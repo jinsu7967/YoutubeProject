@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <title>YouTube Content</title>
+    <script type="text/javascript" src="../static/js/Youtube.js"></script>
+    <!-- bootstrap start -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/sidebar.css">
+    <link rel="stylesheet" href="../static/css/content-detail.css">
+    <!-- bootstrap end -->
+  </head>
+  <body>
+
+    <header class="header">
+        <nav class="navbar navbar-expand-lg">
+          <div class="col-2">
+            <button class="navbar-brand" ><i class="bi bi-list"></i></button>
+            <a class="nav-link-img" href="/index"><img src="../static/images/youtube-logo.png"></a>
+          </div>
+          
+            <div class="col-8 d-flex justify-content-center align-content-center">
+              <form>
+                <div class="input-group">
+                  <div class="form-control-border d-flex">
+                    <input id="search-input" class="form-control" type="search" placeholder="검색">
+                    <i class="bi bi-keyboard"></i>
+                  </div>
+                  <button class="btn btn-secondary search-btn" type="submit"><i class="bi bi-search"></i></button>
+                  <button class="speak-btn  ml-2"><i class="bi bi-mic-fill"></i></button>
+                </div>
+              </form>
+            </div>
+          
+          <div class="col-2 d-flex justify-content-end">
+            <button class="setting btn-lg"><i class="bi bi-grid-3x3-gap"></i></button>
+            <div class="dropdown">
+              <button class="setting btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical mr-3"></i></button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a href="/mypage"  style="text-decoration: none; color: black; font-weight: bold; margin-bottom: 20px;">마이페이지</a><br>
+                <a href="/update-user-check" style="text-decoration: none; color: black; font-weight: bold;">개인정보 변경</a>
+              </div>
+            </div>
+            <div>
+              <a href="/login/logout" style="text-decoration: none;"><button class="loginbtn btn-lg"><i class="bi bi-person-circle mr-2"></i>로그아웃</button></a>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <section class="section">
+      <div class="wrapper">
+        <div class="play-box container-fluid">
+          <div class="row">
+            <div class="play-detail col-8">
+              <div class="play-wrapper">
+              	<th:block th:each="detailList : ${contentDetail}">
+                <img class="detail-content" th:src="@{../static/upload/}+${detailList.file_name}"></img>
+                <div class="content-info">
+                  <h5 style="font-weight: 600;" th:text="|제목 : ${detailList.content_name}|">
+                    
+                  </h5>
+                  <div class="content-count" th:text="|조회수 : ${detailList.content_count}|">
+                    
+                  </div>
+                  <span class="content-date" th:text="|등록일 : ${#dates.format(detailList.content_date,'yyyy-MM-dd')}|">
+                    등록일 :
+                  </span>
+                </div>
+                </th:block>
+                <div class="content-writer container-fluid">
+                  <div class="writer-name row" th:text="|작성자 : ${user_email}|">
+                    
+                  </div>
+                  <div class="writer-info row">
+                    
+                  </div>
+                  <div class="reply row">
+                    댓글 : 0
+                  </div>
+                  <div class="reply-list row">
+                    작성자 : 내용
+                  </div>
+                  <div class="reply-list row">
+                    작성자 : 내용
+                  </div>
+                  <div class="reply-list row">
+                    작성자 : 내용
+                  </div>
+                  <div class="reply-list row">
+                    작성자 : 내용
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="play-list col-4">
+              <div class="container-fluid">
+                <div class="img-list row">
+                  <div class="thum-list col-6 bg ">
+                    <img src="../static/images/thumnail.png" alt="">
+                  </div>
+                  <div class="thum-info col-6 ">
+                    <div class="thum-title">
+                      구글이 최고다.
+                    </div>
+                    <div class="thum-writer">
+                      이진수
+                    </div>
+                    <div class="thum-count">
+                      조회수 : 0
+                    </div>
+                  </div>
+                </div>
+                <div class="img-list row">
+                  <div class="thum-list col-6 bg ">
+                    <img src="../static/images/thumnail.png" alt="">
+                  </div>
+                  <div class="thum-info col-6 ">
+                    <div class="thum-title">
+                      구글이 최고다.
+                    </div>
+                    <div class="thum-writer">
+                      이진수
+                    </div>
+                    <div class="thum-count">
+                      조회수: 0
+                    </div>
+                  </div>
+                </div>
+                <div class="img-list row">
+                  <div class="thum-list col-6 bg ">
+                    <img src="../static/images/thumnail.png" alt="">
+                  </div>
+                  <div class="thum-info col-6 ">
+                    <div class="thum-title">
+                      구글이 최고다.
+                    </div>
+                    <div class="thum-writer">
+                      이진수
+                    </div>
+                    <div class="thum-count">
+                      조회수: 0
+                    </div>
+                  </div>
+                </div>
+                <div class="img-list row">
+                  <div class="thum-list col-6 bg ">
+                    <img src="../static/images/thumnail.png" alt="">
+                  </div>
+                  <div class="thum-info col-6 ">
+                    <div class="thum-title">
+                      구글이 최고다.
+                    </div>
+                    <div class="thum-writer">
+                      이진수
+                    </div>
+                    <div class="thum-count">
+                      조회수: 0
+                    </div>
+                  </div>
+                </div>
+                <div class="img-list row">
+                  <div class="thum-list col-6 bg ">
+                    <img src="../static/images/thumnail.png" alt="">
+                  </div>
+                  <div class="thum-info col-6 ">
+                    <div class="thum-title">
+                      구글이 최고다.
+                    </div>
+                    <div class="thum-writer">
+                      이진수
+                    </div>
+                    <div class="thum-count">
+                      조회수 : 0
+                    </div>
+                  </div>
+                </div>
+                <div class="img-list row">
+                  <div class="thum-list col-6 bg ">
+                    <img src="../static/images/thumnail.png" alt="">
+                  </div>
+                  <div class="thum-info col-6 ">
+                    <div class="thum-title">
+                      구글이 최고다.
+                    </div>
+                    <div class="thum-writer">
+                      이진수
+                    </div>
+                    <div class="thum-count">
+                      조회수: 0
+                    </div>
+                  </div>
+                </div>
+                <div class="img-list row">
+                  <div class="thum-list col-6 bg ">
+                    <img src="../static/images/thumnail.png" alt="">
+                  </div>
+                  <div class="thum-info col-6 ">
+                    <div class="thum-title">
+                      구글이 최고다.
+                    </div>
+                    <div class="thum-writer">
+                      이진수
+                    </div>
+                    <div class="thum-count">
+                      조회수: 0
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

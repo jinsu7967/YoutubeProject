@@ -1,0 +1,283 @@
+.section{
+    padding-top: 128px;
+}
+
+body{
+	font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
+.wrapper{
+    /* height: calc(100vh - 128px); */
+    height: 100%;
+    width: 100%;
+    padding-left: 72px;
+    padding-right: 72px;
+    background-color: white;
+}
+
+.inner-top{
+    width: 100%;
+    height: 256px;
+    padding: 30px 90px;
+    background-color: white;
+}
+
+.inner-left{
+    height: 100%;
+    background-color: white;
+    
+}
+
+.inner-left img{
+    width: 60%;
+}
+
+.inner-left button.join-btn{
+    width: 150px;
+    background: none;
+    color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+}
+
+.inner-right{
+    height: 100%;
+}
+
+.inner-right img{
+    width: 40%;
+    height: 200px;
+}
+
+.player{
+    margin: 0 auto;
+    height: 400px;
+    margin-top: 20px;
+}
+
+.play-content{
+    height: 60%;
+    width: 100%;
+}
+
+.play-mark{
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+div[class *="info-"]{
+    margin: 10px 20px;
+}
+
+.play-mark img{
+    padding-top: 30px;
+    width: 70%;
+    height: 50%;
+}
+
+.play-info-writer{
+    font-size: 14px;
+}
+
+.play-info-count{
+    font-size: 14px;
+}
+
+.play-info-title{
+    font-size: 18px;
+}
+
+/* mypage content css */
+
+.content-box{
+    padding: 30px 30px;
+    border: 1px solid #ced4da;
+}
+
+div[class *="main-"]{
+    padding: 30px 30px;
+    border: 1px solid #ced4da;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+div[class *="list-"]{
+    padding: 30px 30px;
+    border: 1px solid #ced4da;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
+.file_img{
+	width: 100px;
+	height: 50px;
+}
+
+a[class *="list-"]{
+    padding: 30px 30px;
+    border: 1px solid #ced4da;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
+.headline{
+    margin-bottom: 30px;
+}
+
+.content-btn{
+    border: none;
+    background-color: white;
+}
+
+/* 모달부분  */
+
+
+/************** Modal **************/
+div.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 999999;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+div.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fefefe;
+    padding: 35px;
+    width: 50%;
+    height: 700px;
+    /* Could be more or less, depending on screen size */
+    min-width: 510px;
+}
+
+.upload-input{
+	
+	width: 100%;
+	height: 60px;
+	display: flex;
+	justify-content: end;
+	margin-top: 20px;
+	align-items: center;
+	
+}
+
+.upload-file{
+	border: 1px solid;
+	width: 100%;
+	height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+div.upload-file i{
+	font-size: 80px;
+}
+
+.upload-btn-box{
+	width: 100%;
+	
+	padding-top: 0px;
+	display: flex;
+	justify-content: end;
+}
+
+.upload-btn{
+	border: 1px solid;
+	border-radius: 4px;
+	height: 50px;
+	background: none;
+    color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+}
+
+.upload-name{
+	display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 78%;
+    color: #999999;
+}
+
+.upload-file label {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.upload-file input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.update-box{
+	
+	border: 1px solid #ced4da; 
+	width: 2354px;
+	height: 500px;
+	padding: 30px;
+}
+
+.update-info{
+	padding: 20px 0px 20px;
+}
+
+.update-btn-box{
+	height: 50%;
+	display: flex;
+	justify-content: end;
+	align-items: end;
+}
+
+.update-btn{
+	width: 150px;
+    background: none;
+    color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+}
+
+.pagination{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 30px;
+}
+
+
+
+

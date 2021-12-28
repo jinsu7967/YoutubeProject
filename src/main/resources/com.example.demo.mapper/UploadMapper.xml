@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UploadMapper">
+	
+	<insert id="UploadContent">
+		insert into content(content_num,content_name,content_date,content_count,content_writer,file_name) 
+		values(null,#{content_name},#{content_date},0,#{user_email},#{file_name})
+	</insert>
+	
+	<select id="ContentList" resultType="UploadDto">
+		<![CDATA[
+		select @rownum:=@rownum+1 as rownum, content.* 
+		from content,(select @rownum:=0) as rownum 
+		where content_writer = #{user_email} 
+		order by rownum desc
+		limit #{pageStart},#{perPageNum}
+		]]>
+	</select>
+	
+	<delete id="ContentDelete">
+		delete from content where content_num = #{content_num}
+	</delete>
+	
+	<update id="ContentUpdate">
+		update content 
+		set content_name = #{content_name}, content_date = #{content_date} 
+		where content_num = #{content_num}
+	</update>
+	
+	<update id="CountUpdate">
+		update content 
+		set content_count = content_count + 1
+		where content_num = #{content_num}
+	</update>
+	
+	<select id="boardListCnt" resultType="int">
+		select count(*) 
+		from content
+	</select>
+	
+	<select id ="ContentDetail" resultType="UploadDto">
+		select file_name,content_count,content_name,content_date
+		from content
+		where content_num =#{content_num}	
+	</select>
+</mapper>

@@ -1,0 +1,94 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+body{
+	font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
+.section{
+    padding-top: 128px;
+}
+
+.wrapper{
+    /* height: calc(100vh - 128px); */
+    height: 100%;
+    width: 100%;
+    padding-left: 72px;
+    background-color: #f3f3f3;
+}
+
+.inner-top{
+    width: 100%;
+    height: 256px;
+    padding: 30px 90px;
+    background-color: white;
+}
+
+.inner-left{
+    height: 100%;
+    background-color: white;
+    
+}
+
+.inner-left img{
+    width: 60%;
+}
+
+.inner-left button.join-btn{
+    width: 150px;
+    background: none;
+    color: cornflowerblue;
+    border: 2px solid cornflowerblue;
+}
+
+.inner-right{
+    height: 100%;
+}
+
+.inner-right img{
+    width: 20%;
+    height: 200px;
+}
+
+.player{
+    margin: 0 auto;
+    height: 400px;
+    margin-top: 15px;
+}
+
+.play-content{
+    height: auto;
+    width: 100%;
+}
+
+.play-mark{
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+div[class *="info-"]{
+    margin: 10px 20px;
+}
+
+.play-mark img{
+    padding-top: 30px;
+    width: 70%;
+    height: 50%;
+}
+
+.play-info-writer{
+    font-size: 14px;
+}
+
+.play-info-count{
+    font-size: 14px;
+}
+
+.play-info-title{
+    font-size: 18px;
+}
+
+.play-btn{
+    border: none;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youtube 계정 만들기</title>
+<script type="text/javascript" src="../static/js/Youtube.js"></script>
+<!-- bootstrap start -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../static/css/bootstrap-icons.css">
+<link rel="stylesheet" href="../static/css/join-form.css">
+<!-- bootstrap end -->
+</head>
+<body>
+	<div class="wrapper">
+		<div class="wrapper-box">
+			<form action="/join/user-join" method="post" class="join-box container-fluid">
+				<div class="row">
+					<div class="input-box col-6">
+						<a href="index"><img class="google-logo"
+							src="../static/images/Google_logo.png"></a>
+						<h3>Google 계정 만들기</h3>
+						<p>YouTube로 이동</p>
+						<input type="text" class="name" placeholder="이름" name="user_name"> 
+						<input type="text" class="birth" placeholder="생일" name="user_birth">
+						<p style="font-size: 12px;">생일은 20210101 형식으로 입력하세요.</p>
+						<input type="email" class="email" placeholder="이메일 주소" name="user_email">
+						<p style="font-size: 12px;">이메일이 본인인지 확인해야합니다.</p>
+						<a href="#" style="font-size: 20px blue;">새로운 G-mail 만들기</a><br>
+						<input type="password" class="password" placeholder="비밀번호" name="user_pw">
+						<p style="font-size: 12px;">특수문자포함하며 영문, 숫자를 조합하여 8자이상
+							입력하세요.</p>
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input"
+								id="customCheck1"> <label class="custom-control-label"
+								for="customCheck1">비밀번호 표시</label>
+						</div>
+						<br>
+						<br>
+						<div class="btn-set d-flex justify-content-between">
+							<a href="login"><button class="btn btn-outline-primary" type="button">로그인</button></a>
+							<button class="btn btn-primary mr-3" type="submit">가입하기</button>
+						</div>
+					</div>
+					<div class="img-box col-6">
+						<img src="../static/images/join_logo.png"><br>
+						<br>
+						<p style="font-size: 17px;">하나의 계정으로 모든 Google 서비스를 이용해보세요.</p>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

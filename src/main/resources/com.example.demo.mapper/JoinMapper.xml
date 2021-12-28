@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.JoinMapper">
+	<insert id="JoinUser">
+		insert into user(name,birth,email,pw) 
+		values(#{user_name},#{user_birth},#{user_email},#{user_pw})
+	</insert>
+	
+	<select id="IdCheck" resultType="int">
+		select count(*) 
+		from user 
+		where email=#{user_email}
+	</select>
+</mapper>

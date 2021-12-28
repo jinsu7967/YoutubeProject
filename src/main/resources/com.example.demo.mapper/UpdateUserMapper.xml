@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UpdateUserMapper">
+	<select id="UserCheck" resultType="UpdateUserDto">
+		select email,pw,name 
+		from user 
+		where email=#{user_email} and pw=#{user_pw} and name=#{user_name}
+	</select>
+	
+	<update id="UserUpdate">
+		update user set pw=#{user_pw}, name=#{user_name} where email=#{user_email}
+	</update>
+</mapper>

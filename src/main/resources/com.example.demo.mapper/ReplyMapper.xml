@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ReplyMapper">
+	<!-- 댓글 조회 -->
+	<select id="ReplyList" resultType="ReplyDto">
+		select rno,content_num,writer,content,regDate
+		from reply
+		where content_num=#{content_num}
+	</select>
+	
+	<!-- 댓글 작성 -->
+	<insert id="ReplyWrite">
+		insert into reply(content_num,writer,content,regDate)
+		values(#{content_num},#{writer},#{content},#{regDate})
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="ReplyUpdate">
+		update reply
+		set content = #{content}
+		where rno = #{rno} and content_num = #{content_num}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="ReplyDelete">
+		delete from reply
+		where rno = #{rno} and bno = #{bno}
+	</delete>
+</mapper>

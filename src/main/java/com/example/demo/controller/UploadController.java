@@ -25,8 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import com.example.demo.dto.LoginDto;
+import com.example.demo.dto.ReplyDto;
 import com.example.demo.dto.UploadDto;
 import com.example.demo.service.LoginService;
+import com.example.demo.service.ReplyService;
 import com.example.demo.service.UploadService;
 
 
@@ -36,6 +38,8 @@ public class UploadController {
 	
 	@Autowired
 	private UploadService us;
+	@Autowired
+	private ReplyService rs;
 	
 	@RequestMapping("/upload")
 	public String Upload(@RequestParam("content_name") String content_name,
@@ -83,8 +87,16 @@ public class UploadController {
 		model.addAttribute("contentDetail",contentDetail);
 		model.addAttribute("user_email",user_email);
 		
+		//댓글 조회
+		ArrayList<ReplyDto> reply = rs.ReplyList(content_num);
+		model.addAttribute("reply",reply);
+		
+		System.out.println(reply);
+		
 		return "content-detail";
 	}
+	
+	
 	
 	
 	

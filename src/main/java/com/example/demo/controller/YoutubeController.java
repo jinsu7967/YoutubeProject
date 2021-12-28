@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.FindPwCheckDto;
 import com.example.demo.dto.LoginDto;
+import com.example.demo.dto.ReplyDto;
 import com.example.demo.dto.UploadDto;
 import com.example.demo.paging.Criteria;
 import com.example.demo.paging.Paging;
 import com.example.demo.service.LoginService;
+import com.example.demo.service.ReplyService;
 import com.example.demo.service.UploadService;
 
 @Controller
@@ -28,6 +30,9 @@ public class YoutubeController {
 	private UploadService us;
 	@Autowired
 	private LoginService ls;
+	@Autowired
+	private ReplyService rs;
+	
 	
 	
 
@@ -80,6 +85,7 @@ public class YoutubeController {
 		
 		model.addAttribute("contentList",contentList);
 		model.addAttribute("paging",paging);
+		
 		
 		return "mypage";
 	}

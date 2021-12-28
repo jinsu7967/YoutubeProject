@@ -95,10 +95,38 @@ body{
 .reply{
     font-size: 24px;
     padding-top: 40px;
+    
 }
 
 .reply-list{
     font-size: 18px;
     padding-bottom: 20px;
     padding-top: 20px;
+    margin-right: 12px;
+    border-bottom: 1px solid #cccc;
 }
+
+.reply-input{
+	width: 60%;
+}
+
+.reply-write{
+	background: white;
+    color: cornflowerblue;
+    border: 1px solid cornflowerblue;
+    border-radius: 5px;
+    
+}
+
+.reply-info{
+	padding: 10px 10px 10px 10px;
+	
+}
+
+
+
+
+
+
+
+

@@ -38,7 +38,7 @@ public class LoginController {
 		
 		if(user.isEmpty()) {
 			System.out.println("로그인 실패");
-			resultMsg ="<script> alert('로그인 실패했습니다. 아이디와 비밀번호를 확인해주세요.'); location.href='/login' </script>";
+			resultMsg ="<script> alert('로그인 실패 하였습니다 다시 로그인 해주세요.'); location.href='/login' </script>";
 			return resultMsg;
 		}else {
 			session.setAttribute("user_email", user_email);

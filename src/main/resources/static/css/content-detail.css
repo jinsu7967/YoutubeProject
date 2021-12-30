@@ -93,21 +93,26 @@ body{
 }
 
 .reply{
-    font-size: 24px;
-    padding-top: 40px;
+    font-size: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
     
 }
 
 .reply-list{
-    font-size: 18px;
+    font-size: 20px;
     padding-bottom: 20px;
     padding-top: 20px;
     margin-right: 12px;
     border-bottom: 1px solid #cccc;
+    border-top: 1px solid #cccc;
 }
 
 .reply-input{
-	width: 60%;
+	width: 30%;
 }
 
 .reply-write{
@@ -119,11 +124,13 @@ body{
 }
 
 .reply-info{
-	padding: 10px 10px 10px 10px;
+	padding: 10px 10px 10px 0px;
 	
 }
 
-
+.reply-btn:hover{
+	text-decoration: none
+}
 
 
 

@@ -77,7 +77,7 @@ public class UploadController {
 	}
 	
 	@RequestMapping("/content-detail")
-	public String ContentDetail(@RequestParam("content_num") String content_num,Model model,HttpSession session) throws Exception{
+	public String ContentDetail(@RequestParam("contentNum") String content_num,Model model,HttpSession session) throws Exception{
 		
 		us.CountUpdate(content_num);
 		String user_email=(String) session.getAttribute("user_email");
@@ -86,6 +86,7 @@ public class UploadController {
 		
 		model.addAttribute("contentDetail",contentDetail);
 		model.addAttribute("user_email",user_email);
+		model.addAttribute("contentNum",content_num);
 		
 		//댓글 조회
 		ArrayList<ReplyDto> reply = rs.ReplyList(content_num);

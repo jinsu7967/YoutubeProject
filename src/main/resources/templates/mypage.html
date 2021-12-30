@@ -102,7 +102,7 @@
 					<div class="row" th:each="list : ${contentList}">
 					
 						<div class="content-list-num col-1" th:text="${list.rownum}" th:value="${list.rownum}" th:name="rownum"></div>
-						<div class="content-list-player col-4"><a th:href="@{/mypage/content-detail(content_num=${list.content_num})}" th:text="${list.content_name}" th:value="${list.content_name}"></a></div>
+						<div class="content-list-player col-4"><a th:href="@{/mypage/content-detail(contentNum=${list.content_num})}" th:text="${list.content_name}" th:value="${list.content_name}"></a></div>
 						<div class="content-list-player col-2"><img th:src="@{../static/upload/}+${list.file_name}" class="file_img" alt="파일사진"></div>
 						<div class="content-list-date col-2" th:text="${#dates.format(list.content_date,'yyyy-MM-dd')}"></div>
 						<div class="content-list-count col-2" th:text="${list.content_count}"></div>
@@ -217,7 +217,7 @@
       $('span#modal-close').click(function () {
         modal.style.display = "none";
       });
-    
+    	//현재시간 불러오기
       document.getElementById('now_date').valueAsDate = new Date();
 	</script>
 </body>

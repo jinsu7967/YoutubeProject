@@ -15,7 +15,7 @@
     <!-- bootstrap end -->
   </head>
   <body>
-
+	<!-- Header -->
     <header class="header">
         <nav class="navbar navbar-expand-lg">
           <div class="col-2">
@@ -80,22 +80,37 @@
                   <div class="writer-info row">
                     
                   </div>
-                  <div class="reply row">
-                    댓글 : <input type="text" class="reply-input ml-2" name="replyinput"> <button class="reply-write ml-2">댓글 달기</button>
+                  <div class="reply">
+                  댓글 쓰기
                   </div>
+                  <form action="/reply/write" method="post">
+                  <div class="reply">
+                  	작성자 : <input type="text" class="reply-writer ml-2" name="replyWriter" th:value="${user_email}" readonly>
+                  	<input type="hidden" th:value="${contentNum}" name="contentNum">
+                  </div>
+                  <div class="reply">
+                  	<textarea class="reply-input" name="replyContent" cols="20" rows="3" placeholder="댓글을 입력해주세요."></textarea>
+                  </div>
+                  <div class="reply">
+                  	등록일 : <input type="date" id="now_date" name="replyDate" class="ml-2" min=now_date readonly>
+                  	<button type="submit" class="reply-write ml-2">댓글 달기</button>
+                  </div>
+                  </form>
                   <div class="reply-list row">
                   댓글 목록
                   </div>
                   <th:block th:each="replyList : ${reply}">
                   <div class="reply-info">
-                  	<div class="reply-writer" th:text="|작성자 : ${replyList.writer}|"></div>
+                  	<div class="reply-writer" th:text="|작성자 : ${replyList.writer}|"></div> 
 				  	<div class="reply-content" th:text="|내용 : ${replyList.content}|"></div>
 				  	<div class="reply-regDate" th:text="|등록일 : ${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></div>
+				  	<a href="/mypage/update" class="replyControl">수정</a><a href="/mypage/delete" class="replyControl ml-2">삭제</a>
                   </div>
 				  </th:block>
                 </div>
               </div>
             </div>
+            <!-- thumnail-list -->
             <div class="play-list col-4">
               <div class="container-fluid">
                 <div class="img-list row">
@@ -216,5 +231,9 @@
         </div>
       </div>
     </section>
+    <script>
+  		//현재시간 불러오기
+    	document.getElementById('now_date').valueAsDate = new Date();
+    </script>
   </body>
 </html>

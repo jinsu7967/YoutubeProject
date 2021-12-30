@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 댓글 작성 -->
 	<insert id="ReplyWrite">
 		insert into reply(content_num,writer,content,regDate)
-		values(#{content_num},#{writer},#{content},#{regDate})
+		values(#{contentNum},#{replyWriter},#{replyContent},#{replyDate})
 	</insert>
 	
 	<!-- 댓글 수정 -->

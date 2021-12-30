@@ -42,9 +42,9 @@ public class ReplyServiceImpl implements ReplyService {
 
 
 	@Override
-	public void ReplyDelete(String rno, String bno) throws Exception {
+	public void ReplyDelete(String rno, String content_num,String replyWriter) throws Exception {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-		mapper.ReplyDelete(rno,bno);
+		mapper.ReplyDelete(rno,content_num,replyWriter);
 	}
 	
 	

@@ -140,7 +140,7 @@
 					    </div>
 					    <th:block th:with="start =${paging.startPage}, end =${paging.endPage}">
 					    <li class="page-item" aria-current="page" th:each="paging : ${#numbers.sequence(start,end)}">
-					    	<a class="page-link" id="pagingBtn" th:href="@{/mypage(page=${paging})}" th:text=${paging} onclick=""></a>
+					    	<a class="page-link" id="pagingBtn" th:href="@{/mypage(page=${paging})}" th:text=${paging}></a>
 					    </li>
 					    </th:block>
 					    <div th:if="${paging.cri.page == paging.endPage}">

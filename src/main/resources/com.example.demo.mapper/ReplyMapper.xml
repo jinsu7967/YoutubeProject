@@ -26,6 +26,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 댓글 삭제 -->
 	<delete id="ReplyDelete">
 		delete from reply
-		where rno = #{rno} and bno = #{bno}
+		where rno = #{rno} and content_num = #{content_num} and writer = #{replyWriter}
 	</delete>
 </mapper>

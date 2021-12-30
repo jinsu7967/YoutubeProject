@@ -53,6 +53,10 @@ body{
     
 }
 
+#now_date{
+	width: 15%;
+}
+
 .img-list{
     padding: 50px 24px 0px 0px;
 }

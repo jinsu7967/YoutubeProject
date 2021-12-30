@@ -32,10 +32,20 @@ public class ReplyController {
 	}
 	
 	@RequestMapping("/update")
-	public String Update(@RequestParam("replyContent") String replyContent ) throws Exception{
+	public String Update(@RequestParam("replyContent") String replyContent,Model model ) throws Exception{
+		
 		
 		
 		return "";
+	}
+	
+	@RequestMapping("/delete")
+	public String Delete(@RequestParam("replyWriter") String replyWriter,@RequestParam("rno") String rno,
+			@RequestParam("contentNum") String content_num,Model model ) throws Exception{
+		
+		rs.ReplyDelete(rno,content_num,replyWriter);
+		
+		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}
 	
 	

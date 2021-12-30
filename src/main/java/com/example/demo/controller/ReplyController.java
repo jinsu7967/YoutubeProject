@@ -32,7 +32,7 @@ public class ReplyController {
 	}
 	
 	@RequestMapping("/update")
-	public String Update(@RequestParam("replyContent") String replyContent,Model model ) throws Exception{
+	public String Update(Model model ) throws Exception{
 		
 		
 		

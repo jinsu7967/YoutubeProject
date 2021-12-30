@@ -104,9 +104,10 @@
                   	<div class="reply-writer" th:text="|작성자 : ${replyList.writer}|" th:name="replyWriter" th:value="${replyList.writer}"></div> 
 				  	<div class="reply-content" th:text="|내용 : ${replyList.content}|"></div>
 				  	<div class="reply-regDate" th:text="|등록일 : ${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></div>
-				  	
+				  	<th:block th:if="${replyList.writer==user_email}">
 				  	<a th:href="@{/reply/update(content_num=${contentNum},rno=${replyList.rno})}" class="replyControl">수정</a>
 				  	<a th:href="@{/reply/delete(contentNum=${replyList.content_num},rno=${replyList.rno},replyWriter=${replyList.writer})}" class="replyControl ml-2">삭제</a>
+				  	</th:block>
                   </div>
 				  </th:block>
                 </div>

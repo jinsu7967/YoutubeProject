@@ -16,4 +16,6 @@ public interface ReplyService {
 	public void ReplyUpdate(@Param("rno") String rno,@Param("content_num") String content_num ) throws Exception;
 	
 	public void ReplyDelete(@Param("rno") String rno, @Param("content_num") String content_num,@Param("writer") String replyWriter) throws Exception;
+	
+	public void ReplyDeleteAll(@Param("content_num") String content_num) throws Exception;
 }

@@ -43,6 +43,7 @@ public class ReplyController {
 	public String Delete(@RequestParam("replyWriter") String replyWriter,@RequestParam("rno") String rno,
 			@RequestParam("contentNum") String content_num,Model model ) throws Exception{
 		
+		
 		rs.ReplyDelete(rno,content_num,replyWriter);
 		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;

@@ -61,6 +61,7 @@ public class UploadController {
 	@RequestMapping("/delete")
 	public String Delete(@RequestParam("content_num") String content_num) throws Exception {
 		
+		rs.ReplyDeleteAll(content_num);
 		us.ContentDelete(content_num);
 		System.out.println(content_num+"번 삭제");
 		

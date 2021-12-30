@@ -39,6 +39,12 @@ public class ReplyServiceImpl implements ReplyService {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		mapper.ReplyUpdate(rno,content_num);
 	}
+	
+	@Override
+	public void ReplyDeleteAll(String content_num) throws Exception{
+		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
+		mapper.ReplyDeleteAll(content_num);
+	}
 
 
 	@Override

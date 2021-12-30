@@ -28,4 +28,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from reply
 		where rno = #{rno} and content_num = #{content_num} and writer = #{replyWriter}
 	</delete>
+	
+	<!-- 댓글 모두 삭제 -->
+	<delete id="ReplyDeleteAll">
+		delete from reply
+		where content_num = #{content_num}
+	</delete>
 </mapper>

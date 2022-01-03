@@ -102,11 +102,14 @@
                   <th:block th:each="replyList : ${reply}">
                   <div class="reply-info">
                   	<div class="reply-writer" th:text="|작성자 : ${replyList.writer}|" th:name="replyWriter" th:value="${replyList.writer}"></div> 
-				  	<div class="reply-content" th:text="|내용 : ${replyList.content}|"></div>
+				  	<div class="reply-content" th:id="reply+${replyList.rno}" th:text="|내용 : ${replyList.content}|" th:value="${replyList.content}"></div>
 				  	<div class="reply-regDate" th:text="|등록일 : ${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></div>
 				  	<th:block th:if="${replyList.writer==user_email}">
-				  	<a th:href="@{/reply/update(content_num=${contentNum},rno=${replyList.rno})}" class="replyControl">수정</a>
-				  	<a th:href="@{/reply/delete(contentNum=${replyList.content_num},rno=${replyList.rno},replyWriter=${replyList.writer})}" class="replyControl ml-2">삭제</a>
+				  	<!-- <a th:href="@{/reply/update(content_num=${contentNum},rno=${replyList.rno})}" class="replyControl">수정</a> -->
+				  	<!-- <a href="#" class="replyControl" onclick="replyUpdate()">수정</a> -->
+				  	<!-- <button type="button" class="replyUpdateBtn" th:onclick="|javascript:replyUpdate(rno=${replyList.rno},content=${replyList.content})|">수정</button> -->
+				  	<button type="button" th:id="replyBtn+${replyList.rno}" class="replyUpdateBtn" th:onclick="|Test(${replyList.rno})|">수정</button>
+				  	<a th:id="replyBtn2+${replyList.rno}" th:href="@{/reply/delete(contentNum=${replyList.content_num},rno=${replyList.rno},replyWriter=${replyList.writer})}" class="replyControl ml-2">삭제</a>
 				  	</th:block>
                   </div>
 				  </th:block>
@@ -238,5 +241,6 @@
   		//현재시간 불러오기
     	document.getElementById('now_date').valueAsDate = new Date();
     </script>
+    
   </body>
 </html>

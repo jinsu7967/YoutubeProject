@@ -133,10 +133,18 @@ body{
 }
 
 .reply-btn:hover{
-	text-decoration: none
+	text-decoration: none;
 }
 
+.replyUpdateBtn{
+	border: none;
+	background-color: none;
+	color: #007bff;
+}
 
+.replyControl:hover{
+	text-decoration: none;
+}
 
 
 

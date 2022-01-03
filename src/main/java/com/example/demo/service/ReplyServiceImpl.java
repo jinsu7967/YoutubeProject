@@ -35,9 +35,9 @@ public class ReplyServiceImpl implements ReplyService {
 
 
 	@Override
-	public void ReplyUpdate(String rno, String content_num) throws Exception {
+	public void ReplyUpdate(String rno, String content_num,String content) throws Exception {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-		mapper.ReplyUpdate(rno,content_num);
+		mapper.ReplyUpdate(rno,content_num,content);
 	}
 	
 	@Override

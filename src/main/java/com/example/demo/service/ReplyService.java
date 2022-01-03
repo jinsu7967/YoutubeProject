@@ -13,7 +13,7 @@ public interface ReplyService {
 	
 	public void ReplyWrite(@Param("content_num") String content_num,@Param("writer") String writer ,@Param("content") String content ,@Param("regDate") String regDate) throws Exception;
 	
-	public void ReplyUpdate(@Param("rno") String rno,@Param("content_num") String content_num ) throws Exception;
+	public void ReplyUpdate(@Param("rno") String rno,@Param("content_num") String content_num,@Param("content") String content) throws Exception;
 	
 	public void ReplyDelete(@Param("rno") String rno, @Param("content_num") String content_num,@Param("writer") String replyWriter) throws Exception;
 	

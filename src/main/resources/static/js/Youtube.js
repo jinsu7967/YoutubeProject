@@ -1,7 +1,7 @@
 
 function Test(rno){
 	var reply="";
-	reply = $("#reply"+rno).val();
+	reply = document.getElementById('reply'+rno).value;
 	console.log(reply);
 	
 	$("#reply"+rno).replaceWith(
@@ -11,7 +11,7 @@ function Test(rno){
 	"<button type='submit' name='replyBtn' class='replyUpdateBtn' value='수정하기'>수정하기</button>"
 	);
 	$("#replyBtn2"+rno).replaceWith(
-	"<button type='button' class='replyUpdateBtn' >취소</button>"
+	"<button type='button' class='replyUpdateBtn'><a href='/mypage'>취소</a></button>"
 	);
 	
 }

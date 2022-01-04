@@ -11,7 +11,12 @@ function Test(rno){
 	"<button type='submit' name='replyBtn' class='replyUpdateBtn' value='수정하기'>수정하기</button>"
 	);
 	$("#replyBtn2"+rno).replaceWith(
-	"<button type='button' class='replyUpdateBtn'><a href='/mypage'>취소</a></button>"
+	"<button type='button' class='replyUpdateBtn' onclick='history.go(0)'>취소</button>"
 	);
 	
+}
+
+function Return(){
+	
+
 }

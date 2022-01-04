@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import com.example.demo.dto.ReplyDto;
 
-@Mapper
+
 @Repository
 public interface ReplyMapper {
 	

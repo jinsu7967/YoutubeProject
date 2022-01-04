@@ -32,7 +32,7 @@ public class JoinController {
 				resultMsg="<script> alert('가입정보를 입력해주세요.'); location.href=history.back(); </script>";
 			}else {
 				if(user_pw.matches("[0-9|a-z|A-Z\\s]*") || !(user_birth.matches("[0-9]*")) || user_birth.length()!=8 || 
-						user_pw.length()<8 || user_name.length()<2 || !(user_name.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) ) {
+						user_pw.length()<8 || user_name.length()<2 || !(user_name.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) || !(user_email.matches("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$")) ) {
 					resultMsg="<script> alert('가입정보를 정확히 입력해주세요.'); location.href=history.back(); </script>";
 				}else {
 					joinCheck=js.JoinUser(user_name, user_birth, user_email, user_pw);

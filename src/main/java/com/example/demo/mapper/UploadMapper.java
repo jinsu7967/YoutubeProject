@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.UploadDto;
 
-@Mapper
+
 @Repository
 public interface UploadMapper {
 	

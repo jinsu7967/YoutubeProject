@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.ContentDto;
 import com.example.demo.dto.FindPwCheckDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.ReplyDto;
 import com.example.demo.dto.UploadDto;
 import com.example.demo.paging.Criteria;
 import com.example.demo.paging.Paging;
+import com.example.demo.service.ContentService;
 import com.example.demo.service.LoginService;
 import com.example.demo.service.ReplyService;
 import com.example.demo.service.UploadService;
@@ -32,6 +34,8 @@ public class YoutubeController {
 	private LoginService ls;
 	@Autowired
 	private ReplyService rs;
+	@Autowired
+	private ContentService cs;
 	
 	
 	
@@ -39,6 +43,8 @@ public class YoutubeController {
 	@RequestMapping("/index")
 	public String Main(Model model) throws Exception{
 		
+		ArrayList<ContentDto> allContentList = cs.ContentList();
+		model.addAttribute(allContentList);
 		
 		return "index";
 	}

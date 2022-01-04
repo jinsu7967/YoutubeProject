@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.UpdateUserDto;
 
-@Mapper
+
 @Repository
 public interface UpdateUserMapper {
 	

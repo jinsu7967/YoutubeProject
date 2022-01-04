@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.dto.FindPwCheckDto;
 import com.example.demo.dto.LoginDto;
 
-@Mapper
+
 @Repository
 public interface LoginMapper {
 	

@@ -2,6 +2,7 @@
 
 body{
 	font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+	
 }
 
 .section{
@@ -56,8 +57,9 @@ body{
 }
 
 .play-content{
-    height: auto;
+    height: 300px;
     width: 100%;
+    background-color: white;
 }
 
 .play-mark{
@@ -72,9 +74,10 @@ div[class *="info-"]{
 }
 
 .play-mark img{
-    padding-top: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     width: 70%;
-    height: 50%;
+    height: 70%;
 }
 
 .play-info-writer{
@@ -86,9 +89,13 @@ div[class *="info-"]{
 }
 
 .play-info-title{
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .play-btn{
     border: none;
+}
+
+.content-info{
+	margin-bottom: 0px;
 }

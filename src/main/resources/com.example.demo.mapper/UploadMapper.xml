@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id ="ContentDetail" resultType="UploadDto">
-		select file_name,content_count,content_name,content_date
+		select file_name,content_count,content_name,content_date,content_writer
 		from content
 		where content_num =#{content_num}	
 	</select>

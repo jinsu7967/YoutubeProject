@@ -4,7 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.ContentMapper">
 	<select id="ContentList" resultType="ContentDto">
-		select content_num,content_name,content_date,content_count,file_name 
+		select content_num,content_name,content_date,content_count,file_name,content_writer
 		from content
+		order by content_num desc
 	</select>
 </mapper>

@@ -44,7 +44,8 @@ public class YoutubeController {
 	public String Main(Model model) throws Exception{
 		
 		ArrayList<ContentDto> allContentList = cs.ContentList();
-		model.addAttribute(allContentList);
+		model.addAttribute("allContentList",allContentList);
+		System.out.println(allContentList);
 		
 		return "index";
 	}

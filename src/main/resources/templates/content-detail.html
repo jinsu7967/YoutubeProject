@@ -71,18 +71,20 @@
            
                   </span>
                 </div>
-                </th:block>
+                
                 <!-- Reply -->
                 <div class="content-writer container-fluid">
-                  <div class="writer-name row" th:text="|작성자 : ${user_email}|">
+                  <div class="writer-name row" th:text="|작성자 : ${detailList.content_writer}|">
                     
                   </div>
+                  </th:block>
                   <div class="writer-info row">
                     
                   </div>
                   <div class="reply">
                   댓글 쓰기
                   </div>
+                  <th:block th:if="${user_email}!=null">
                   <form action="/reply/write" method="post">
                   <div class="reply">
                   	작성자 : <input type="text" class="reply-writer ml-2" name="replyWriter" th:value="${user_email}" readonly>
@@ -96,6 +98,7 @@
                   	<button type="submit" class="reply-write ml-2">댓글 달기</button>
                   </div>
                   </form>
+                  </th:block>
                   <div class="reply-list row">
                   댓글 목록
                   </div>

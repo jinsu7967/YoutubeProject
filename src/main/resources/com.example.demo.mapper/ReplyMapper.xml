@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select rno,content_num,writer,content,regDate
 		from reply
 		where content_num=#{content_num}
+		order by rno desc
 	</select>
 	
 	<!-- 댓글 작성 -->

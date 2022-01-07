@@ -40,8 +40,18 @@ public class YoutubeController {
 	
 	
 
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String Main(Model model) throws Exception{
+		
+		ArrayList<ContentDto> allContentList = cs.ContentList();
+		model.addAttribute("allContentList",allContentList);
+		System.out.println(allContentList);
+		
+		return "index";
+	}
+	
+	@RequestMapping("/index")
+	public String MainGo(Model model) throws Exception{
 		
 		ArrayList<ContentDto> allContentList = cs.ContentList();
 		model.addAttribute("allContentList",allContentList);
@@ -67,7 +77,9 @@ public class YoutubeController {
 	@RequestMapping("/mypage")
 	public String Mypage(Model model,HttpSession session,String user_email,Criteria cri) throws Exception{
 		
-		int boardListCnt = us.boardListCnt();
+		user_email=(String) session.getAttribute("user_email");
+		
+		int boardListCnt = us.boardListCnt(user_email);
 		System.out.println("boardListCnt : "+boardListCnt);
 		
 		
@@ -82,7 +94,7 @@ public class YoutubeController {
 		System.out.println("pageStart : "+pageStart);
 		System.out.println("perPageNum : "+perPageNum);
 		
-		user_email=(String) session.getAttribute("user_email");
+		
 		ArrayList<UploadDto> contentList = us.ContentList(user_email, pageStart, perPageNum);
 		
 		

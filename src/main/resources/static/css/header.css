@@ -61,6 +61,10 @@ div button.setting{
     
 }
 
+div button.setting::after{
+    display: none;
+}
+
 
 .form-control{
     border: none;
@@ -115,7 +119,8 @@ input#search-input:focus{
     width: 70px;
 }
 
-.contentbtn:hover{
+.contentbtn:hover,
+.contentbtn.active{
     border: 1px solid #ced4da;
     border-radius: 20px;
     height: 30px;

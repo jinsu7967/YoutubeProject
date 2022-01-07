@@ -53,9 +53,9 @@ public class UploadServiceImpl implements UploadService {
 	}
 	
 	@Override
-	public int boardListCnt() throws Exception{
+	public int boardListCnt(String content_writer) throws Exception{
 		UploadMapper mapper = sqlSession.getMapper(UploadMapper.class);
-		return mapper.boardListCnt();
+		return mapper.boardListCnt(content_writer);
 	}
 	
 	@Override

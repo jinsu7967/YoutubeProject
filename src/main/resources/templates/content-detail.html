@@ -9,51 +9,68 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
-    <link rel="stylesheet" href="../static/css/header.css">
-    <link rel="stylesheet" href="../static/css/sidebar.css">
-    <link rel="stylesheet" href="../static/css/content-detail.css">
+    <link rel="stylesheet" href="../static/css/master.css">
     <!-- bootstrap end -->
   </head>
   <body>
 	<!-- Header -->
     <header class="header">
-        <nav class="navbar navbar-expand-lg">
-          <div class="col-2">
-            <button class="navbar-brand" ><i class="bi bi-list"></i></button>
-            <a class="nav-link-img" href="/index"><img src="../static/images/youtube-logo.png"></a>
+        <nav class="navbar navbar-expand-lg px-0">
+          <div class="col-2 d-flex align-items-center">
+            <span id="header-list" class="ml-2 mr-3">
+            	<i class="bi bi-list"></i>
+            </span>
+            <a class="navbar-brand" href="/index">
+            	<img src="../static/images/youtube-logo.png">
+            </a>
           </div>
           
             <div class="col-8 d-flex justify-content-center align-content-center">
               <form>
                 <div class="input-group">
-                  <div class="form-control-border d-flex">
-                    <input id="search-input" class="form-control" type="search" placeholder="검색">
-                    <i class="bi bi-keyboard"></i>
+                  <input id="search-input" class="form-control" type="search" placeholder="검색">
+                  <div class="input-group-append">                  
+	                  <button class="btn btn-secondary" type="submit">
+	                  	<i class="bi bi-search"></i>
+	                  </button>
                   </div>
-                  <button class="btn btn-secondary search-btn" type="submit"><i class="bi bi-search"></i></button>
-                  <button class="speak-btn  ml-2"><i class="bi bi-mic-fill"></i></button>
                 </div>
               </form>
             </div>
           
           <div class="col-2 d-flex justify-content-end">
-            <button class="setting btn-lg"><i class="bi bi-grid-3x3-gap"></i></button>
+            <button class="btn btn-lg btn-link">
+            	<i class="bi bi-grid-3x3-gap text-secondary"></i>
+            </button>
             <div class="dropdown">
-              <button class="setting btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical mr-3"></i></button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a href="/mypage"  style="text-decoration: none; color: black; font-weight: bold; margin-bottom: 20px;">마이페이지</a><br>
-                <a href="/update-user-check" style="text-decoration: none; color: black; font-weight: bold;">개인정보 변경</a>
+              <button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+              		<i class="bi bi-three-dots-vertical text-secondary"></i>
+              </button>
+              <div th:if="${session.user_email != null}">
+              	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                	<a href="mypage"  style="text-decoration: none; color: black; font-weight: bold; margin-bottom: 20px;">
+                	마이페이지
+                	</a><br>
+                	<a href="update-user-check" style="text-decoration: none; color: black; font-weight: bold;">
+                	개인정보 변경
+                	</a>
+              	</div>
               </div>
             </div>
-            <div>
-              <a href="/login/logout" style="text-decoration: none;"><button class="loginbtn btn-lg"><i class="bi bi-person-circle mr-2"></i>로그아웃</button></a>
+            <div th:if="${session.user_email == null}">
+              <a href="/login" style="text-decoration: none;">
+              	<button class="btn btn-lg btn-secondary"><i class="bi bi-person-circle mr-2"></i>로그인</button>
+              </a>
+            </div>
+            <div th:if="${session.user_email != null}">
+              <a href="/login/logout" style="text-decoration: none;"><button class="btn btn-lg btn-secondary"><i class="bi bi-person-circle mr-2"></i>로그아웃</button></a>
             </div>
           </div>
-        </nav>
+        </nav>     
     </header>
     <!-- Content  -->
     <section class="section">
-      <div class="wrapper">
+      <div class="wrapper" id="content-detail">
         <div class="play-box container-fluid">
           <div class="row">
             <div class="play-detail col-8">
@@ -86,17 +103,16 @@
                   </div>
                   <th:block th:if="${user_email}!=null">
                   <form action="/reply/write" method="post">
-                  <div class="reply">
-                  	작성자 : <input type="text" class="reply-writer ml-2" name="replyWriter" th:value="${user_email}" readonly>
-                  	<input type="hidden" th:value="${contentNum}" th:name="contentNum">
-                  </div>
-                  <div class="reply">
-                  	<textarea class="reply-input" name="replyContent" cols="20" rows="3" placeholder="댓글을 입력해주세요."></textarea>
-                  </div>
-                  <div class="reply">
-                  	등록일 : <input type="date" id="now_date" name="replyDate" class="ml-2" min=now_date readonly>
-                  	<button type="submit" class="reply-write ml-2">댓글 달기</button>
-                  </div>
+	                <input type="hidden" class="reply-writer ml-2" name="replyWriter" th:value="${user_email}" readonly>
+	                <input type="hidden" th:value="${contentNum}" th:name="contentNum">
+	              	<input type="date" id="now_date" name="replyDate" class="ml-2 d-none" min=now_date readonly>
+	              	<div class="input-group mb-3">
+					  <textarea class="form-control" name="replyContent" placeholder="댓글을 입력해주세요." rows="3" style="resize: none;"></textarea>
+					  <div class="input-group-append">
+	               	  	<button type="submit" class="btn btn-primary">댓글 달기</button>
+					  </div>
+					</div>
+					
                   </form>
                   </th:block>
                   <div class="reply-list row">

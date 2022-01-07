@@ -15,6 +15,7 @@ body{
     width: 100%;
     padding-left: 72px;
     background-color: #f3f3f3;
+    
 }
 
 .inner-top{
@@ -51,7 +52,6 @@ body{
 }
 
 .player{
-    margin: 0 auto;
     height: 400px;
     margin-top: 15px;
 }
@@ -63,21 +63,28 @@ body{
 }
 
 .play-mark{
-    height: 150px;
-    width: 100%;
+    height: 75px;
+    width: 75px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-info{
+	display: flex;
+	flex-direction: column;
     justify-content: center;
 }
 
-div[class *="info-"]{
-    margin: 10px 20px;
+#content_height{
+	height: 100px;
 }
 
 .play-mark img{
-    padding-top: 15px;
-    padding-bottom: 15px;
-    width: 70%;
-    height: 70%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
 }
 
 .play-info-writer{

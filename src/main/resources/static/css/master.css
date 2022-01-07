@@ -1,0 +1,155 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+body{
+	font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+	
+}
+
+.wrapper-box{
+    border: 1px solid #cccc;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    padding: 2.5rem;
+}
+
+
+/* content.css(index.html) */
+
+.section{
+    padding-top: 128px;
+}
+
+.wrapper#index{
+    height: 100%;
+    width: 100%;
+    padding-left: 72px;
+    background-color: #f3f3f3;
+}
+
+.inner-top{
+    width: 100%;
+    height: 256px;
+    padding: 30px 90px;
+    background-color: white;
+}
+
+.inner-left{
+    height: 100%;
+    background-color: white;
+    
+}
+
+.inner-left img{
+    width: 60%;
+}
+
+.inner-right{
+    height: 100%;
+}
+
+.inner-right img{
+    width: 20%;
+    height: 200px;
+}
+
+.player{
+    height: 400px;
+    margin-top: 15px;
+}
+
+.play-content{
+    height: 300px;
+    width: 100%;
+    background-color: white;
+}
+
+.play-mark{
+    height: 75px;
+    width: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-info{
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+}
+
+.play-mark img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+}
+
+/* Header */
+.header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 4rem;
+    z-index: 998;
+}
+
+.navbar{
+    border-bottom: 1px solid;
+    border-color: #cccc;
+    background-color: white;
+}
+
+.navbar #header-list{
+	font-size: 2rem;
+}
+
+.navbar-brand img{
+	height: 2rem;
+}
+
+.top-btn{
+    height: 56px;
+    border-bottom: 1px solid;
+    border-color: #cccc;
+    background-color: white;
+}
+
+#dropdownMenuButton::after{
+    display: none;
+}
+
+/* Sidebar */
+.sidebar{
+    width: 74px;
+    height: calc(100vh - 56px);
+    background-color: white;
+    position: fixed;
+    left: 0;
+    top: 56px;
+    z-index: 999;
+}
+
+.sidebar button{
+    width: 74px;
+    padding: 16px 0.75rem 14px 0.75rem;
+    background-color: white;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+}
+
+.sidebar button:hover{
+    width: 74px;
+    padding: 16px 0 14px;
+    background-color: #cccc;
+    border: none;
+}
+.sidebar i{
+    font-size: 26px;
+}

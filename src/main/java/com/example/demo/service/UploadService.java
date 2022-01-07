@@ -21,7 +21,7 @@ public interface UploadService {
 	
 	public void CountUpdate(@Param("content_num") String content_num) throws Exception;
 	
-	public int boardListCnt() throws Exception;
+	public int boardListCnt(String content_writer) throws Exception;
 	
 	public ArrayList<UploadDto> ContentDetail(@Param("content_num") String content_num) throws Exception;
 }

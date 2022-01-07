@@ -9,37 +9,43 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
-    <link rel="stylesheet" href="../static/css/header.css">
-    <link rel="stylesheet" href="../static/css/sidebar.css">
-    <link rel="stylesheet" href="../static/css/content.css">
+    <link rel="stylesheet" href="../static/css/master.css">
     <!-- bootstrap end -->
   </head>
   <body>
 
     <header class="header">
-        <nav class="navbar navbar-expand-lg">
-          <div class="col-2">
-            <button class="navbar-brand" ><i class="bi bi-list"></i></button>
-            <a class="nav-link-img" href="index"><img src="../static/images/youtube-logo.png"></a>
+        <nav class="navbar navbar-expand-lg px-0">
+          <div class="col-2 d-flex align-items-center">
+            <span id="header-list" class="ml-2 mr-3">
+            	<i class="bi bi-list"></i>
+            </span>
+            <a class="navbar-brand" href="index">
+            	<img src="../static/images/youtube-logo.png">
+            </a>
           </div>
           
             <div class="col-8 d-flex justify-content-center align-content-center">
               <form>
                 <div class="input-group">
-                  <div class="form-control-border d-flex">
-                    <input id="search-input" class="form-control" type="search" placeholder="검색">
-                    <i class="bi bi-keyboard"></i>
+                  <input id="search-input" class="form-control" type="search" placeholder="검색">
+                  <div class="input-group-append">                  
+	                  <button class="btn btn-secondary" type="submit">
+	                  	<i class="bi bi-search"></i>
+	                  </button>
                   </div>
-                  <button class="btn btn-secondary search-btn" type="submit"><i class="bi bi-search"></i></button>
-                  <button class="speak-btn  ml-2"><i class="bi bi-mic-fill"></i></button>
                 </div>
               </form>
             </div>
           
           <div class="col-2 d-flex justify-content-end">
-            <button class="setting btn-lg"><i class="bi bi-grid-3x3-gap"></i></button>
+            <button class="btn btn-lg btn-link">
+            	<i class="bi bi-grid-3x3-gap text-secondary"></i>
+            </button>
             <div class="dropdown">
-              <button class="setting btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical mr-3"></i></button>
+              <button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+              		<i class="bi bi-three-dots-vertical text-secondary"></i>
+              </button>
               <div th:if="${session.user_email != null}">
               	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 	<a href="mypage"  style="text-decoration: none; color: black; font-weight: bold; margin-bottom: 20px;">
@@ -52,27 +58,29 @@
               </div>
             </div>
             <div th:if="${session.user_email == null}">
-              <a href="login" style="text-decoration: none;"><button class="loginbtn btn-lg"><i class="bi bi-person-circle mr-2"></i>로그인</button></a>
+              <a href="login" style="text-decoration: none;">
+              	<button class="btn btn-lg btn-secondary"><i class="bi bi-person-circle mr-2"></i>로그인</button>
+              </a>
             </div>
             <div th:if="${session.user_email != null}">
-              <a href="/login/logout" style="text-decoration: none;"><button class="loginbtn btn-lg"><i class="bi bi-person-circle mr-2"></i>로그아웃</button></a>
+              <a href="/login/logout" style="text-decoration: none;"><button class="btn btn-lg btn-secondary"><i class="bi bi-person-circle mr-2"></i>로그아웃</button></a>
             </div>
           </div>
         </nav>
     
-        <div class="top-btn d-flex justify-content-center align-content-center">
-          <button class="contentbtn mr-2">전체</button>
-          <button class="contentbtn mr-2">실시간</button>
-          <button class="contentbtn mr-2">취미</button>
-          <button class="contentbtn mr-2">음악</button>
-          <button class="contentbtn mr-2">게임</button>
-          <button class="contentbtn mr-2">운동</button>
-          <button class="contentbtn mr-2">공부</button>
+        <div class="top-btn d-flex justify-content-center align-content-center py-2">
+          <button class="btn btn-outline-secondary rounded-pill mr-2">전체</button>
+          <button class="btn btn-outline-secondary rounded-pill mr-2">실시간</button>
+          <button class="btn btn-outline-secondary rounded-pill mr-2">취미</button>
+          <button class="btn btn-outline-secondary rounded-pill mr-2">음악</button>
+          <button class="btn btn-outline-secondary rounded-pill mr-2">게임</button>
+          <button class="btn btn-outline-secondary rounded-pill mr-2">운동</button>
+          <button class="btn btn-outline-secondary rounded-pill mr-2">공부</button>
         </div>
      
     </header>
     <section class="section">
-      <div class="wrapper">
+      <div class="wrapper" id="index">
         <div class="sidebar">
           <button><i class="bi bi-house-door-fill"></i>홈</button>
           <button><i class="bi bi-compass"></i>탐색</button>
@@ -80,14 +88,17 @@
           <button><i class="bi bi-box-seam"></i>보관함</button>
           <button><i class="bi bi-clock-history"></i>시청 기록</button>
         </div>
+        <div class="d-flex flex-column">
         <div class="inner-top">
           <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="inner-left col-4">
                   <img src="../static/images/youtubepremium.png">
                   <div th:if="${session.user_email==null}">
                   	<h4>유튜브 지금 바로 회원가입 해보세요</h4>
-                  	<a href="join" style="text-decoration: none;"><button class="join-btn btn-lg" >회원가입</button></a>
+                  	<a href="join">
+                  		<button class="btn btn-outline-primary btn-lg" >회원가입</button>
+                  	</a>
                   </div>
                 </div>
                 <div class="inner-right col-8">
@@ -96,33 +107,31 @@
             </div>
           </div>
         </div>
-        
         <div class="container-fluid">
-          <div class="row">
+          <div class="row row-cols-6">
           <th:block th:each="content : ${allContentList}">
-            <div class="player col-2 pr-3">
+            <div class="player col pr-3">
               <a th:href="@{/mypage/content-detail(contentNum=${content.content_num})}"><img class="play-content" th:src="@{../static/upload/}+${content.file_name}"></a>
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="play-mark col-2">
+                <div class="row row-cols-2 no-gutters align-items-center py-3">
+                  <div class="play-mark col-auto ">
                     <img th:src="@{../static/upload/}+${content.file_name}" alt="">
                   </div>
-                  <div class="play-info col-10">
+                  <div class="play-info col-auto pl-3">
                     <div class="play-info-title">
-                      <b th:text="|제목 : ${content.content_name}|"></b>
+                      <h5 class="mb-0">
+	                      <b th:text="|${content.content_name}|"></b>                      
+                      </h5>
                     </div>
                     <div class="play-info-writer">
-                      <p class="content-info" th:text="|작성자 : ${content.content_writer}|" >
-                    </div>
-                    <div class="play-info-count">
-                      <p class="content-info" th:text="|조회수 : ${content.content_count}|" >
+                      <p class="mb-0" th:text="|${content.content_writer}|" >
+                      <p class="mb-0" th:text="|조회수 ${content.content_count}|" >
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
             </th:block>
           </div>
+        </div>
         </div>
       </div>
     </section>

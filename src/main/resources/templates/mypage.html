@@ -17,20 +17,18 @@
 	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
-<link rel="stylesheet" href="../static/css/mypage-header.css">
-<link rel="stylesheet" href="../static/css/sidebar.css">
-<link rel="stylesheet" href="../static/css/mypage-content.css">
+<link rel="stylesheet" href="../static/css/master.css">
 <!-- bootstrap end -->
 </head>
 <body>
 	<!-- Header -->
 	<header class="header">
-		<nav class="navbar navbar-expand-lg">
+		<nav class="navbar navbar-expand-lg" id="mypage">
 			<div class="col-2">
 				<button class="navbar-brand">
 					<i class="bi bi-list"></i>
 				</button>
-				<a class="nav-link-img" href="/mypage"><img
+				<a class="nav-link-img" href="/mypage"><img id="logo"
 					src="../static/images/studio_logo.png"></a> <a
 					class="home-btn ml-2" href="/index"><i class="bi bi-house-door"></i></a>
 			</div>
@@ -55,7 +53,7 @@
 					<button class="setting btn-lg dropdown-toggle" type="button"
 						id="dropdownMenuButton" data-toggle="dropdown"
 						aria-expanded="false">
-						<i class="bi bi-three-dots-vertical mr-3"></i>
+						<i class="bi bi-three-dots-vertical"></i>
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<a href="mypage"

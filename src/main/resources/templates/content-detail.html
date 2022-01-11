@@ -74,13 +74,15 @@
         <div class="play-box container-fluid">
           <div class="row">
             <div class="play-detail col-8">
-              <div class="play-wrapper">
+              <div class="play-wrapper px-5">
               	<th:block th:each="detailList : ${contentDetail}">
-                <img class="detail-content" th:src="@{../static/upload/}+${detailList.file_name}"></img>
-                <div class="content-info">
-                  <h5 style="font-weight: 600;" th:text="|제목 : ${detailList.content_name}|">
+              	<div class="d-flex justify-content-center align-items-center py-3">
+              		<img  id="content"  class="w-100" th:src="@{../static/upload/}+${detailList.file_name}"></img>
+              	</div>
+                <div class="content-info pt-3 border-top">
+                  <h3 style="font-weight: 600;" th:text="|제목 : ${detailList.content_name}|">
                     
-                  </h5>
+                  </h3>
                   <div class="content-count" th:text="|조회수 : ${detailList.content_count}회|">
                     
                   </div>
@@ -91,14 +93,14 @@
                 
                 <!-- Reply -->
                 <div class="content-writer container-fluid">
-                  <div class="writer-name row" th:text="|작성자 : ${detailList.content_writer}|">
+                  <div class="writer-name row border-bottom pb-3" th:text="|작성자 : ${detailList.content_writer}|">
                     
                   </div>
                   </th:block>
                   <div class="writer-info row">
                     
                   </div>
-                  <div class="reply">
+                  <div class="reply pt-3">
                   댓글 쓰기
                   </div>
                   <th:block th:if="${user_email}!=null">
@@ -115,7 +117,7 @@
 					
                   </form>
                   </th:block>
-                  <div class="reply-list row">
+                  <div class="reply-list row border-top p">
                   댓글 목록
                   </div>
                   <th:block th:each="replyList : ${reply}">

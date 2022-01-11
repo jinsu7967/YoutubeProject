@@ -47,13 +47,9 @@
               		<i class="bi bi-three-dots-vertical text-secondary"></i>
               </button>
               <div th:if="${session.user_email != null}">
-              	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                	<a href="mypage"  style="text-decoration: none; color: black; font-weight: bold; margin-bottom: 20px;">
-                	마이페이지
-                	</a><br>
-                	<a href="update-user-check" style="text-decoration: none; color: black; font-weight: bold;">
-                	개인정보 변경
-                	</a>
+              	<div class="dropdown-menu">
+                	<a class="dropdown-item" href="mypage">마이페이지</a>
+                	<a class="dropdown-item" href="update-user-check">개인정보 변경</a>
               	</div>
               </div>
             </div>

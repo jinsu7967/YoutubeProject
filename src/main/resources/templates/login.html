@@ -15,26 +15,29 @@
     <!-- bootstrap end -->
 </head>
 <body>
-    <div class="wrapper-form">
-        <div class="wrapper-box">
-            <div class="text-center">
-            	<a href="index"><img class="Google-logo" src="../static/images/Google_logo.png"></a>
-	            <h3>로그인</h3>
-	            <p style="font-size: 18px;">YouTube로 이동</p>
-            </div>
-            <form action="login/loginCheck" method="post">
-                <div class="mb-3">
-	                <input type="text" class="form-control mb-3" name="user_email" placeholder="이메일 또는 휴대전화">
-	                <input type="password" class="form-control mb-3" name="user_pw" placeholder="비밀번호 입력">
-	                <a href="find-pw">이메일 및 비밀번호를 잊으셨나요?</a>                
-                </div>
-                <p class="mb-3">내컴퓨터가 아닌가요?<br>게스트 모드를 사용하여 비공개로 로그인하세요.<a class="ml-2" href="#">자세히 알아보기</a></p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <a href="join">계정 만들기</a>
-                    <button type="submit" class="btn btn-outline-primary">다음</button>
-                </div>
-            </form>
-        </div>
-    </div>
+	<div class="wrapper-box container w-25">
+		<div class="text-center mb-5">
+			<a href="/index">
+				<img class="Google-logo my-4" src="../static/images/Google_logo.png">
+			</a>
+			<h3 class="font-weight-bold">로그인</h3>
+			<p style="font-size: 18px;">YouTube로 이동</p>
+		</div>
+		<form action="login/loginCheck" method="post">
+			<div class="mb-4">
+				<input type="text" class="form-control mb-3" name="user_email" placeholder="이메일 또는 휴대전화">
+				<input type="password" class="form-control mb-3" name="user_pw" placeholder="비밀번호 입력">
+				<a class="text-primary" href="find-pw">이메일 및 비밀번호를 잊으셨나요?</a>
+			</div>
+			<p class="mb-4">
+				내컴퓨터가 아닌가요?<br>게스트 모드를 사용하여 비공개로 로그인하세요.
+				<a class="ml-2 text-primary" href="#">자세히 알아보기</a>
+			</p>
+			<div class="d-flex justify-content-between align-items-center mt-4">
+				<a class="text-primary" href="join">계정 만들기</a>
+				<button type="submit" class="btn btn-outline-primary">다음</button>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

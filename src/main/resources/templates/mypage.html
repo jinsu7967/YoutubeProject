@@ -22,199 +22,199 @@
 </head>
 <body>
 	<!-- Header -->
-	<header class="header">
-		<nav class="navbar navbar-expand-lg" id="mypage">
-			<div class="col-2">
-				<button class="navbar-brand">
-					<i class="bi bi-list"></i>
-				</button>
-				<a class="nav-link-img" href="/mypage"><img id="logo"
-					src="../static/images/studio_logo.png"></a> <a
-					class="home-btn ml-2" href="/index"><i class="bi bi-house-door"></i></a>
-			</div>
-			<div class="col-8 d-flex justify-content-center align-content-center">
-				<form>
-					<div class="input-group">
-						<div class="form-control-border d-flex">
-							<input id="search-input" class="form-control" type="search"
-								placeholder="검색"> <i class="bi bi-keyboard"></i>
-						</div>
-						<button class="btn btn-secondary search-btn" type="submit">
-							<i class="bi bi-search"></i>
-						</button>
-					</div>
-				</form>
-			</div>
-			<div class="col-2 d-flex justify-content-end">
-				<button class="create-btn btn-lg">
-						<i class="bi bi-plus-square-fill mr-2"></i>만들기
-					</button>
-				<div class="dropdown">
-					<button class="setting btn-lg dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-expanded="false">
-						<i class="bi bi-three-dots-vertical"></i>
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a href="mypage"
-							style="text-decoration: none; color: black; font-weight: bold; margin-bottom: 20px;">마이페이지</a><br>
-						<a href="update-user-check"
-							style="text-decoration: none; color: black; font-weight: bold;">개인정보
-							변경</a>
-					</div>
-				</div>
-				<div>
-					<div th:if="${session.user_email == null}">
-						<a href="login" style="text-decoration: none;"><button
-								class="loginbtn btn-lg">
-								<i class="bi bi-person-circle mr-2"></i>로그인
-							</button></a>
-					</div>
-					<div th:if="${session.user_email != null}">
-						<a href="/login/logout" style="text-decoration: none;"><button
-								class="loginbtn btn-lg">
-								<i class="bi bi-person-circle mr-2"></i>로그아웃
-							</button></a>
-					</div>
-				</div>
-			</div>
-		</nav>
-	</header>
-	
-	<!-- ContentList -->
+	    <header class="header">
+        <nav class="navbar navbar-expand-lg px-0">
+          <div class="col-2 d-flex align-items-center">
+            <span id="header-list" class="ml-2 mr-3">
+            	<i class="bi bi-list"></i>
+            </span>
+            <a class="navbar-brand" href="index">
+            	<img src="../static/images/youtube-logo.png">
+            </a>
+          </div>
+          
+            <div class="col-8 d-flex justify-content-center align-content-center">
+              <form>
+                <div class="input-group">
+                  <input id="search-input" class="form-control" type="search" placeholder="검색">
+                  <div class="input-group-append">                  
+	                  <button class="btn btn-secondary" type="submit">
+	                  	<i class="bi bi-search"></i>
+	                  </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          
+          <div class="col-2 d-flex justify-content-end">
+            <button class="btn btn-lg btn-secondary text-nowrap" data-toggle="modal" data-target="#myModal">
+				<i class="bi bi-plus-square mr-2"></i>만들기
+			</button>
+            <div class="dropdown">
+              <button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+              		<i class="bi bi-three-dots-vertical text-secondary"></i>
+              </button>
+              <div th:if="${session.user_email != null}">
+              	<div class="dropdown-menu">
+                	<a class="dropdown-item" href="mypage">마이페이지</a>
+                	<a class="dropdown-item" href="update-user-check">개인정보 변경</a>
+              	</div>
+              </div>
+            </div>
+            <div th:if="${session.user_email == null}">
+              <a href="login" style="text-decoration: none;">
+              	<button class="btn btn-lg btn-secondary text-nowrap"><i class="bi bi-person-circle mr-2"></i>로그인</button>
+              </a>
+            </div>
+            <div th:if="${session.user_email != null}">
+              <a href="/login/logout"><button class="btn btn-lg btn-secondary text-nowrap"><i class="bi bi-person-circle mr-2"></i>로그아웃</button></a>
+            </div>
+          </div>
+        </nav>     
+    </header>
+    <!-- ContentList -->
 	<section class="section">
-		<div class="wrapper">
-			<div class="content-box">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="headline col-12">
-							<h1 style="font-weight: bold;">YouTube Content</h1>
-						</div>
-						<div class="content-main-num col-1">번호</div>
-						<div class="content-main-player col-4">컨텐츠 제목</div>
-						<div class="content-main-player col-2">파일이미지</div>
-						<div class="content-main-date col-2">등록일</div>
-						<div class="content-main-count col-2">조회수</div>
-						<div class="content-main-setting col-1">설정</div>
+		<div class="container-xl">
+			
+
+	<table class="table table-bordered text-center">
+		<colgroup>
+			<col width="5%">
+			<col width="50%">
+			<!-- <col width="20%"> -->
+			<col width="20%">
+			<col width="20%">
+			<col width="5%">
+		</colgroup>
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">번호</th>
+				<th scope="col">컨텐츠 제목</th>
+				<!-- <th scope="col">파일이미지</th> -->
+				<th scope="col">등록일</th>
+				<th scope="col">조회수</th>
+				<th scope="col">설정</th>
+			</tr>
+		</thead>
+		<tbody>
+			<th:block th:each="list : ${contentList}">
+			<tr>
+				<td th:text="${list.rownum}" th:value="${list.rownum}" th:name="rownum">2</td>
+				<td>
+					<a class="text-primary" th:href="@{/mypage/content-detail(contentNum=${list.content_num})}" th:text="${list.content_name}" th:value="${list.content_name}"></a>
+				</td>
+				<!-- <td>
+					<img th:src="@{../static/upload/}+${list.file_name}" class="file_img" alt="파일사진">
+				</td> -->
+				<td th:text="${#dates.format(list.content_date,'yyyy-MM-dd')}"></td>
+				<td th:text="${list.content_count}"></td>
+				<td>
+					<div class="btn-group dropright">
+						<button class="btn dropdown-toggle p-0" type="button"
+							data-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-gear"></i>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a
+								th:href="@{/mypage-update(content_num=${list.content_num},content_name=${list.content_name})}"><button
+										class="btn dropdown-item">수정</button></a></li>
+							<li><a
+								th:href="@{/mypage/delete(content_num=${list.content_num})}"><button
+										class="btn dropdown-item">삭제</button></a></li>
+						</ul>
 					</div>
-					<div class="row" th:each="list : ${contentList}">
-					
-						<div class="content-list-num col-1" th:text="${list.rownum}" th:value="${list.rownum}" th:name="rownum"></div>
-						<div class="content-list-player col-4"><a th:href="@{/mypage/content-detail(contentNum=${list.content_num})}" th:text="${list.content_name}" th:value="${list.content_name}"></a></div>
-						<div class="content-list-player col-2"><img th:src="@{../static/upload/}+${list.file_name}" class="file_img" alt="파일사진"></div>
-						<div class="content-list-date col-2" th:text="${#dates.format(list.content_date,'yyyy-MM-dd')}"></div>
-						<div class="content-list-count col-2" th:text="${list.content_count}"></div>
-						<div class="content-list-setting col-1">
-							<div class="btn-group dropright">
-								<button class="btn dropdown-toggle" type="button"
-									data-toggle="dropdown" aria-expanded="false">
-									<i class="bi bi-gear"></i>
-								</button>
-								<ul class="dropdown-menu">
-									<li>
-										<a th:href="@{/mypage-update(content_num=${list.content_num},content_name=${list.content_name})}"><button class="btn dropdown-item">수정</button></a>
-									</li>
-									<li>
-										<a th:href="@{/mypage/delete(content_num=${list.content_num})}"><button class="btn dropdown-item">삭제</button></a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- pagination -->
-				<div class="pagination pagination-lg">
-					<nav aria-label="...">
-					  <ul class="pagination">
-					  	<div th:if="${paging.cri.page == 1}">
-						    <li class="page-item disabled">
-						      <a class="page-link">Start</a>
-						    </li>
-					    </div>
-					    <div th:if="${paging.cri.page != 1}">
-						    <li class="page-item">
-						      <a class="page-link" th:href="@{/mypage(page=${paging.startPage})}">Start</a>
-						    </li>
-					    </div>
-					    <th:block th:with="start =${paging.startPage}, end =${paging.endPage}">
-					    <li class="page-item" aria-current="page" th:each="paging : ${#numbers.sequence(start,end)}">
-					    	<a class="page-link" id="pagingBtn" th:href="@{/mypage(page=${paging})}" th:text=${paging}></a>
-					    </li>
-					    </th:block>
-					    <div th:if="${paging.cri.page == paging.endPage}">
-						    <li class="page-item disabled">
-						      <a class="page-link">End</a>
-						    </li>  
-					    </div>
-					    <div th:if="${paging.cri.page != paging.endPage}">
-					    	<li class="page-item">
-						      <a class="page-link" th:href="@{/mypage(page=${paging.endPage})}">End</a>
-						    </li>
-					    </div>
-					  </ul>
-					</nav>
-				</div>
-			</div>
-		</div>
+				</td>
+			</tr>
+			</th:block>
+		</tbody>
+	</table>
+	<!-- pagination -->
+	<div class="pagination justify-content-center">
+		<nav aria-label="...">
+		  <ul class="pagination">
+		  	<div th:if="${paging.cri.page == 1}">
+			    <li class="page-item disabled">
+			      <a class="page-link">Start</a>
+			    </li>
+		    </div>
+		    <div th:if="${paging.cri.page != 1}">
+			    <li class="page-item">
+			      <a class="page-link" th:href="@{/mypage(page=${paging.startPage})}">Start</a>
+			    </li>
+		    </div>
+		    <th:block th:with="start =${paging.startPage}, end =${paging.endPage}">
+		    <li class="page-item" aria-current="page" th:each="paging : ${#numbers.sequence(start,end)}">
+		    	<a class="page-link" id="pagingBtn" th:href="@{/mypage(page=${paging})}" th:text=${paging}></a>
+		    </li>
+		    </th:block>
+		    <div th:if="${paging.cri.page == paging.endPage}">
+			    <li class="page-item disabled">
+			      <a class="page-link">End</a>
+			    </li>  
+		    </div>
+		    <div th:if="${paging.cri.page != paging.endPage}">
+		    	<li class="page-item">
+			      <a class="page-link" th:href="@{/mypage(page=${paging.endPage})}">End</a>
+			    </li>
+		    </div>
+		  </ul>
+		</nav>
+	</div>
 	</section>
 	
 	<!-- The Modal -->
-	  <div id="myModal" class="modal">
-		<!-- Modal content -->
-		<div class="modal-content">
-		  <div class="modal-header">
-			<span><h3 class="font-weight-bold">동영상 업로드</h3></span>
-			<span id="modal-close"><i class="bi bi-x" style="font-size: 30px;"></i></span>
-		  </div>
-		  <div class="modal-context">
-			  <form action="/mypage/upload" class="upload-box" method="post" enctype="multipart/form-data">
-			  		<div class="row">
-					  	<div class="col">
-						  	<div class="upload-file mt-3">
-						  		<input type="file" id="file-select" name="file-name">
-						  		<input class="upload-name w-25" value="첨부파일" placeholder="첨부파일">
-						  		<label class="mb-0" for="file-select">파일 찾기</label>
-						  	</div>
-						  	<div class="upload-input">
-						  		컨텐츠 제목  <input type="text" class="mr-4 ml-2" name="content_name" style="width: 300px;">
-						  		등록 날짜 <input type="date" id="now_date" name="content_date" class="ml-2" min=now_date readonly><br><br>
-						  	</div>
-						  	<div class="upload-btn-box">
-						  	<button type="submit" class="upload-btn">컨텐츠 등록</button>
-						  	</div>
+	  <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+		  <div class="modal-dialog modal-dialog-centered modal-xl">
+			<!-- Modal content -->
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title font-weight-bold" id="myModalLabel">동영상 업로드</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+			  </div>
+			  <div class="modal-body">
+				  <form action="/mypage/upload" method="post" enctype="multipart/form-data">
+					  	<input type="file" class="d-none form-control" id="file-select" name="file-name">
+				  		<div class="input-group mb-3">
+					  		<input class="form-control" id="upload-name" value="첨부파일" placeholder="첨부파일">
+					  		<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button" id="button-addon">파일 찾기</button>
+							</div>
 					  	</div>
-				  	</div>
-			  </form>
+					  	<div class="row row-cols-2">
+				  			<div class="col">
+				  				<span class="mr-2">컨텐츠 제목</span>
+				  				<input type="text" class="form-control" name="content_name">
+				  			</div>
+				  			<div class="col">
+						  		<span class="mr-2">등록 날짜</span>
+						  		<input type="date" class="form-control" id="now_date" name="content_date" min=now_date readonly>					  			
+				  			</div>
+				  		</div>
+				  		<hr class="w-100">
+				  		<span class="d-flex justify-content-end w-100 mt-3">
+				  			<button type="submit" class="btn btn-primary d-flex align-items-center">컨텐츠 등록</button>
+				  		</span>
+				  </form>
+			  </div>
+			</div>
 		  </div>
-		</div>
 	  </div>
 	  <!-- Modal JQuery -->
 	  <script>
 	  $( document ).ready(function() {
-		$("label").click(function(e){
+		$("#button-addon").click(function(e){
 			  e.preventDefault();
 			 $("input#file-select").click(); 
 		});
 		  
 		$("input#file-select").on('change',function(){
 			  var fileName = $(this).val().split('/').pop().split('\\').pop();
-			  $(".upload-name").val(fileName);
+			  $("#upload-name").val(fileName);
 		});
 		
-		
-		
 	  });
-		// Get the modal
-		var modal = document.getElementById('myModal');
-		
-      // When the user clicks on the button, open the modal
-      $('button.create-btn').click(function () {
-        modal.style.display = "block";
-      });
-      
-      $('span#modal-close').click(function () {
-        modal.style.display = "none";
-      });
     	//현재시간 불러오기
       document.getElementById('now_date').valueAsDate = new Date();
 	</script>

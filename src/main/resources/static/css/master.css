@@ -2,7 +2,13 @@
 
 body{
 	font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-	
+	word-break: keep-all;
+	word-wrap: break-word;
+}
+
+a, a:hover, a:focus{
+	color: inherit;
+	text-decoration: none;
 }
 
 .wrapper-box{
@@ -12,18 +18,26 @@ body{
     top: 50%;
     left: 50%;
     transform:translate(-50%, -50%);
-    padding: 2.5rem;
+    padding: 4rem;
 }
+
 
 
 /* content.css(index.html) */
 
 .section{
-    padding-top: 128px;
+    padding-top: 65px;
 }
 
 .wrapper#index{
     height: 100%;
+    width: 100%;
+    padding-left: 72px;
+    background-color: #f3f3f3;
+}
+
+.wrapper#content-detail{
+	height: 100%;
     width: 100%;
     padding-left: 72px;
     background-color: #f3f3f3;
@@ -152,4 +166,27 @@ body{
 }
 .sidebar i{
     font-size: 26px;
+}
+
+/* login */
+
+.Google-logo{
+	width: 120px;
+}
+
+.file_img{
+	max-width: 200px;
+}
+
+.upload-file{
+		
+	height: 300px;
+}
+
+/* content-detail*/
+
+#content{
+	
+	
+	height: 720px;
 }

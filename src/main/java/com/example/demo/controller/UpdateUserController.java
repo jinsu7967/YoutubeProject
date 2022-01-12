@@ -27,7 +27,7 @@ public class UpdateUserController {
 	private UpdateUserService uus;
 	
 	
-	@RequestMapping("/UserCheck")
+	@RequestMapping("/user-check")
 	public String UserCheck(@RequestParam("user_name") String user_name,Model model
 			,@RequestParam("user_email") String user_email,@RequestParam("user_pw") String user_pw,HttpServletResponse response) throws Exception{
 		
@@ -49,21 +49,20 @@ public class UpdateUserController {
 		return "user-update";
 	}
 	
-	@RequestMapping("/UserUpdate")
+	@RequestMapping("/user-update")
 	public void UpdateUser(@RequestParam("user_email") String user_email,@RequestParam("user_pw") String user_pw,@RequestParam("user_name") String user_name,Model model,HttpServletResponse response) throws Exception{
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		int a=uus.UserUpdate(user_email,user_pw,user_name);
 		
-		System.out.println(a);
+		if(user_pw.length()<8 || user_pw.matches("[0-9|a-z|A-Z\\\\s]*") || !(user_name.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*"))) {
+			out.println("<script>alert('정보변경 실패 입력내용을 확인해주세요.'); location.href=history.back(); </script>");
+		}else {
+			int userUpdate = uus.UserUpdate(user_email,user_pw,user_name);
+			System.out.println("정보변경 성공");
+			out.println("<script>alert('정보변경 완료.'); location.href='/index' </script>");
+		}
 		
-		System.out.println(user_email);
-		System.out.println(user_pw);
-		System.out.println(user_name);
-		
-		System.out.println("정보변경 성공");
-		out.println("<script>alert('정보변경 완료.'); location.href='/index' </script>");
 	}
 	
 	

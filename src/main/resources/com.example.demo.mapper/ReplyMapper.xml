@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.example.demo.mapper.ReplyMapper">
 	<!-- 댓글 조회 -->
 	<select id="ReplyList" resultType="ReplyDto">
-		select rno,content_num,writer,content,regDate
+		select rno,content_num,writer,content,regDate,reply_up,reply_down
 		from reply
 		where content_num=#{content_num}
 		order by rno desc
@@ -35,4 +35,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from reply
 		where content_num = #{content_num}
 	</delete>
+	
+	<!-- 댓글 갯수 -->
+	<select id="ReplyCount" resultType="int">
+		select count(*)
+		from reply
+		where content_num = #{content_num}
+	</select>
+	
+	<!-- 좋아요  -->
+	<update id="ReplyUp">
+		update reply 
+		set reply_up = reply_up + 1 
+		where rno = #{rno} and content_num = #{content_num}
+	</update>
+	
+	<!-- 싫어요  -->
+	<update id="ReplyDown">
+		update reply 
+		set reply_down = reply_down - 1 
+		where rno = #{rno} and content_num = #{content_num}
+	</update>
 </mapper>

@@ -24,22 +24,15 @@ a, a:hover, a:focus{
 
 
 /* content.css(index.html) */
-
-.section{
-    padding-top: 65px;
-}
-
 .wrapper#index{
-    height: 100%;
-    width: 100%;
     padding-left: 72px;
-    background-color: #f3f3f3;
+    padding-top: 112px!important;
 }
 
-.wrapper#content-detail{
+.wrapper{
 	height: 100%;
     width: 100%;
-    padding-left: 72px;
+    padding-top: 4rem;
     background-color: #f3f3f3;
 }
 
@@ -179,14 +172,26 @@ a, a:hover, a:focus{
 }
 
 .upload-file{
-		
 	height: 300px;
 }
 
 /* content-detail*/
+.container-xxl {
+	width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1800px;
+}
 
-#content{
-	
-	
-	height: 720px;
+.text-truncate-2{
+    line-height: 1.5rem;
+    max-height: 4rem;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
 }

@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +47,28 @@ public class ReplyController {
 		
 		
 		rs.ReplyDelete(rno,content_num,replyWriter);
+		
+		return "redirect:/mypage/content-detail?contentNum="+content_num;
+	}
+	
+	@RequestMapping("reply-up")
+	public String ReplyUp(@RequestParam("contentNum") String content_num,@RequestParam("rno") String rno,Model model) throws Exception{
+		
+		System.out.println(rno);
+		System.out.println(content_num);
+		
+		int a = rs.ReplyUp(rno, content_num);
+		
+		System.out.println(a);
+		
+		
+		return "redirect:/mypage/content-detail?contentNum="+content_num;
+	}
+	
+	@RequestMapping("reply-down")
+	public String ReplyDown(@RequestParam("contentNum") String content_num,@RequestParam("rno") String rno,Model model) throws Exception{
+		
+		rs.ReplyDown(rno, content_num);
 		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}

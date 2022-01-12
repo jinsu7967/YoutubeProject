@@ -1,268 +1,183 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8">
-    <title>YouTube Content</title>
-    <script type="text/javascript" src="../static/js/Youtube.js"></script>
-    <!-- bootstrap start -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
-    <link rel="stylesheet" href="../static/css/master.css">
-    <!-- bootstrap end -->
-  </head>
-  <body>
+<head>
+<meta charset="utf-8">
+<title>YouTube Content</title>
+<script type="text/javascript" src="../static/js/Youtube.js"></script>
+<!-- bootstrap start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video.min.js"></script>
+<link rel="stylesheet" href="../static/css/bootstrap-icons.css">
+<link rel="stylesheet" href="../static/css/master.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video-js.min.css">
+<link rel="stylesheet" href="../static/css/vjs-fantasy.css">
+<!-- bootstrap end -->
+</head>
+<body>
 	<!-- Header -->
-    <header class="header">
-        <nav class="navbar navbar-expand-lg px-0">
-          <div class="col-2 d-flex align-items-center">
-            <span id="header-list" class="ml-2 mr-3">
-            	<i class="bi bi-list"></i>
-            </span>
-            <a class="navbar-brand" href="/index">
-            	<img src="../static/images/youtube-logo.png">
-            </a>
-          </div>
-          
-            <div class="col-8 d-flex justify-content-center align-content-center">
-              <form>
-                <div class="input-group">
-                  <input id="search-input" class="form-control" type="search" placeholder="검색">
-                  <div class="input-group-append">                  
-	                  <button class="btn btn-secondary" type="submit">
-	                  	<i class="bi bi-search"></i>
-	                  </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          
-          <div class="col-2 d-flex justify-content-end">
-            <button class="btn btn-lg btn-link">
-            	<i class="bi bi-grid-3x3-gap text-secondary"></i>
-            </button>
-            <div class="dropdown">
-              <button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-              		<i class="bi bi-three-dots-vertical text-secondary"></i>
-              </button>
-              <div th:if="${session.user_email != null}">
-              	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                	<a href="mypage"  style="text-decoration: none; color: black; font-weight: bold; margin-bottom: 20px;">
-                	마이페이지
-                	</a><br>
-                	<a href="update-user-check" style="text-decoration: none; color: black; font-weight: bold;">
-                	개인정보 변경
-                	</a>
-              	</div>
-              </div>
-            </div>
-            <div th:if="${session.user_email == null}">
-              <a href="/login" style="text-decoration: none;">
-              	<button class="btn btn-lg btn-secondary"><i class="bi bi-person-circle mr-2"></i>로그인</button>
-              </a>
-            </div>
-            <div th:if="${session.user_email != null}">
-              <a href="/login/logout" style="text-decoration: none;"><button class="btn btn-lg btn-secondary"><i class="bi bi-person-circle mr-2"></i>로그아웃</button></a>
-            </div>
-          </div>
-        </nav>     
-    </header>
-    <!-- Content  -->
-    <section class="section">
-      <div class="wrapper" id="content-detail">
-        <div class="play-box container-fluid">
-          <div class="row">
-            <div class="play-detail col-8">
-              <div class="play-wrapper px-5">
-              	<th:block th:each="detailList : ${contentDetail}">
-              	<div class="d-flex justify-content-center align-items-center py-3">
-              		<img  id="content"  class="w-100" th:src="@{../static/upload/}+${detailList.file_name}"></img>
-              	</div>
-                <div class="content-info pt-3 border-top">
-                  <h3 style="font-weight: 600;" th:text="|제목 : ${detailList.content_name}|">
-                    
-                  </h3>
-                  <div class="content-count" th:text="|조회수 : ${detailList.content_count}회|">
-                    
-                  </div>
-                  <span class="content-date" th:text="|등록일 : ${#dates.format(detailList.content_date,'yyyy-MM-dd')}|">
-           
-                  </span>
-                </div>
-                
-                <!-- Reply -->
-                <div class="content-writer container-fluid">
-                  <div class="writer-name row border-bottom pb-3" th:text="|작성자 : ${detailList.content_writer}|">
-                    
-                  </div>
-                  </th:block>
-                  <div class="writer-info row">
-                    
-                  </div>
-                  <div class="reply pt-3">
-                  댓글 쓰기
-                  </div>
-                  <th:block th:if="${user_email}!=null">
-                  <form action="/reply/write" method="post">
-	                <input type="hidden" class="reply-writer ml-2" name="replyWriter" th:value="${user_email}" readonly>
-	                <input type="hidden" th:value="${contentNum}" th:name="contentNum">
-	              	<input type="date" id="now_date" name="replyDate" class="ml-2 d-none" min=now_date readonly>
-	              	<div class="input-group mb-3">
-					  <textarea class="form-control" name="replyContent" placeholder="댓글을 입력해주세요." rows="3" style="resize: none;"></textarea>
-					  <div class="input-group-append">
-	               	  	<button type="submit" class="btn btn-primary">댓글 달기</button>
-					  </div>
+	<header class="header">
+		<nav class="navbar navbar-expand-lg">
+			<div class="row row-cols-3 no-gutters w-100">
+				<div class="col d-flex align-items-center">
+					<span id="header-list" class="ml-2 mr-3"> <i class="bi bi-list"></i>
+					</span> <a class="navbar-brand" href="/index"> <img src="../static/images/youtube-logo.png">
+					</a>
+				</div>
+				<div class="col d-flex justify-content-center align-items-center">
+					<form>
+						<div class="input-group">
+							<input id="search-input" class="form-control" type="search" placeholder="검색">
+							<div class="input-group-append">
+								<button class="btn btn-secondary" type="submit">
+									<i class="bi bi-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col d-flex justify-content-end">
+					<button class="btn btn-lg btn-link">
+						<i class="bi bi-grid-3x3-gap text-secondary"></i>
+					</button>
+					<div class="dropdown">
+						<button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-three-dots-vertical text-secondary"></i>
+						</button>
+						<div th:if="${session.user_email != null}">
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/mypage">마이페이지</a> 
+								<a class="dropdown-item" href="/update-user-check">개인정보 변경</a>
+							</div>
+						</div>
 					</div>
-					
-                  </form>
-                  </th:block>
-                  <div class="reply-list row border-top p">
-                  댓글 목록
-                  </div>
-                  <th:block th:each="replyList : ${reply}">
-                  <form action="/reply/update" method="get">
-                  <div class="reply-info">
-                  	<div class="reply-writer" th:text="|작성자 : ${replyList.writer}|" th:name="replyWriter" th:value="${replyList.writer}"></div> 
-				  	<div class="reply-content" th:id="reply+${replyList.rno}" th:text="|내용 : ${replyList.content}|" th:value="${replyList.content}"></div>
-				  	<div class="reply-regDate" th:text="|등록일 : ${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></div>
-				  	<th:block th:if="${replyList.writer==user_email}">
-				  	<input type="hidden" th:name="replyRno" th:value="${replyList.rno}">
-				  	<input type="hidden" th:name="replyConNum" th:value="${contentNum}">
-				  	<button type="button" th:id="replyBtn+${replyList.rno}" class="replyUpdateBtn" th:onclick="|Test(${replyList.rno})|">수정</button>
-				  	<a th:id="replyBtn2+${replyList.rno}" th:href="@{/reply/delete(contentNum=${replyList.content_num},rno=${replyList.rno},replyWriter=${replyList.writer})}" class="replyControl ml-2">삭제</a>
-				  	</th:block>
-                  </div>
-                  </form>
-				  </th:block>
-                </div>
-              </div>
-            </div>
-            <!-- thumnail-list -->
-            <div class="play-list col-4">
-              <div class="container-fluid">
-                <div class="img-list row">
-                  <div class="thum-list col-6 bg ">
-                    <img src="../static/images/thumnail.png" alt="">
-                  </div>
-                  <div class="thum-info col-6 ">
-                    <div class="thum-title">
-                      구글이 최고다.
-                    </div>
-                    <div class="thum-writer">
-                      이진수
-                    </div>
-                    <div class="thum-count">
-                      조회수 : 0
-                    </div>
-                  </div>
-                </div>
-                <div class="img-list row">
-                  <div class="thum-list col-6 bg ">
-                    <img src="../static/images/thumnail.png" alt="">
-                  </div>
-                  <div class="thum-info col-6 ">
-                    <div class="thum-title">
-                      구글이 최고다.
-                    </div>
-                    <div class="thum-writer">
-                      이진수
-                    </div>
-                    <div class="thum-count">
-                      조회수: 0
-                    </div>
-                  </div>
-                </div>
-                <div class="img-list row">
-                  <div class="thum-list col-6 bg ">
-                    <img src="../static/images/thumnail.png" alt="">
-                  </div>
-                  <div class="thum-info col-6 ">
-                    <div class="thum-title">
-                      구글이 최고다.
-                    </div>
-                    <div class="thum-writer">
-                      이진수
-                    </div>
-                    <div class="thum-count">
-                      조회수: 0
-                    </div>
-                  </div>
-                </div>
-                <div class="img-list row">
-                  <div class="thum-list col-6 bg ">
-                    <img src="../static/images/thumnail.png" alt="">
-                  </div>
-                  <div class="thum-info col-6 ">
-                    <div class="thum-title">
-                      구글이 최고다.
-                    </div>
-                    <div class="thum-writer">
-                      이진수
-                    </div>
-                    <div class="thum-count">
-                      조회수: 0
-                    </div>
-                  </div>
-                </div>
-                <div class="img-list row">
-                  <div class="thum-list col-6 bg ">
-                    <img src="../static/images/thumnail.png" alt="">
-                  </div>
-                  <div class="thum-info col-6 ">
-                    <div class="thum-title">
-                      구글이 최고다.
-                    </div>
-                    <div class="thum-writer">
-                      이진수
-                    </div>
-                    <div class="thum-count">
-                      조회수 : 0
-                    </div>
-                  </div>
-                </div>
-                <div class="img-list row">
-                  <div class="thum-list col-6 bg ">
-                    <img src="../static/images/thumnail.png" alt="">
-                  </div>
-                  <div class="thum-info col-6 ">
-                    <div class="thum-title">
-                      구글이 최고다.
-                    </div>
-                    <div class="thum-writer">
-                      이진수
-                    </div>
-                    <div class="thum-count">
-                      조회수: 0
-                    </div>
-                  </div>
-                </div>
-                <div class="img-list row">
-                  <div class="thum-list col-6 bg ">
-                    <img src="../static/images/thumnail.png" alt="">
-                  </div>
-                  <div class="thum-info col-6 ">
-                    <div class="thum-title">
-                      구글이 최고다.
-                    </div>
-                    <div class="thum-writer">
-                      이진수
-                    </div>
-                    <div class="thum-count">
-                      조회수: 0
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <script>
-  		//현재시간 불러오기
-    	document.getElementById('now_date').valueAsDate = new Date();
-    </script>
-    
-  </body>
+					<div th:if="${session.user_email == null}">
+						<a href="/login" style="text-decoration: none;">
+							<button class="btn btn-lg btn-secondary text-nowrap">
+								<i class="bi bi-person-circle mr-2"></i>로그인
+							</button>
+						</a>
+					</div>
+					<div th:if="${session.user_email != null}">
+						<a href="/login/logout" style="text-decoration: none;">
+							<button class="btn btn-lg btn-secondary text-nowrap">
+								<i class="bi bi-person-circle mr-2"></i> <span>로그아웃</span>
+							</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<!-- Content  -->
+	<section class="section">
+		<div class="wrapper">
+			<div class="pt-5">
+				<div class="container-xxl">
+					<div class="row p-5">
+						<div class="col-lg-8 col-md-12">
+							<th:block th:each="detailList : ${contentDetail}">
+								<div class="d-flex justify-content-center align-items-center w-100">
+									<!-- <img id="content" class="h-100 bg-white"
+											th:src="@{../static/upload/}+${detailList.file_name}"></img> -->
+									<video id="my-player" class="video-js vjs-theme-fantasy vjs-16-9" controls preload="auto" poster="../static/images/thumbnail.png" data-setup='{}'>
+										<source src="../static/video/sample.mp4" type="video/mp4"></source>
+										<p class="vjs-no-js">영상 재생을 위해 브라우저의 스크립트 활성화가 필요합니다.</p>
+									</video>
+								</div>
+								<hr class="w-100">
+								<div class="content-info">
+									<h3 style="font-weight: 600;" th:text="|${detailList.content_name}|"></h3>
+									<span class="text-muted" th:text="|조회수 ${detailList.content_count}회|"> </span> <span>•</span> <span class="text-muted" th:text="|${#dates.format(detailList.content_date,'yyyy.MM.dd')}|"> </span>
+								</div>
+								<hr class="w-100">
+								<p th:text="|${detailList.content_writer}|">
+								<hr class="w-100">
+							</th:block>
+							<!-- Reply -->
+							<h5 class="font-weight-bold" th:text="|댓글 ${replyCount}개|"></h5>
+							<th:block th:if="${user_email}!=null">
+								<form action="/reply/write" method="post">
+									<input type="hidden" class="reply-writer ml-2" name="replyWriter" th:value="${user_email}" readonly> <input type="hidden" th:value="${contentNum}" th:name="contentNum"> 
+									<input type="date" id="now_date" name="replyDate" class="ml-2 d-none" min=now_date readonly>
+									<div class="input-group mb-3">
+										<textarea class="form-control" name="replyContent" id="replyContent" placeholder="댓글을 입력해주세요." rows="3" style="resize: none;"></textarea>
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-primary">댓글 달기</button>
+										</div>
+									</div>
+								</form>
+							</th:block>
+							<hr class="w-100">
+							<th:block th:each="replyList : ${reply}">
+								<form action="/reply/update" method="get">
+									<div class="pt-2">
+										<span class="font-weight-bold" th:text="${replyList.writer}" th:name="replyWriter" th:value="${replyList.writer}"></span>
+										<span>•</span>
+										<span class="text-muted" th:text="${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></span>
+										<div class="d-flex d-inline justify-content-between align-items-center">
+										<p class="font-monospace mb-0" th:id="reply+${replyList.rno}" th:text="${replyList.content}" th:value="${replyList.content}"></p>
+										<th:block th:if="${user_email==replyList.writer}">
+										<div class="dropdown">
+											<button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+												<i class="bi bi-three-dots-vertical text-muted"></i>
+											</button>
+											<div class="dropdown-menu">
+												<a class="dropdown-item text-center" href="#">수정</a> 
+												<a class="dropdown-item text-center" href="#">삭제</a>
+											</div>
+										</div>
+										</th:block>
+										</div>
+										<span>
+										<a th:href="@{/reply/reply-up(contentNum=${contentNum},rno=${replyList.rno})}"><i class="bi bi-hand-thumbs-up" th:text="| ${replyList.reply_up}|"> </i></a>
+										<a th:href="@{/reply/reply-down(contentNum=${contentNum},rno=${replyList.rno})}"><i class="bi bi-hand-thumbs-down ml-4" th:text="| ${replyList.reply_down}|"></i> </a>
+										</span>
+									</div>
+								</form>
+							</th:block>
+						</div>
+
+						<!-- thumnail-list -->
+						<div class="col-lg-4 col-md-12">
+							<div class="row row-cols-1">
+
+								<th:block th:each="list:${thumList}">
+									<div class="col mb-2">
+										<div class="card border-0 bg-transparent" style="height: 142px;">
+											<div class="row row-cols-2 no-gutters flex-nowrap h-100">
+												<div class="col h-100 bg-white">
+													<img class="w-100 h-100" th:src="@{../static/upload/}+${list.file_name}" alt="">
+												</div>
+												<div class="col">
+													<div class="card-body h-100 d-flex flex-column py-2">
+														<h4 class="font-weight-bold text-truncate-2" th:text="${list.content_name}"></h4>
+														<div class="mt-auto">
+															<p class="text-muted mb-0" th:text="${list.content_writer}"></p>
+															<span class="text-muted" th:text="|조회수 ${list.content_count}회|"></span> 
+															<span>•</span> 
+															<span class="text-muted" th:text="${#dates.format(list.content_date,'yyyy-MM-dd')}"></span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</th:block>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script>
+		//현재시간 불러오기
+		document.getElementById('now_date').valueAsDate = new Date();
+	</script>
+
+</body>
 </html>

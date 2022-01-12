@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,10 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.example.demo.dto.ContentDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.ReplyDto;
 import com.example.demo.dto.UploadDto;
+import com.example.demo.service.ContentService;
 import com.example.demo.service.LoginService;
 import com.example.demo.service.ReplyService;
 import com.example.demo.service.UploadService;
@@ -40,6 +42,8 @@ public class UploadController {
 	private UploadService us;
 	@Autowired
 	private ReplyService rs;
+	@Autowired
+	private ContentService cs;
 	
 	@RequestMapping("/upload")
 	public String Upload(@RequestParam("content_name") String content_name,
@@ -80,18 +84,24 @@ public class UploadController {
 	@RequestMapping("/content-detail")
 	public String ContentDetail(@RequestParam("contentNum") String content_num,Model model,HttpSession session) throws Exception{
 		
+		int replyCount = rs.ReplyCount(content_num);
 		us.CountUpdate(content_num);
 		String user_email=(String) session.getAttribute("user_email");
 		ArrayList<UploadDto> contentDetail = us.ContentDetail(content_num);
+		ArrayList<ContentDto> thumList = cs.ContentList();
 		System.out.println(contentDetail);
-		
+		System.out.println(thumList);
 		model.addAttribute("contentDetail",contentDetail);
 		model.addAttribute("user_email",user_email);
 		model.addAttribute("contentNum",content_num);
+		model.addAttribute("replyCount",replyCount);
+		model.addAttribute("thumList",thumList);
 		
 		//댓글 조회
 		ArrayList<ReplyDto> reply = rs.ReplyList(content_num);
 		model.addAttribute("reply",reply);
+		
+		//섬네일 리스트
 		
 		System.out.println(reply);
 		

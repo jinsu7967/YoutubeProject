@@ -18,4 +18,10 @@ public interface ReplyService {
 	public void ReplyDelete(@Param("rno") String rno, @Param("content_num") String content_num,@Param("writer") String replyWriter) throws Exception;
 	
 	public void ReplyDeleteAll(@Param("content_num") String content_num) throws Exception;
+	
+	public int ReplyCount(@Param("content_num") String content_num) throws Exception;
+	
+	public int ReplyUp(@Param("rno") String rno, @Param("content_num") String content_num) throws Exception;
+	
+	public int ReplyDown(@Param("rno") String rno, @Param("content_num") String content_num) throws Exception;
 }

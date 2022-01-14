@@ -6,14 +6,21 @@
 <script type="text/javascript" src="../static/js/Youtube.js"></script>
 <!-- bootstrap start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
 <link rel="stylesheet" href="../static/css/master.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video-js.min.css">
 <link rel="stylesheet" href="../static/css/vjs-fantasy.css">
 <!-- bootstrap end -->
+<style>
+	.collapsing{
+		transition: none;
+	}
+</style>
 </head>
 <body>
 	<!-- Header -->
@@ -80,9 +87,8 @@
 						<div class="col-lg-8 col-md-12">
 							<th:block th:each="detailList : ${contentDetail}">
 								<div class="d-flex justify-content-center align-items-center w-100">
-									<!-- <img id="content" class="h-100 bg-white"
-											th:src="@{../static/upload/}+${detailList.file_name}"></img> -->
-									<video id="my-player" class="video-js vjs-theme-fantasy vjs-16-9" controls preload="auto" poster="../static/images/thumbnail.png" data-setup='{}'>
+									<video id="my-player" class="video-js vjs-theme-fantasy vjs-16-9" controls preload="auto" 
+										th:poster="@{../static/upload/}+${detailList.file_name}" data-setup='{}'>
 										<source src="../static/video/sample.mp4" type="video/mp4"></source>
 										<p class="vjs-no-js">영상 재생을 위해 브라우저의 스크립트 활성화가 필요합니다.</p>
 									</video>
@@ -97,47 +103,63 @@
 								<hr class="w-100">
 							</th:block>
 							<!-- Reply -->
+							<div id="replyWrapper">
 							<h5 class="font-weight-bold" th:text="|댓글 ${replyCount}개|"></h5>
 							<th:block th:if="${user_email}!=null">
 								<form action="/reply/write" method="post">
-									<input type="hidden" class="reply-writer ml-2" name="replyWriter" th:value="${user_email}" readonly> <input type="hidden" th:value="${contentNum}" th:name="contentNum"> 
+									<input type="hidden" class="reply-writer ml-2" name="replyWriter" th:value="${user_email}" id="replyWriter" readonly> 
+									<input type="hidden" th:value="${contentNum}" th:name="contentNum" id="content_num"> 
 									<input type="date" id="now_date" name="replyDate" class="ml-2 d-none" min=now_date readonly>
 									<div class="input-group mb-3">
 										<textarea class="form-control" name="replyContent" id="replyContent" placeholder="댓글을 입력해주세요." rows="3" style="resize: none;"></textarea>
 										<div class="input-group-append">
-											<button type="submit" class="btn btn-primary">댓글 달기</button>
+											<button type="button" class="btn btn-primary" id="write-btn" onclick="replyWrite();">댓글 달기</button>
 										</div>
 									</div>
 								</form>
 							</th:block>
 							<hr class="w-100">
-							<th:block th:each="replyList : ${reply}">
-								<form action="/reply/update" method="get">
-									<div class="pt-2">
-										<span class="font-weight-bold" th:text="${replyList.writer}" th:name="replyWriter" th:value="${replyList.writer}"></span>
-										<span>•</span>
-										<span class="text-muted" th:text="${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></span>
-										<div class="d-flex d-inline justify-content-between align-items-center">
-										<p class="font-monospace mb-0" th:id="reply+${replyList.rno}" th:text="${replyList.content}" th:value="${replyList.content}"></p>
-										<th:block th:if="${user_email==replyList.writer}">
-										<div class="dropdown">
-											<button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-												<i class="bi bi-three-dots-vertical text-muted"></i>
-											</button>
-											<div class="dropdown-menu">
-												<a class="dropdown-item text-center" href="#">수정</a> 
-												<a class="dropdown-item text-center" href="#">삭제</a>
+								<th:block th:each="replyList : ${reply}"  >
+								<!-- <form action="/reply/update" method="get"> -->
+								<form>
+									<div class="py-2 reply-wrap">
+										<div class="d-flex align-items-center">
+											<span class="font-weight-bold" th:text="${replyList.writer}" th:name="replyWriter" th:value="${replyList.writer}"></span>
+											<span>•</span>
+											<span class="text-muted" th:text="${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></span>
+											<th:block th:if="${user_email==replyList.writer}">
+											<span class="dropleft ml-auto">
+												<button class="btn btn-lg btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+													<i class="bi bi-three-dots-vertical text-muted"></i>
+												</button>
+												<div class="dropdown-menu">
+													<a class="dropdown-item text-center" data-toggle="collapse" th:href="'.multi-collapse-' + ${replyList.rno}" aria-expanded="false">수정</a> 
+													<button class="dropdown-item text-center" type="button" th:id="${replyList.rno}" onclick="replyDelete(this.id);">삭제</button>
+												</div>
+											</span>
+											</th:block>
+										</div>
+										<p th:class="'collapse multi-collapse-' + ${replyList.rno} + ' font-monospace my-2 show'" th:text="${replyList.content}" th:value="${replyList.content}"></p>
+										<div th:class="'collapse multi-collapse-' + ${replyList.rno} + ' w-100 my-2'">
+											<div class="input-group w-100">
+												<textarea class="form-control" th:id="'content' + ${replyList.rno}" rows="3" th:text="${replyList.content}"></textarea>
+												<div class="input-group-append">
+													<input type="hidden" th:value="${replyList.rno}" th:id="'rno' + ${replyList.rno}">
+													<input type="hidden" th:value="${contentNum}" th:id="'content_num' + ${replyList.rno}">
+													<button type="button" class="btn btn-primary" th:id="${replyList.rno}" onclick="replyModify(this.id)">수정 하기</button>
+												</div>
 											</div>
 										</div>
-										</th:block>
-										</div>
-										<span>
-										<a th:href="@{/reply/reply-up(contentNum=${contentNum},rno=${replyList.rno})}"><i class="bi bi-hand-thumbs-up" th:text="| ${replyList.reply_up}|"> </i></a>
-										<a th:href="@{/reply/reply-down(contentNum=${contentNum},rno=${replyList.rno})}"><i class="bi bi-hand-thumbs-down ml-4" th:text="| ${replyList.reply_down}|"></i> </a>
-										</span>
 									</div>
+									<span>
+										<a th:href="@{/reply/reply-up(contentNum=${contentNum},rno=${replyList.rno})}">
+										<i class="bi bi-hand-thumbs-up" th:text="| ${replyList.reply_up}|"> </i></a>
+										<a th:href="@{/reply/reply-down(contentNum=${contentNum},rno=${replyList.rno})}">
+										<i class="bi bi-hand-thumbs-down ml-4" th:text="| ${replyList.reply_down}|"></i> </a>
+									</span>
 								</form>
 							</th:block>
+							</div>
 						</div>
 
 						<!-- thumnail-list -->
@@ -149,7 +171,9 @@
 										<div class="card border-0 bg-transparent" style="height: 142px;">
 											<div class="row row-cols-2 no-gutters flex-nowrap h-100">
 												<div class="col h-100 bg-white">
+													<a th:href="@{/mypage/content-detail(contentNum=${list.content_num})}">
 													<img class="w-100 h-100" th:src="@{../static/upload/}+${list.file_name}" alt="">
+													</a>
 												</div>
 												<div class="col">
 													<div class="card-body h-100 d-flex flex-column py-2">
@@ -174,10 +198,5 @@
 			</div>
 		</div>
 	</section>
-	<script>
-		//현재시간 불러오기
-		document.getElementById('now_date').valueAsDate = new Date();
-	</script>
-
 </body>
 </html>

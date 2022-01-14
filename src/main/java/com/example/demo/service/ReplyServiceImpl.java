@@ -48,9 +48,9 @@ public class ReplyServiceImpl implements ReplyService {
 
 
 	@Override
-	public void ReplyDelete(String rno, String content_num,String replyWriter) throws Exception {
+	public void ReplyDelete(String rno, String content_num) throws Exception {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-		mapper.ReplyDelete(rno,content_num,replyWriter);
+		mapper.ReplyDelete(rno,content_num);
 	}
 	
 	@Override
@@ -60,15 +60,15 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 	
 	@Override
-	public int ReplyUp(String content_num,String rno) throws Exception {
+	public int ReplyUp(String content_num, String rno) throws Exception {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-		 return mapper.ReplyUp(rno, content_num);
+		 return mapper.ReplyUp(content_num,rno);
 	}
 	
 	@Override
 	public int ReplyDown(String content_num,String rno) throws Exception {
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-		return mapper.ReplyDown(rno, content_num);
+		return mapper.ReplyDown(content_num,rno);
 		
 	}
 	

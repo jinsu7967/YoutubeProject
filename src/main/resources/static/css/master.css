@@ -21,6 +21,9 @@ a, a:hover, a:focus{
     padding: 4rem;
 }
 
+textarea{
+	resize: none;
+}
 
 
 /* content.css(index.html) */
@@ -125,8 +128,9 @@ a, a:hover, a:focus{
     background-color: white;
 }
 
-#dropdownMenuButton::after{
-    display: none;
+.dropdown-toggle::before,
+.dropdown-toggle::after{
+    display: none !important;
 }
 
 /* Sidebar */

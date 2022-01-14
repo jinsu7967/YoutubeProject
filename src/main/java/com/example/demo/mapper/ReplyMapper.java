@@ -16,7 +16,7 @@ public interface ReplyMapper {
 	
 	public void ReplyUpdate(@Param("rno") String rno,@Param("content_num") String content_num,@Param("content") String content) throws Exception;
 	
-	public void ReplyDelete(@Param("rno") String rno, @Param("content_num") String content_num ,@Param("replyWriter") String replyWriter) throws Exception;
+	public void ReplyDelete(@Param("rno") String rno, @Param("content_num") String content_num) throws Exception;
 	
 	public void ReplyDeleteAll(@Param("content_num") String content_num) throws Exception;
 	

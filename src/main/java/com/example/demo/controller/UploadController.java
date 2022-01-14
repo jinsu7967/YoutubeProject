@@ -108,6 +108,24 @@ public class UploadController {
 		return "content-detail";
 	}
 	
+	@RequestMapping("/reply/update")
+	public String Update(@RequestParam("content_num") String content_num,@RequestParam("rno") String rno,@RequestParam("content") String content) throws Exception{
+		System.out.println("성공");
+		rs.ReplyUpdate(rno, content_num, content);
+		
+		return "redirect:/mypage/content-detail?contentNum="+content_num;
+	}
+	
+	@RequestMapping("/reply/delete")
+	public String Delete(@RequestParam("rno") String rno,
+			@RequestParam("contentNum") String content_num,Model model ) throws Exception{
+		
+		
+		rs.ReplyDelete(rno,content_num);
+		
+		return "redirect:/mypage/content-detail?contentNum="+content_num;
+	}
+	
 	
 	
 	

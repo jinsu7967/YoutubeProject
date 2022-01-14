@@ -117,7 +117,9 @@
 					<div class="row row-cols-6">
 						<th:block th:each="content : ${allContentList}">
 							<div class="player col pr-3">
-								<a th:href="@{/mypage/content-detail(contentNum=${content.content_num})}"><img class="play-content" th:src="@{../static/upload/}+${content.file_name}"></a>
+								<a th:href="@{/mypage/content-detail(contentNum=${content.content_num})}">
+									<img class="play-content" th:src="@{../static/upload/}+${content.file_name}">
+								</a>
 								<div class="row row-cols-2 no-gutters align-items-center py-3">
 									<div class="play-mark col-auto ">
 										<img th:src="@{../static/upload/}+${content.file_name}" alt="">

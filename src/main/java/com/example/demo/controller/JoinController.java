@@ -28,7 +28,7 @@ public class JoinController {
 	@RequestMapping("/user-join")
 	@ResponseBody
 	public String UserJoin(@RequestParam("user_name") String user_name,@RequestParam("user_birth") String user_birth
-			,@RequestParam("user_email") String user_email,@RequestParam("user_pw") String user_pw) {
+			,@RequestParam("user_email") String user_email,@RequestParam("user_pw") String user_pw,@RequestParam("user_pw_check") String user_pw_check) {
 		
 		String resultMsg = null;
 		
@@ -41,7 +41,9 @@ public class JoinController {
 				resultMsg="<script> alert('가입정보를 입력해주세요.'); location.href=history.back(); </script>";
 			}else {
 				if(user_pw.matches("[0-9|a-z|A-Z\\s]*") || !(user_birth.matches("[0-9]*")) || user_birth.length()!=8 || 
-						user_pw.length()<8 || user_name.length()<2 || !(user_name.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) || !(user_email.matches("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$")) ) {
+						user_pw.length()<8 || user_name.length()<2 || !(user_name.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) || 
+						!(user_email.matches("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$")) ||
+						user_pw!=user_pw_check) {
 					resultMsg="<script> alert('가입정보를 정확히 입력해주세요.'); location.href=history.back(); </script>";
 				}else {
 					joinCheck=js.JoinUser(user_name, user_birth, user_email, user_pw);

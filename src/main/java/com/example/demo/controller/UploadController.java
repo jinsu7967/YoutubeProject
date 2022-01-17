@@ -112,7 +112,6 @@ public class UploadController {
 	public String Update(@RequestParam("content_num") String content_num,@RequestParam("rno") String rno,@RequestParam("content") String content) throws Exception{
 		System.out.println("성공");
 		rs.ReplyUpdate(rno, content_num, content);
-		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}
 	

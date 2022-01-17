@@ -1,7 +1,9 @@
 
 
 /* 댓글쓰기 (Reply Write) */
+
 		function replyWrite(){
+
 			/*현재 시간 불러오기  */
 		    document.getElementById('now_date').valueAsDate = new Date();
 
@@ -24,10 +26,10 @@
 		        }
 		    })
 		};
-
 /* 댓글 수정(Reply Modify) */
 
 function replyModify(id){				
+
 		var updateReply = {
 			rno : $("#rno" + id).val(),
 			content : $("#content" + id).val(),
@@ -53,6 +55,7 @@ function replyModify(id){
 /* 댓글 삭제(Reply Delete) */
 
 function replyDelete(id){
+
 		var deleteReply = {
 				rno: $("#rno" + id).val(),
 				content_num: $("#content_num" + id).val()

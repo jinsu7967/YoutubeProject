@@ -17,4 +17,6 @@ public interface LoginMapper {
 	public ArrayList<LoginDto> PwFind(@Param("user_email") String user_email,@Param("user_name") String user_name,@Param("user_birth") String user_birth) throws Exception;
 	
 	public ArrayList<FindPwCheckDto> FindUserCheck(@Param("user_email") String user_email,@Param("user_name") String user_name,@Param("user_birth") String user_birth) throws Exception;
+	
+	public ArrayList<LoginDto> userInfo(@Param("user_email") String user_email) throws Exception;
 }

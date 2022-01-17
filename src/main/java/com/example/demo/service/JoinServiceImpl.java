@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.LoginDto;
@@ -21,6 +22,7 @@ public class JoinServiceImpl implements JoinService {
 	@Override
 	public int JoinUser(String user_name, String user_birth,String user_email,String user_pw) throws Exception{
 		JoinMapper mapper = sqlSession.getMapper(JoinMapper.class);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		return mapper.JoinUser(user_name, user_birth, user_email, user_pw);
 	}
 	

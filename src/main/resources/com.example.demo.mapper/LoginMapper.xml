@@ -21,4 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where email=#{user_email} and name=#{user_name} and birth=#{user_birth}
 	</select>
 	
+	<select id = "userInfo" resultType="LoginDto">
+		select * from user where  email = #{user_email}
+	</select>
+	
 </mapper>

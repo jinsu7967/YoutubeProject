@@ -1,6 +1,12 @@
 package com.example.demo.dto;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
+
+
 public class LoginDto {
+	
+	
 	private String email;
 	private String pw;
 	

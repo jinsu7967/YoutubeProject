@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
@@ -75,9 +76,9 @@ public class YoutubeController {
 	}
 	
 	@RequestMapping("/mypage")
-	public String Mypage(Model model,HttpSession session,String user_email,Criteria cri) throws Exception{
+	public String Mypage(Model model,HttpSession session,String user_email,Criteria cri,Principal principal) throws Exception{
 		
-		user_email=(String) session.getAttribute("user_email");
+		user_email = principal.getName();
 		
 		int boardListCnt = us.boardListCnt(user_email);
 		System.out.println("boardListCnt : "+boardListCnt);
@@ -104,6 +105,7 @@ public class YoutubeController {
 		
 		model.addAttribute("contentList",contentList);
 		model.addAttribute("paging",paging);
+		model.addAttribute("user",user_email);
 		
 		
 		return "mypage";

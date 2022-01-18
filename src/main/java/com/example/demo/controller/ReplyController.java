@@ -28,13 +28,9 @@ public class ReplyController {
 		@RequestParam("replyContent") String replyContent,@RequestParam("replyDate") String replyDate,
 		HttpServletRequest req,Model model) throws Exception{
 		
-		if(replyContent.isEmpty()) {
-			
-		}else {
+		if(!(replyContent.isEmpty())) {
 			rs.ReplyWrite(content_num, replyWriter, replyContent, replyDate);
 		}
-		
-		
 		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 		

@@ -133,6 +133,10 @@ textarea{
     display: none !important;
 }
 
+.dropdown-menu{
+	overflow: hidden;
+}
+
 /* Sidebar */
 .sidebar{
     width: 74px;

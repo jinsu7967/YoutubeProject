@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="utf-8">
 <title>YouTube Content</title>
@@ -44,32 +44,28 @@
 						</div>
 					</form>
 				</div>
-				<div class="col d-flex justify-content-end">
+				<div class="col d-flex justify-content-end align-items-center" >
 					<button class="btn btn-lg btn-link">
 						<i class="bi bi-grid-3x3-gap text-secondary"></i>
 					</button>
 					<div class="dropdown">
 						<button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-three-dots-vertical text-secondary"></i>
+							<i class="bi bi-person-circle text-muted"></i>
 						</button>
-						<div th:if="${session.user_email != null}">
-							<div class="dropdown-menu">
+						<div sec:authorize="!isAnonymous()">
+							<div class="dropdown-menu dropdown-menu-right text-center">
+								<p class="dropdown-item mb-0" th:text="|${#authentication.principal.Username}님 환영합니다|"></p>
+								<hr class="w-100">
 								<a class="dropdown-item" href="/mypage">마이페이지</a> 
 								<a class="dropdown-item" href="/update-user-check">개인정보 변경</a>
+								<a class="dropdown-item" href="login/logout">로그아웃</a>
 							</div>
 						</div>
 					</div>
-					<div th:if="${session.user_email == null}">
+					<div sec:authorize="isAnonymous()">
 						<a href="/login" style="text-decoration: none;">
 							<button class="btn btn-lg btn-secondary text-nowrap">
 								<i class="bi bi-person-circle mr-2"></i>로그인
-							</button>
-						</a>
-					</div>
-					<div th:if="${session.user_email != null}">
-						<a href="/login/logout" style="text-decoration: none;">
-							<button class="btn btn-lg btn-secondary text-nowrap">
-								<i class="bi bi-person-circle mr-2"></i> <span>로그아웃</span>
 							</button>
 						</a>
 					</div>
@@ -105,9 +101,9 @@
 							<!-- Reply -->
 							<div id="replyWrapper">
 							<h5 class="font-weight-bold" th:text="|댓글 ${replyCount}개|"></h5>
-							<th:block th:if="${user_email}!=null">
+							<th:block sec:authorize="!isAnonymous()">
 								<form action="/reply/write" method="post">
-									<input type="hidden" class="reply-writer ml-2" name="replyWriter" th:value="${user_email}" id="replyWriter" readonly> 
+									<input type="hidden" class="reply-writer ml-2" name="replyWriter" th:value="${user}" id="replyWriter" readonly> 
 									<input type="hidden" th:value="${contentNum}" th:name="contentNum" id="content_num"> 
 									<input type="date" id="now_date" name="replyDate" class="ml-2 d-none" min=now_date readonly>
 									<div class="input-group mb-3">
@@ -119,7 +115,7 @@
 								</form>
 							</th:block>
 							<hr class="w-100">
-								<th:block th:each="replyList : ${reply}"  >
+								<th:block th:each="replyList : ${reply}" >
 								<!-- <form action="/reply/update" method="get"> -->
 								<form>
 									<div class="py-2 reply-wrap">
@@ -127,7 +123,7 @@
 											<span class="font-weight-bold" th:text="${replyList.writer}" th:name="replyWriter" th:value="${replyList.writer}"></span>
 											<span>•</span>
 											<span class="text-muted" th:text="${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></span>
-											<th:block th:if="${user_email==replyList.writer}">
+											<th:block th:if="${user==replyList.writer}">
 											<span class="dropleft ml-auto">
 												<button class="btn btn-lg btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
 													<i class="bi bi-three-dots-vertical text-muted"></i>

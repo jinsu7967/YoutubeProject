@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,7 +84,7 @@ public class UploadController {
 	}
 	
 	@RequestMapping("/content-detail")
-	public String ContentDetail(@RequestParam("contentNum") String content_num,Model model,HttpSession session) throws Exception{
+	public String ContentDetail(@RequestParam("contentNum") String content_num,Model model,HttpSession session,Principal principal) throws Exception{
 		
 		int replyCount = rs.ReplyCount(content_num);
 		us.CountUpdate(content_num);
@@ -96,6 +98,7 @@ public class UploadController {
 		model.addAttribute("contentNum",content_num);
 		model.addAttribute("replyCount",replyCount);
 		model.addAttribute("thumList",thumList);
+		model.addAttribute("user",principal.getName());
 		
 		//댓글 조회
 		ArrayList<ReplyDto> reply = rs.ReplyList(content_num);

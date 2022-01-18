@@ -22,7 +22,7 @@
 		            $("#replyWrapper").load(location.href + " #replyWrapper");
 		        },
 		        error:function(){
-		            alert("실패");
+					
 		        }
 		    })
 		};
@@ -75,10 +75,3 @@ function replyDelete(id){
 			}
 		});
 	}; 
-	
-$('#write-btn').click(function(){
-	
-		if(document.getElementById('replyContent').value == ""){
-			alert("내용을 입력해주세요");
-		}
-})

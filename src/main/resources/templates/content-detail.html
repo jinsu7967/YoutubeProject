@@ -48,17 +48,17 @@
 					<button class="btn btn-lg btn-link">
 						<i class="bi bi-grid-3x3-gap text-secondary"></i>
 					</button>
-					<div class="dropdown">
+					<div class="dropdown" sec:authorize="!isAnonymous()">
 						<button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
 							<i class="bi bi-person-circle text-muted"></i>
 						</button>
-						<div sec:authorize="!isAnonymous()">
+						<div>
 							<div class="dropdown-menu dropdown-menu-right text-center">
 								<p class="dropdown-item mb-0" th:text="|${#authentication.principal.Username}님 환영합니다|"></p>
 								<hr class="w-100">
 								<a class="dropdown-item" href="/mypage">마이페이지</a> 
 								<a class="dropdown-item" href="/update-user-check">개인정보 변경</a>
-								<a class="dropdown-item" href="login/logout">로그아웃</a>
+								<a class="dropdown-item" href="/login/logout">로그아웃</a>
 							</div>
 						</div>
 					</div>
@@ -103,7 +103,7 @@
 							<h5 class="font-weight-bold" th:text="|댓글 ${replyCount}개|"></h5>
 							<th:block sec:authorize="!isAnonymous()">
 								<form action="/reply/write" method="post">
-									<input type="hidden" class="reply-writer ml-2" name="replyWriter" th:value="${user}" id="replyWriter" readonly> 
+									<input type="hidden" class="reply-writer ml-2" name="replyWriter" th:value="${#authentication.principal.Username}" id="replyWriter" readonly> 
 									<input type="hidden" th:value="${contentNum}" th:name="contentNum" id="content_num"> 
 									<input type="date" id="now_date" name="replyDate" class="ml-2 d-none" min=now_date readonly>
 									<div class="input-group mb-3">
@@ -123,7 +123,7 @@
 											<span class="font-weight-bold" th:text="${replyList.writer}" th:name="replyWriter" th:value="${replyList.writer}"></span>
 											<span>•</span>
 											<span class="text-muted" th:text="${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></span>
-											<th:block th:if="${user==replyList.writer}">
+											<th:block th:if="${'#authentication.principal.Username'==replyList.writer}">
 											<span class="dropleft ml-auto">
 												<button class="btn btn-lg btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
 													<i class="bi bi-three-dots-vertical text-muted"></i>

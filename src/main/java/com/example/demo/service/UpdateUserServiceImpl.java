@@ -30,4 +30,10 @@ public class UpdateUserServiceImpl implements UpdateUserService {
 		UpdateUserMapper mapper = sqlSession.getMapper(UpdateUserMapper.class);
 		return mapper.UserUpdate(user_email,user_pw,user_name);
 	}
+	
+	@Override
+	public ArrayList<UpdateUserDto> PwCheck(String user_email) throws Exception{
+		UpdateUserMapper mapper = sqlSession.getMapper(UpdateUserMapper.class);
+		return mapper.PwCheck(user_email);
+	}
 }

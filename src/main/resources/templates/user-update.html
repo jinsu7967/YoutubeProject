@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +24,7 @@
 			<h3 class="text-center mb-3">개인 정보 변경</h3>
 			<form action="/update-user-check/user-update" method="post">
 				<div th:each="userInfo : ${userInfo}">
-					<input type="text" name="user_email" class="form-control" th:value="${userInfo.email}" readonly>
+					<input type="text" name="user_email" class="form-control" th:value="${#authentication.principal.Username}" readonly>
 					<p class="text-monospace text-danger mb-3" style="font-size: 12px;">이메일은 변경불가</p> 
 					<input type="password" name="user_pw" class="form-control" th:value="${userInfo.pw}" placeholder="변경할 비밀번호">
 					<p class="text-muted" style="font-size: 12px;">비밀번호는 특수문자 시작이며 영어, 숫자 혼합 8자 이상이여야합니다.</p>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,9 +22,9 @@
 				<a href="/index"><img class="Google-logo" src="../static/images/Google_logo.png"></a>
 			</div>
 			<h3 class="text-center mb-5">본인 확인 페이지</h3>
-			<form action="update-user-check/user-check" method=post>
+			<form action="/update-user-check/user-check" method=post>
 				<div class="">
-					<input type="text" class="form-control mb-4" th:value="${user_email}" placeholder="이메일" name="user_email" readonly /> 
+					<input type="text" class="form-control mb-4" th:value="${#authentication.principal.Username}" name="user_email" readonly /> 
 					<input type="password" class="form-control" placeholder="비밀번호" name="user_pw">
 					<p class="text-muted" style="font-size: 12px;">현재 비밀번호를 입력해주세요.</p>
 					<input type="text" class="form-control mb-5" value="" placeholder="이름" name="user_name">

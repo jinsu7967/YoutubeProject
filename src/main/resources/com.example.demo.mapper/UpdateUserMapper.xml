@@ -9,6 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where email=#{user_email} and pw=#{user_pw} and name=#{user_name}
 	</select>
 	
+	<select id="PwCheck" resultType="updateUserDto">
+		select pw
+		from user
+		where email=#{user_email}
+	</select>
+	
 	<update id="UserUpdate">
 		update user set pw=#{user_pw}, name=#{user_name} where email=#{user_email}
 	</update>

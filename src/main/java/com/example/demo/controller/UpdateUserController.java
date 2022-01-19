@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,24 +30,29 @@ public class UpdateUserController {
 	
 	
 	@RequestMapping("/user-check")
-	public String UserCheck(@RequestParam("user_name") String user_name,Model model
-			,@RequestParam("user_email") String user_email,@RequestParam("user_pw") String user_pw,HttpServletResponse response) throws Exception{
+	public String UserCheck(@RequestParam("user_name") String user_name,Model model,@RequestParam("user_email") String user_email
+			,@RequestParam("user_pw") String user_pw,HttpServletResponse response,Principal principal) throws Exception{
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-	
 		
-		ArrayList<UpdateUserDto> userInfo =uus.UserCheck(user_name, user_email, user_pw);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		if(userInfo.isEmpty()) {
-			out.println("<script>alert('본인인증 실패했습니다.'); location.href=history.back(); </script>");
-		}else {
+		ArrayList<UpdateUserDto> user_pw_check = uus.PwCheck(user_email);
+		
+		if(encoder.matches(user_pw,user_pw_check.get(0).getPw())) {
+			user_pw = user_pw_check.get(0).getPw();
+			ArrayList<UpdateUserDto> userInfo = uus.UserCheck(user_name,user_email,user_pw);
 			model.addAttribute("userInfo", userInfo);
+			System.out.println(user_name);
+			System.out.println(user_email);
+			System.out.println(user_pw);
+			System.out.println(userInfo);
 			out.println("<script>alert('본인인증 성공.'); </script>");
-			System.out.println("회원 : "+model+"님이 맞습니다");
-			
+		}else {
+			out.println("<script>alert('본인인증 실패했습니다.'); location.href=history.back(); </script>");
 		}
-		
+
 		return "user-update";
 	}
 	

@@ -98,7 +98,6 @@ public class UploadController {
 		model.addAttribute("contentNum",content_num);
 		model.addAttribute("replyCount",replyCount);
 		model.addAttribute("thumList",thumList);
-		model.addAttribute("user",principal.getName());
 		
 		//댓글 조회
 		ArrayList<ReplyDto> reply = rs.ReplyList(content_num);

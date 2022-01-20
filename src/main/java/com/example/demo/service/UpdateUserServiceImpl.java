@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.UpdateUserDto;
@@ -25,9 +27,11 @@ public class UpdateUserServiceImpl implements UpdateUserService {
 		return mapper.UserCheck(user_name, user_email, user_pw);
 	}
 	
-	@Override
+	@Transactional
 	public int UserUpdate(String user_email,String user_pw,String user_name) throws Exception{
 		UpdateUserMapper mapper = sqlSession.getMapper(UpdateUserMapper.class);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		user_pw = encoder.encode(user_pw);
 		return mapper.UserUpdate(user_email,user_pw,user_name);
 	}
 	

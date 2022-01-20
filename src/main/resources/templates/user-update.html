@@ -26,7 +26,7 @@
 				<div th:each="userInfo : ${userInfo}">
 					<input type="text" name="user_email" class="form-control" th:value="${#authentication.principal.Username}" readonly>
 					<p class="text-monospace text-danger mb-3" style="font-size: 12px;">이메일은 변경불가</p> 
-					<input type="password" name="user_pw" class="form-control" th:value="${userInfo.pw}" placeholder="변경할 비밀번호">
+					<input type="password" name="user_pw" class="form-control" placeholder="변경할 비밀번호">
 					<p class="text-muted" style="font-size: 12px;">비밀번호는 특수문자 시작이며 영어, 숫자 혼합 8자 이상이여야합니다.</p>
 					<input type="text" name="user_name" class="form-control" th:value="${userInfo.name}">
 					<div class="d-flex justify-content-end mt-5">

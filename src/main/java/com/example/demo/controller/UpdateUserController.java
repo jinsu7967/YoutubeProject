@@ -66,7 +66,12 @@ public class UpdateUserController {
 			out.println("<script>alert('정보변경 실패 입력내용을 확인해주세요.'); location.href=history.back(); </script>");
 		}else {
 			int userUpdate = uus.UserUpdate(user_email,user_pw,user_name);
-			System.out.println("정보변경 성공");
+			if(userUpdate == 1 ) {
+				System.out.println("정보변경 성공");
+			}else {
+				System.out.println("정보변경 실패");
+			}
+			
 			out.println("<script>alert('정보변경 완료.'); location.href='/index' </script>");
 		}
 		

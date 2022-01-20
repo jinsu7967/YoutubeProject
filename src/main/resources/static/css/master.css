@@ -203,3 +203,25 @@ textarea{
     text-overflow: ellipsis;
     white-space: normal;
 }
+
+/* Slick Custom */
+.slick-prev:before, .slick-next:before{
+	color: rgba(0,0,0,0.75);
+}
+
+/* img 16:9 */
+.thumb-wrap{
+	position: relative;
+	padding-bottom: 56.25%;
+}
+
+.thumb-wrap img {
+  position: absolute;
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+}
+
+.mypage-img{
+	padding-top: 65px;
+}

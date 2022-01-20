@@ -16,7 +16,10 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
 	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
 <link rel="stylesheet" href="../static/css/master.css">
 <!-- bootstrap end -->
 </head>
@@ -79,14 +82,57 @@
 	</header>
 	<!-- ContentList -->
 	<section class="section">
+		<div class="container-fluid w-100 bg-dark">
+			<div class="mypage-img d-flex justify-content-center mt-3">
+				<img src="../static/images/Google_logo.png">
+			</div>
+		</div>
+		<div class="container d-flex justify-content-center ">
+			<div class="row">
+				<div class="col">
+					<div class="col">
+					logo
+					</div>
+					<div class="col">
+					content
+					</div>
+				</div>
+				<div class="col">
+				1
+				</div>
+			</div>
+		</div>
 		<div class="wrapper bg-white">
 			<div class="container-xl">
 				<div class="pt-5">
-					<table class="table table-bordered text-center">
+  				  <h5 class="font-weight-bold pb-3">생성된 재생목록</h5>
+					<div class="your-class">
+					  <th:block th:each="content : ${contentList}">
+							<div class=" pr-3">
+								<div class="thumb-wrap">
+									<a th:href="@{/mypage/content-detail(contentNum=${content.content_num})}">
+										<img class="play-content" th:src="@{../static/upload/}+${content.file_name}">
+									</a>
+								</div>
+								<div class="d-flex flex-column py-3">
+									<div class="play-info-title">
+										<h6 class="mb-0 text-truncate">
+											<b th:text="|${content.content_name}|" th:title="|${content.content_name}|"></b>
+										</h6>
+									</div>
+									<div class="play-info-writer">
+										<p class="mb-0" th:text="|${content.content_writer}|">
+										<p class="mb-0" th:text="|조회수 ${content.content_count}|">
+									</div>
+								</div>
+							</div>
+						</th:block>
+					</div>
+					<!-- <table class="table table-bordered text-center">
 						<colgroup>
 							<col width="5%">
 							<col width="50%">
-							<!-- <col width="20%"> -->
+							<col width="20%">
 							<col width="20%">
 							<col width="20%">
 							<col width="5%">
@@ -95,7 +141,7 @@
 							<tr>
 								<th scope="col">번호</th>
 								<th scope="col">컨텐츠 제목</th>
-								<!-- <th scope="col">파일이미지</th> -->
+								<th scope="col">파일이미지</th>
 								<th scope="col">등록일</th>
 								<th scope="col">조회수</th>
 								<th scope="col">설정</th>
@@ -110,9 +156,9 @@
 										th:href="@{/mypage/content-detail(contentNum=${list.content_num})}"
 										th:text="${list.content_name}" th:value="${list.content_name}"></a>
 									</td>
-									<!-- <td>
+									<td>
 										<img th:src="@{../static/upload/}+${list.file_name}" class="file_img" alt="파일사진">
-									</td> -->
+									</td>
 									<td th:text="${#dates.format(list.content_date,'yyyy-MM-dd')}"></td>
 									<td th:text="${list.content_count}"></td>
 									<td>
@@ -134,9 +180,9 @@
 								</tr>
 							</th:block>
 						</tbody>
-					</table>
+					</table> -->
 					<!-- pagination -->
-					<div class="pagination justify-content-center">
+					<!-- <div class="pagination justify-content-center">
 						<nav aria-label="...">
 							<ul class="pagination">
 								<div th:if="${paging.cri.page == 1}">
@@ -164,7 +210,7 @@
 								</div>
 							</ul>
 						</nav>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -224,6 +270,13 @@
 	<script>
 		$(document).ready(
 				function() {
+					$('.your-class').slick({
+						slide: 'div',
+						infinite: true,
+						slidesToShow: 6,
+						slidesToScroll: 6 
+				     });
+					
 					$("#button-addon").click(function(e) {
 						e.preventDefault();
 						$("input#file-select").click();

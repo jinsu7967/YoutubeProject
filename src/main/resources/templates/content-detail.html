@@ -16,11 +16,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video-js.min.css">
 <link rel="stylesheet" href="../static/css/vjs-fantasy.css">
 <!-- bootstrap end -->
-<style>
-	.collapsing{
-		transition: none;
-	}
-</style>
+
 </head>
 <body>
 	<!-- Header -->
@@ -123,16 +119,18 @@
 											<span class="font-weight-bold" th:text="${replyList.writer}" th:name="replyWriter" th:value="${replyList.writer}"></span>
 											<span>•</span>
 											<span class="text-muted" th:text="${#dates.format(replyList.regDate,'yyyy-MM-dd')}"></span>
-											<th:block th:if="${'#authentication.principal.Username'==replyList.writer}">
-											<span class="dropleft ml-auto">
-												<button class="btn btn-lg btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-													<i class="bi bi-three-dots-vertical text-muted"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item text-center" data-toggle="collapse" th:href="'.multi-collapse-' + ${replyList.rno}" aria-expanded="false">수정</a> 
-													<button class="dropdown-item text-center" type="button" th:id="${replyList.rno}" onclick="replyDelete(this.id);">삭제</button>
-												</div>
-											</span>
+											<th:block sec:authorize="!isAnonymous()">
+												<th:block th:if="${#authentication.principal.Username==replyList.writer}">
+													<span class="dropleft ml-auto">
+														<button class="btn btn-lg btn-link dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+															<i class="bi bi-three-dots-vertical text-muted"></i>
+														</button>
+														<div class="dropdown-menu">
+															<a class="dropdown-item text-center" data-toggle="collapse" th:href="'.multi-collapse-' + ${replyList.rno}" aria-expanded="false">수정</a> 
+															<button class="dropdown-item text-center" type="button" th:id="${replyList.rno}" onclick="replyDelete(this.id);">삭제</button>
+														</div>
+													</span>
+												</th:block>
 											</th:block>
 										</div>
 										<p th:class="'collapse multi-collapse-' + ${replyList.rno} + ' font-monospace my-2 show'" th:text="${replyList.content}" th:value="${replyList.content}"></p>

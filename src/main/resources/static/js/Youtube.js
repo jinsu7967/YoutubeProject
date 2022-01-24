@@ -2,30 +2,31 @@
 
 /* 댓글쓰기 (Reply Write) */
 
-		function replyWrite(){
+function replyWrite(){
 
-			/*현재 시간 불러오기  */
-		    document.getElementById('now_date').valueAsDate = new Date();
+	/*현재 시간 불러오기  */
+    document.getElementById('now_date').valueAsDate = new Date();
 
-		    var writeReply = {
-		        contentNum : $("#content_num").val(),
-		        replyWriter : $("#replyWriter").val(),
-		        replyContent : $("#replyContent").val(),
-		        replyDate : $("#now_date").val()
-		    }
+    var writeReply = {
+        contentNum : $("#content_num").val(),
+        replyWriter : $("#replyWriter").val(),
+        replyContent : $("#replyContent").val(),
+        replyDate : $("#now_date").val()
+    }
 
-		    $.ajax({
-		        url: "/reply/write",
-		        type: "post",
-		        data: writeReply,
-		        success:function(){
-		            $("#replyWrapper").load(location.href + " #replyWrapper");
-		        },
-		        error:function(){
-					
-		        }
-		    })
-		};
+    $.ajax({
+        url: "/reply/write",
+        type: "post",
+        data: writeReply,
+        success:function(){
+            $("#replyWrapper").load(location.href + " #replyWrapper");
+        },
+        error:function(){
+			
+        }
+    })
+};
+
 /* 댓글 수정(Reply Modify) */
 
 function replyModify(id){				
@@ -50,7 +51,7 @@ function replyModify(id){
 			}
 		})
 		
-	};
+};
 
 /* 댓글 삭제(Reply Delete) */
 
@@ -74,4 +75,4 @@ function replyDelete(id){
 				alert("삭제실패!")
 			}
 		});
-	}; 
+}; 

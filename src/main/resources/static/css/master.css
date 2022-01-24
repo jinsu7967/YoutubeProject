@@ -35,7 +35,6 @@ textarea{
 .wrapper{
 	height: 100%;
     width: 100%;
-    padding-top: 4rem;
     background-color: #f3f3f3;
 }
 
@@ -66,7 +65,6 @@ textarea{
 }
 
 .player{
-    height: 400px;
     margin-top: 15px;
 }
 

@@ -14,5 +14,5 @@ public interface ContentMapper {
 	
 	public ArrayList<ContentDto> ContentList() throws Exception;
 
-	
+	public ArrayList<ContentDto> SearchContent(@Param("keyword") String keyword) throws Exception;
 }

@@ -76,3 +76,26 @@ function replyDelete(id){
 			}
 		});
 }; 
+
+/* 검색 기능 
+
+function searchContent(){
+
+	var searchData = {
+		keyword: $("#search-input").val()
+	}
+	
+	$.ajax({
+        url: "/search",
+        type: "get",
+        data: searchData,
+        success:function(){
+            $("#contentList").load(location.href + " #contentList");
+        },
+        error:function(){
+			alert("검색 실패")
+        }
+    })
+}
+
+*/

@@ -61,6 +61,15 @@ public class YoutubeController {
 		return "index";
 	}
 	
+	@RequestMapping("/search")
+	public String Search(@RequestParam("keyword") String keyword,Model model) throws Exception{
+		
+		ArrayList<ContentDto> allContentList = cs.SearchContent(keyword);
+		model.addAttribute("allContentList",allContentList);
+		
+		return "index";
+	}
+	
 	@RequestMapping("/join")
 	public String Join(Model model) throws Exception{
 		

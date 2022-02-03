@@ -26,5 +26,11 @@ public class ContentServiceImpl implements ContentService {
 		return mapper.ContentList();
 	}
 	
+	@Override
+		public ArrayList<ContentDto> SearchContent(String keyword) throws Exception{
+		ContentMapper mapper = sqlSession.getMapper(ContentMapper.class);
+		return mapper.SearchContent(keyword);
+	}
+	
 	
 }

@@ -8,4 +8,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from content
 		order by content_num desc
 	</select>
+	
+	<select id="SearchContent" resultType="ContentDto">
+		<![CDATA[
+		select content_num,content_name,content_date,content_count,file_name,content_writer
+		from content
+		where content_name like concat('%',#{keyword},'%')
+		]]>
+	</select>
 </mapper>

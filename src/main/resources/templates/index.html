@@ -6,14 +6,16 @@
 <script type="text/javascript" src="../static/js/Youtube.js"></script>
 <!-- bootstrap start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
 <link rel="stylesheet" href="../static/css/master.css">
 <!-- bootstrap end -->
 </head>
-<body>
-
+<body class="body-color">
 	<header class="header">
 		<nav class="navbar navbar-expand-lg">
 			<div class="row row-cols-3 no-gutters w-100">
@@ -23,11 +25,11 @@
 					</a>
 				</div>
 				<div class="col d-flex justify-content-center align-items-center">
-					<form>
+					<form action="/search" method="get">
 						<div class="input-group">
-							<input id="search-input" class="form-control" type="search" placeholder="검색">
+							<input id="search-input" class="form-control" type="text" placeholder="검색" name="keyword">
 							<div class="input-group-append">
-								<button class="btn btn-secondary" type="submit">
+								<button class="btn btn-secondary" type="submit" onclick="searchContent()">
 									<i class="bi bi-search"></i>
 								</button>
 							</div>
@@ -114,7 +116,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="container-fluid">
+				<div class="container-fluid" id="contentList">
 					<div class="row row-cols-6">
 						<th:block th:each="content : ${allContentList}">
 							<div class="player col pr-3">

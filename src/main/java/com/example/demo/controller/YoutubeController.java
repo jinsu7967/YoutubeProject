@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,14 +11,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ContentDto;
 import com.example.demo.dto.FindPwCheckDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.ReplyDto;
+import com.example.demo.dto.TestDto;
 import com.example.demo.dto.UploadDto;
 import com.example.demo.paging.Criteria;
 import com.example.demo.paging.Paging;
@@ -51,23 +55,32 @@ public class YoutubeController {
 		return "index";
 	}
 	
-	@RequestMapping("/index")
-	public String MainGo(Model model) throws Exception{
+	@ResponseBody
+	@RequestMapping("/search-test")
+	public ArrayList<ContentDto> SearchTest(@RequestBody String keyword,Model model) throws Exception{
 		
-		ArrayList<ContentDto> allContentList = cs.ContentList();
-		model.addAttribute("allContentList",allContentList);
-		System.out.println(allContentList);
+		System.out.println(keyword);
 		
-		return "index";
+		ArrayList<ContentDto> searchContentList = cs.SearchContent(keyword);
+		System.out.println(searchContentList);
+		
+		return searchContentList;
 	}
+	
 	
 	@RequestMapping("/search")
 	public String Search(@RequestParam("keyword") String keyword,Model model) throws Exception{
 		
-		ArrayList<ContentDto> allContentList = cs.SearchContent(keyword);
-		model.addAttribute("allContentList",allContentList);
+		System.out.println("키워드는"+keyword);
+		ArrayList<ContentDto> searchContentList = cs.SearchContent(keyword);
+		if(searchContentList.isEmpty()) {
+			System.out.println("결과없음");
+		}
+		model.addAttribute("allContentList",searchContentList);
+		System.out.println(searchContentList);
 		
 		return "index";
+		
 	}
 	
 	@RequestMapping("/join")

@@ -29,12 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.formLogin()
 						.loginPage("/login")
 						.loginProcessingUrl("/login/loginCheck")
-						.defaultSuccessUrl("/index")
+						.defaultSuccessUrl("/")
 						.usernameParameter("user_email")
 						.passwordParameter("user_pw")
 				.and()
 					.logout()
-						.logoutSuccessUrl("/index")
+						.logoutSuccessUrl("/")
 						.logoutRequestMatcher(new AntPathRequestMatcher("/login/logout"))
 						.invalidateHttpSession(true);
 		http.cors().and();

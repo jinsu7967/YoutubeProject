@@ -1,5 +1,4 @@
 
-
 /* 댓글쓰기 (Reply Write) */
 
 function replyWrite(){
@@ -62,7 +61,7 @@ function replyDelete(id){
 				content_num: $("#content_num" + id).val()
 		}
 		
-		var target = $('#replyWrapper');
+		
 		
 		$.ajax({
 			url: "/reply/delete",
@@ -70,32 +69,66 @@ function replyDelete(id){
 			data: deleteReply,
 			success:function(){
 				$("#replyWrapper").load(location.href + " #replyWrapper");
+				alert("삭제 성공")
 			},
 			error:function(){
-				alert("삭제실패!")
+				alert("삭제 실패")
 			}
 		});
 }; 
 
-/* 검색 기능 
+/* 검색 기능 */
 
 function searchContent(){
 
-	var searchData = {
-		keyword: $("#search-input").val()
-	}
+	var SearchData = {
+			keyword: $("#search-input").val()
+		}
+	
+	console.log("keyword는"+SearchData.keyword);
 	
 	$.ajax({
-        url: "/search",
-        type: "get",
-        data: searchData,
-        success:function(){
-            $("#contentList").load(location.href + " #contentList");
+        url: "/search-test",
+        type: "post",
+        data: SearchData.keyword,
+		contentType: "application/json",
+		dataType: "json",
+        success: function(content){
+			console.log(content);
+			$('#contentList').empty();
+			if(content.length >=1){
+				content.forEach(function(content){
+					str= '<div class="player col pr-3">';
+					str+= '<div class="thumb-wrap">';
+					str+= '<a href="/mypage/content-detail/'+content.content_num+'">';
+					str+= '<img class="play-content" src="../static/upload/'+content.file_name+'">';
+					str+= '</a>';
+					str+= '</div>';
+					str+= '<div class="row row-cols-2 no-gutters align-items-center py-3">';
+					str+= '<div class="play-mark col-auto ">';
+					str+= '<img src="../static/upload/'+content.file_name+'">';
+					str+= '</div>';
+					str+= '<div class="play-info col-auto pl-3">';
+					str+= '<div class="play-info-title">';
+					str+= '<h5 class="mb-0">';
+					str+= '<b>'+content.content_name+'</b>';
+					str+= '</h5>';
+					str+= '</div>';
+					str+= '<div class="play-info-writer">';
+					str+= '<p class="mb-0">'+content.content_writer+'</p>';
+					str+= '<p class="mb-0">'+content.content_count+"회"+'</P>';
+					str+= '</div>';
+					str+= '</div>';
+					str+= '</div>';
+					str+= '</div>';
+					$('#contentList').append(str);
+				})
+			}
+			
+			alert("검색성공")
         },
         error:function(){
 			alert("검색 실패")
         }
     })
 }
-
-*/

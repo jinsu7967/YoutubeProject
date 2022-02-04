@@ -62,7 +62,7 @@ public class LoginController {
 		
 		session.invalidate();
 		System.out.println("로그아웃");
-		resultMsg ="<script> alert('로그아웃 되었습니다'); location.href='/index' </script>";
+		resultMsg ="<script> alert('로그아웃 되었습니다'); location.href='/' </script>";
 		return resultMsg;
 	}
 	

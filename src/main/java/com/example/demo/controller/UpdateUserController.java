@@ -72,7 +72,7 @@ public class UpdateUserController {
 				System.out.println("정보변경 실패");
 			}
 			
-			out.println("<script>alert('정보변경 완료.'); location.href='/index' </script>");
+			out.println("<script>alert('정보변경 완료.'); location.href='/' </script>");
 		}
 		
 	}

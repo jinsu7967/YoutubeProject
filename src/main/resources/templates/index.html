@@ -27,7 +27,8 @@
 				<div class="col d-flex justify-content-center align-items-center">
 					<form>
 						<div class="input-group">
-							<input id="search-input" class="form-control" type="text" placeholder="검색" name="keyword">
+							<input hidden="hidden">
+							<input id="search-input" class="form-control" type="text" placeholder="검색" name="keyword" onkeypress="if(event.keyCode==13)searchContent();" onsubmit="return false">
 							<div class="input-group-append">
 								<button class="btn btn-secondary" type="button" onclick="searchContent();" >
 									<i class="bi bi-search"></i>

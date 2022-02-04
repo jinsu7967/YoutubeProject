@@ -29,16 +29,6 @@
 			</div>
 
 			<div class="col-8 d-flex justify-content-center align-content-center">
-				<form>
-					<div class="input-group">
-						<input id="search-input" class="form-control" type="search" placeholder="검색">
-						<div class="input-group-append">
-							<button class="btn btn-secondary" type="submit">
-								<i class="bi bi-search"></i>
-							</button>
-						</div>
-					</div>
-				</form>
 			</div>
 
 			<div class="col-2 d-flex justify-content-end">
@@ -75,11 +65,11 @@
 				<img src="../static/images/art2.jpg" class="w-100" style="height: 400px;">
 			</div>
 		</div>
-		<div class="mypage-info">
-			<div class="container d-flex justify-content-center align-items-center pt-3">
+		<div class="container">
+			<div class="d-flex justify-content-center align-items-center pt-3">
 				<div class="col-1 ">
 					<div class="play-mark col-auto px-0">
-						<img src="../static/images/Google_logo.png" alt="">
+						<img src="../static/images/join_logo.png" alt="">
 					</div>
 				</div>
 				<div class="col">
@@ -91,125 +81,66 @@
 					<button type="button" class="btn btn-primary">동영상 관리</button>
 				</div>
 			</div>
-			<div class="container d-flex justify-content-center py-3">
-				<div class="col pt-3">
-					<button type="button" class="btn btn-secondary">홈</button>
-					<button type="button" class="btn btn-secondary">동영상</button>
-					<button type="button" class="btn btn-secondary">재생목록</button>
-					<button type="button" class="btn btn-secondary">채널</button>
-					<button type="button" class="btn btn-secondary">정보</button>
-				</div>
+			<div class="d-flex justify-content-center py-3">
+				<ul class="nav nav-tabs w-100">
+				  <li class="nav-item">
+				    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab">홈</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="video-tab" data-toggle="tab" href="#video" role="tab">동영상</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="channel-tab" data-toggle="tab" href="#channel" role="tab">채널</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab">정보</a>
+				  </li>
+				</ul>
 			</div>
 		</div>
 		<div class="wrapper">
-			<div class="container-xl">
-				<div class="py-5">
-					<h5 class="font-weight-bold py-2">생성된 재생목록</h5>
-					<div class="your-class">
-						<th:block th:each="content : ${contentList}">
-							<div class=" pr-3">
-								<div class="thumb-wrap">
-									<a th:href="@{/mypage/content-detail(contentNum=${content.content_num})}"> 
-										<img class="play-content" th:src="@{../static/upload/}+${content.file_name}">
-									</a>
-								</div>
-								<div class="d-flex flex-column py-3">
-									<div class="play-info-title">
-										<h6 class="mb-0 text-truncate">
-											<b th:text="|${content.content_name}|" th:title="|${content.content_name}|"></b>
-										</h6>
+			<div class="container-xl h-100">
+				<div class="tab-content">
+				  <div class="tab-pane fade show active" id="home" role="tabpanel">
+				  	홈
+				  </div>
+				  <div class="tab-pane fade active" id="video" role="tabpanel">
+				  	<div class="h-100">
+						<h5 class="font-weight-bold py-2">생성된 동영상</h5>
+						<div class="your-class">
+							<th:block th:each="content : ${contentList}">
+								<div class="px-2">
+									<div class="thumb-wrap">
+										<a th:href="@{/mypage/content-detail(contentNum=${content.content_num})}"> 
+											<img class="play-content" th:src="@{../static/upload/}+${content.file_name}">
+										</a>
 									</div>
-									<div class="play-info-writer">
-										<p class="mb-0" th:text="|${content.content_writer}|">
-										<p class="mb-0" th:text="|조회수 ${content.content_count}|">
-									</div>
-								</div>
-							</div>
-						</th:block>
-					</div>
-					<!-- <table class="table table-bordered text-center">
-						<colgroup>
-							<col width="5%">
-							<col width="50%">
-							<col width="20%">
-							<col width="20%">
-							<col width="20%">
-							<col width="5%">
-						</colgroup>
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">번호</th>
-								<th scope="col">컨텐츠 제목</th>
-								<th scope="col">파일이미지</th>
-								<th scope="col">등록일</th>
-								<th scope="col">조회수</th>
-								<th scope="col">설정</th>
-							</tr>
-						</thead>
-						<tbody>
-							<th:block th:each="list : ${contentList}">
-								<tr>
-									<td th:text="${list.rownum}" th:value="${list.rownum}"
-										th:name="rownum">2</td>
-									<td><a class="text-primary"
-										th:href="@{/mypage/content-detail(contentNum=${list.content_num})}"
-										th:text="${list.content_name}" th:value="${list.content_name}"></a>
-									</td>
-									<td>
-										<img th:src="@{../static/upload/}+${list.file_name}" class="file_img" alt="파일사진">
-									</td>
-									<td th:text="${#dates.format(list.content_date,'yyyy-MM-dd')}"></td>
-									<td th:text="${list.content_count}"></td>
-									<td>
-										<div class="btn-group dropright">
-											<button class="btn dropdown-toggle p-0" type="button"
-												data-toggle="dropdown" aria-expanded="false">
-												<i class="bi bi-gear"></i>
-											</button>
-											<ul class="dropdown-menu text-center">
-												<li><a
-													th:href="@{/mypage-update(content_num=${list.content_num},content_name=${list.content_name})}"><button
-															class="btn dropdown-item">수정</button></a></li>
-												<li><a
-													th:href="@{/mypage/delete(content_num=${list.content_num})}"><button
-															class="btn dropdown-item">삭제</button></a></li>
-											</ul>
+									<div class="d-flex flex-column mt-2">
+										<div class="play-info-title">
+											<h6 class="mb-0 text-truncate">
+												<b th:text="|${content.content_name}|" th:title="|${content.content_name}|"></b>
+											</h6>
 										</div>
-									</td>
-								</tr>
+										<div class="play-info-writer">
+											<p class="mb-0" th:text="|${content.content_writer}|">
+											<p class="mb-0" th:text="|조회수 ${content.content_count}|">
+										</div>								
+									</div>
+									<div class="d-flex justify-content-end">
+										<a class="mr-2 text-primary" th:href="@{/mypage-update(content_num=${content.content_num},content_name=${content.content_name})}">수정</a>
+										<a class="text-primary" th:href="@{/mypage/delete(content_num=${content.content_num})}">삭제</a>
+									</div>
+								</div>
 							</th:block>
-						</tbody>
-					</table> -->
-					<!-- pagination -->
-					<!-- <div class="pagination justify-content-center">
-						<nav aria-label="...">
-							<ul class="pagination">
-								<div th:if="${paging.cri.page == 1}">
-									<li class="page-item disabled"><a class="page-link">Start</a>
-									</li>
-								</div>
-								<div th:if="${paging.cri.page != 1}">
-									<li class="page-item"><a class="page-link"
-										th:href="@{/mypage(page=${paging.startPage})}">Start</a></li>
-								</div>
-								<th:block
-									th:with="start =${paging.startPage}, end =${paging.endPage}">
-									<li class="page-item" aria-current="page"
-										th:each="paging : ${#numbers.sequence(start,end)}"><a
-										class="page-link" id="pagingBtn"
-										th:href="@{/mypage(page=${paging})}" th:text=${paging}></a></li>
-								</th:block>
-								<div th:if="${paging.cri.page == paging.endPage}">
-									<li class="page-item disabled"><a class="page-link">End</a>
-									</li>
-								</div>
-								<div th:if="${paging.cri.page != paging.endPage}">
-									<li class="page-item"><a class="page-link"
-										th:href="@{/mypage(page=${paging.endPage})}">End</a></li>
-								</div>
-							</ul>
-						</nav>
-					</div> -->
+						</div>
+				  	</div>
+				  </div>
+				  <div class="tab-pane fade" id="channel" role="tabpanel">
+				  	이 채널에는 다른 채널이 표시 되지 않습니다.
+				  </div>
+				  <div class="tab-pane fade" id="info" role="tabpanel">
+				  	정보
+				  </div>
 				</div>
 			</div>
 		</div>
@@ -260,7 +191,8 @@
 						slide: 'div',
 						infinite: true,
 						slidesToShow: 6,
-						slidesToScroll: 6 
+						slidesToScroll: 6,
+						adaptiveHeight: true
 				     });
 					
 					$("#button-addon").click(function(e) {

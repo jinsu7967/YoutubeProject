@@ -29,16 +29,6 @@
 					</a>
 				</div>
 				<div class="col d-flex justify-content-center align-items-center">
-					<form>
-						<div class="input-group">
-							<input id="search-input" class="form-control" type="search" placeholder="검색">
-							<div class="input-group-append">
-								<button class="btn btn-secondary" type="submit">
-									<i class="bi bi-search"></i>
-								</button>
-							</div>
-						</div>
-					</form>
 				</div>
 				<div class="col d-flex justify-content-end align-items-center" >
 					<button class="btn btn-lg btn-link">
@@ -82,13 +72,21 @@
 									<video id="my-player" class="video-js vjs-theme-fantasy vjs-16-9" controls preload="auto" 
 										th:poster="@{../static/upload/}+${detailList.file_name}" data-setup='{}'>
 										<source src="../static/video/sample.mp4" type="video/mp4"></source>
-										<p class="vjs-no-js">영상 재생을 위해 브라우저의 스크립트 활성화가 필요합니다.</p>
 									</video>
 								</div>
 								<hr class="w-100">
 								<div class="content-info">
 									<h3 style="font-weight: 600;" th:text="|${detailList.content_name}|"></h3>
-									<span class="text-muted" th:text="|조회수 ${detailList.content_count}회|"> </span> <span>•</span> <span class="text-muted" th:text="|${#dates.format(detailList.content_date,'yyyy.MM.dd')}|"> </span>
+									<div class="row">
+										<span class="d-flex align-items-center col">
+											<span class="text-muted" th:text="|조회수 ${detailList.content_count}회|"> </span> 
+											<span>•</span>
+											<span class="text-muted" th:text="|${#dates.format(detailList.content_date,'yyyy.MM.dd')}|"></span>
+										</span>
+										<span class="col d-flex justify-content-end">
+											<button class="btn btn-info mb-0">나의 재생목록에 추가</button>
+										</span>
+									</div>
 								</div>
 								<hr class="w-100">
 								<p th:text="|${detailList.content_writer}|">
@@ -112,7 +110,6 @@
 							</th:block>
 							<hr class="w-100">
 								<th:block th:each="replyList : ${reply}" >
-								<!-- <form action="/reply/update" method="get"> -->
 								<form>
 									<div class="py-2 reply-wrap">
 										<div class="d-flex align-items-center">

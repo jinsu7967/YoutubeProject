@@ -94,8 +94,9 @@ function searchContent(){
 		contentType: "application/json",
 		dataType: "json",
         success: function(content){
-			console.log(content);
+
 			$('#contentList').empty();
+			
 			if(content.length >=1){
 				content.forEach(function(content){
 					str= '<div class="player col pr-3">';
@@ -125,7 +126,10 @@ function searchContent(){
 				})
 			}
 			
-			alert("검색성공")
+			if(content.length==0){
+			 	alert("검색내용 없음")
+				location.href="/";
+			}
         },
         error:function(){
 			alert("검색 실패")

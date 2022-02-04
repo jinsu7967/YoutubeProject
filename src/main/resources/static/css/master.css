@@ -4,7 +4,6 @@ body{
 	font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
 	word-break: keep-all;
 	word-wrap: break-word;
-	
 }
 
 a, a:hover, a:focus{
@@ -227,8 +226,8 @@ textarea{
 
 .mypage-info{
 	background-color: #f3f3f3;
-	border-bottom: solid 1px;
-	border-top: solid 1px;
+	/* border-bottom: solid 1px;
+	border-top: solid 1px; */
 }
 
 .body-color{

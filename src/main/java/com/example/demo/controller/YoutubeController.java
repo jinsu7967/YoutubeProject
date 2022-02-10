@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.ContentDto;
 import com.example.demo.dto.FindPwCheckDto;
 import com.example.demo.dto.LoginDto;
+import com.example.demo.dto.PlaylistDto;
 import com.example.demo.dto.ReplyDto;
 import com.example.demo.dto.TestDto;
 import com.example.demo.dto.UploadDto;
@@ -122,6 +123,7 @@ public class YoutubeController {
 		
 		
 		ArrayList<UploadDto> contentList = us.ContentList(user_email, pageStart, perPageNum);
+		ArrayList<PlaylistDto> playlist = ps.MyPlaylistName(user_email);
 		
 		
 		System.out.println(contentList);
@@ -131,6 +133,7 @@ public class YoutubeController {
 		model.addAttribute("contentList",contentList);
 		model.addAttribute("paging",paging);
 		model.addAttribute("user",user_email);
+		model.addAttribute("playlist",playlist);
 		
 		
 		return "mypage";

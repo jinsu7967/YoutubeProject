@@ -233,3 +233,8 @@ textarea{
 .body-color{
 	background-color: #f3f3f3;	
 }
+
+.playlist{
+	width: 100%;
+	height: 200px;
+}

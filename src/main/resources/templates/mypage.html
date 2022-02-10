@@ -3,16 +3,17 @@
 <head>
 <meta charset="utf-8">
 <title>마이페이지</title>
-<script type="text/javascript" src="../static/js/Youtube.js"></script>
+
 <!-- bootstrap start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
 <link rel="stylesheet" href="../static/css/master.css">
+<script type="text/javascript" src="../static/js/Youtube.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <!-- bootstrap end -->
 </head>
 <body class="body-color">
@@ -86,7 +87,7 @@
 				    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab">홈</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" id="video-tab" data-toggle="tab" href="#video" role="tab">동영상</a>
+				    <a class="nav-link" id="playlist-tab" data-toggle="tab" href="#playlist" role="tab">재생목록</a>
 				  </li>
 				  <li class="nav-item">
 				    <a class="nav-link" id="channel-tab" data-toggle="tab" href="#channel" role="tab">채널</a>
@@ -100,12 +101,8 @@
 		<div class="wrapper">
 			<div class="container-xl h-100">
 				<div class="tab-content">
-				  <div class="tab-pane fade pl-1" id="home" role="tabpanel">
-				  	테스트
-				  </div>
-				  <div class="tab-pane fade active" id="video" role="tabpanel">
-				  	<div class="h-100">
-						<h5 class="font-weight-bold py-2">생성된 동영상</h5>
+				  <div class="tab-pane fade show active" id="home" role="tabpanel">
+				  	<h5 class="font-weight-bold py-2">생성된 동영상</h5>
 						<div class="your-class">
 							<th:block th:each="content : ${contentList}">
 								<div class="px-2">
@@ -132,13 +129,33 @@
 								</div>
 							</th:block>
 						</div>
-				  	</div>
+				  </div>
+				  <div class="tab-pane fade" id="playlist" role="tabpanel">
+				  	<h5 class="font-weight-bold py-2 px-2" >나의 재생목록</h5>
+				  		<div class="container-fluid">
+				  			<div class="row row-cols-6">
+				  				<th:block th:each="playlist : ${playlist}">
+					  				<div class="col px-2">
+					  					<div class="bg-primary">
+					  					 	<img src="../static/images/thumnail.png" class="playlist">
+					  					</div>
+					  					<div class="d-flex justify-content-start align-items-center py-2">
+					  						<p class="font-weight-bold mb-0" th:text="${playlist.playlist_name}"></p>
+					  					</div>
+					  					<div class="d-flex justify-content-end align-items-center">
+					  						<a href="#" class="text-primary pr-2">수정</a>
+					  						<a href="#" class="text-primary">삭제</a>
+					  					</div>
+					  				</div>
+				  				</th:block>
+				  			</div>
+				  		</div>
 				  </div>
 				  <div class="tab-pane fade" id="channel" role="tabpanel">
 				  	이 채널에는 다른 채널이 표시 되지 않습니다.
 				  </div>
 				  <div class="tab-pane fade" id="info" role="tabpanel">
-				  	정보
+				  	정보 없음
 				  </div>
 				</div>
 			</div>
@@ -205,6 +222,7 @@
 		</div>
 	</div>
 	<!-- Modal JQuery -->
+	
 	<script>
 		$(document).ready(
 				function() {

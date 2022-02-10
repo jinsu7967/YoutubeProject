@@ -28,10 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.ContentDto;
 import com.example.demo.dto.LoginDto;
+import com.example.demo.dto.PlaylistDto;
 import com.example.demo.dto.ReplyDto;
 import com.example.demo.dto.UploadDto;
 import com.example.demo.service.ContentService;
 import com.example.demo.service.LoginService;
+import com.example.demo.service.PlaylistService;
 import com.example.demo.service.ReplyService;
 import com.example.demo.service.UploadService;
 
@@ -46,6 +48,8 @@ public class UploadController {
 	private ReplyService rs;
 	@Autowired
 	private ContentService cs;
+	@Autowired
+	private PlaylistService ps;
 	
 	@RequestMapping("/upload")
 	public String Upload(@RequestParam("content_name") String content_name,
@@ -88,9 +92,14 @@ public class UploadController {
 		
 		int replyCount = rs.ReplyCount(content_num);
 		us.CountUpdate(content_num);
-		String user_email=(String) session.getAttribute("user_email");
+		String user_email= principal.getName();
+		
 		ArrayList<UploadDto> contentDetail = us.ContentDetail(content_num);
 		ArrayList<ContentDto> thumList = cs.ContentList();
+		ArrayList<PlaylistDto> myPlaylist = ps.MyPlaylistName(user_email);
+		
+		System.out.println(myPlaylist);
+		System.out.println(user_email);
 		System.out.println(contentDetail);
 		System.out.println(thumList);
 		model.addAttribute("contentDetail",contentDetail);
@@ -98,6 +107,7 @@ public class UploadController {
 		model.addAttribute("contentNum",content_num);
 		model.addAttribute("replyCount",replyCount);
 		model.addAttribute("thumList",thumList);
+		model.addAttribute("myPlaylist",myPlaylist);
 		
 		//댓글 조회
 		ArrayList<ReplyDto> reply = rs.ReplyList(content_num);

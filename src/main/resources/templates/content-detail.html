@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="../static/css/bootstrap-icons.css">
 <link rel="stylesheet" href="../static/css/master.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.17.0/dist/video-js.min.css">
-<link rel="stylesheet" href="../static/css/vjs-fantasy.css">
 <!-- bootstrap end -->
 
 </head>
@@ -76,15 +75,15 @@
 								</div>
 								<hr class="w-100">
 								<div class="content-info">
-									<h3 style="font-weight: 600;" th:text="|${detailList.content_name}|"></h3>
+									<h3 style="font-weight: 600;" th:text="|${detailList.content_name}|" name="playlist"></h3>
 									<div class="row">
 										<span class="d-flex align-items-center col">
 											<span class="text-muted" th:text="|조회수 ${detailList.content_count}회|"> </span> 
 											<span>•</span>
 											<span class="text-muted" th:text="|${#dates.format(detailList.content_date,'yyyy.MM.dd')}|"></span>
 										</span>
-										<span class="col d-flex justify-content-end">
-											<button class="btn btn-info mb-0">나의 재생목록에 추가</button>
+										<span class="col d-flex justify-content-end" sec:authorize="!isAnonymous()">
+											<button class="btn btn-info mb-0" onclick=""  data-toggle="modal" data-target="#myModal">나의 재생목록에 추가</button>
 										</span>
 									</div>
 								</div>
@@ -181,7 +180,6 @@
 										</div>
 									</div>
 								</th:block>
-
 							</div>
 						</div>
 					</div>
@@ -189,5 +187,35 @@
 			</div>
 		</div>
 	</section>
+	
+	<!-- The Modal -->
+	<div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title font-weight-bold" id="myModalLabel">나의 플레이리스트 추가</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="/playlist-add" method="post">
+						<input type="hidden" th:value="${contentNum}" id="contentNum">
+						<input type="hidden" th:value="${#authentication.principal.Username}" id="user">
+						<select class="custom-select custom-select-lg mb-3" id="playlist">
+						<th:block th:each=" myplaylist : ${myPlaylist}">
+						  <option th:value="${myplaylist.playlist_name}" th:text="${myplaylist.playlist_name}" th:id="${myplaylist.playlist_num}"></option>
+						</th:block>
+						</select>
+						<hr class="w-100">
+						<span class="d-flex justify-content-end w-100 mt-3">
+							<button type="button" class="btn btn-primary d-flex align-items-center" onclick="PlayListAdd();">플레이리스트에 추가</button>
+						</span>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

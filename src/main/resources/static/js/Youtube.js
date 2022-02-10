@@ -136,3 +136,32 @@ function searchContent(){
         }
     })
 }
+
+/* 재생 목록에 추가*/
+
+function PlayListAdd(){
+	
+	var playlistData = {
+	
+	playlist_name: $("#playlist option:selected").val(),
+	content_num: $("#contentNum").val(),
+	email: $("#user").val()
+	
+	
+	}
+	console.log(playlistData);
+	
+	$.ajax({
+			url: "/playlist-add",
+			type:"post",
+			data: playlistData,
+			success:function(){
+				alert("재생목록에 추가 되었습니다.")
+			},
+			error:function(){
+				alert("재생목록에 추가 되지 않았습니다.")
+			}
+		});
+}
+
+

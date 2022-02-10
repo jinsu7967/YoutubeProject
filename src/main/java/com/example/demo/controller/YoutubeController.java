@@ -27,6 +27,7 @@ import com.example.demo.paging.Criteria;
 import com.example.demo.paging.Paging;
 import com.example.demo.service.ContentService;
 import com.example.demo.service.LoginService;
+import com.example.demo.service.PlaylistService;
 import com.example.demo.service.ReplyService;
 import com.example.demo.service.UploadService;
 
@@ -41,6 +42,8 @@ public class YoutubeController {
 	private ReplyService rs;
 	@Autowired
 	private ContentService cs;
+	@Autowired
+	private PlaylistService ps;
 	
 	
 	
@@ -196,7 +199,6 @@ public class YoutubeController {
 		
 	}
 
-	
 	@RequestMapping("/mypage-update")
 	public String MypageUpdate(@RequestParam("content_num") String content_num,@RequestParam("content_name") String content_name,Model model) throws Exception{
 		System.out.println(content_num);
@@ -205,6 +207,26 @@ public class YoutubeController {
 		
 		
 		return "mypage-update";
+	}
+	
+	@RequestMapping("/playlist-add")
+	public String PlaylistAdd(@RequestParam("content_num") String content_num,@RequestParam("playlist_name") String playlist_name,@RequestParam("email") String email,Principal principal) throws Exception{
+		
+		
+		System.out.println(playlist_name);
+		ps.playlistAdd(playlist_name, email, content_num);
+		
+		return "redirect:/mypage/content-detail?contentNum="+content_num;
+		
+	}
+	
+	@RequestMapping("playlist-create")
+	public String playlistCreate(@RequestParam("playlistName") String playlistName,Principal principal) throws Exception{
+		String email=principal.getName();
+		ps.PlaylistCreate(email, playlistName);
+		
+		
+		return "redirect:/mypage";
 	}
 	
 	

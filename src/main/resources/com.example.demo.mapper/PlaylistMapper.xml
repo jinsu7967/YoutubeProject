@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{email},#{playlist_name})
 	</insert>
 	
-	<insert id="playlistAdd">
+	<insert id="PlaylistAdd">
 		insert into playlistdata(playlist_name,email,content_num)
 		values(#{playlist_name},#{email},#{content_num})
 	</insert>
@@ -18,4 +18,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from playlist
 		where email=#{email}
 	</select>
+	
+	<delete id="PlaylistDelete">
+		delete from playlist
+		where playlist_num = #{playlist_num}
+	</delete>
+	
+	<update id="PlaylistUpdate">
+		update playlist
+		set playlist_name = #{playlist_name}
+		where playlist_num = #{playlist_num}
+	</update>
+	
 </mapper>

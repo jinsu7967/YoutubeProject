@@ -217,17 +217,33 @@ public class YoutubeController {
 		
 		
 		System.out.println(playlist_name);
-		ps.playlistAdd(playlist_name, email, content_num);
+		ps.PlaylistAdd(playlist_name, email, content_num);
 		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 		
 	}
 	
 	@RequestMapping("playlist-create")
-	public String playlistCreate(@RequestParam("playlistName") String playlistName,Principal principal) throws Exception{
+	public String playlistCreate(@RequestParam("playlistName") String playlistName,Principal principal) throws Exception {
 		String email=principal.getName();
 		ps.PlaylistCreate(email, playlistName);
 		
+		
+		return "redirect:/mypage";
+	}
+	
+	@RequestMapping("/playlist-delete")
+	public void playlistDelete(@RequestParam("playlist_num") String playlist_num) throws Exception{
+		
+		ps.PlaylistDelete(playlist_num);
+		
+		
+	}
+	
+	@RequestMapping("/playlist-update")
+	public String playlistUpdate(@RequestParam("playlist_num")String playlist_num,@RequestParam("playlist_name") String playlist_name) throws Exception {
+		
+		ps.PlaylistUpdate(playlist_num,playlist_name);
 		
 		return "redirect:/mypage";
 	}

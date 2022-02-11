@@ -28,15 +28,27 @@ public class PlaylistServiceImpl implements PlaylistService {
 	}
 	
 	@Override
-	public void playlistAdd(String playlist_name,String email,String content_num) throws Exception{
+	public void PlaylistAdd(String playlist_name,String email,String content_num) throws Exception{
 		PlaylistMapper mapper = sqlSession.getMapper(PlaylistMapper.class);
-		mapper.playlistAdd(playlist_name,email,content_num);
+		mapper.PlaylistAdd(playlist_name,email,content_num);
 	}
 	
 	@Override
 	public ArrayList<PlaylistDto> MyPlaylistName(String email) throws Exception{
 		PlaylistMapper mapper = sqlSession.getMapper(PlaylistMapper.class);
 		return mapper.MyPlaylistName(email);
+	}
+	
+	@Override
+	public void PlaylistDelete(String playlist_num) throws Exception{
+		PlaylistMapper mapper = sqlSession.getMapper(PlaylistMapper.class);
+		mapper.PlaylistDelete(playlist_num);
+	}
+	
+	@Override
+	public void PlaylistUpdate(String playlist_num,String playlist_name) throws Exception{
+		PlaylistMapper mapper = sqlSession.getMapper(PlaylistMapper.class);
+		mapper.PlaylistUpdate(playlist_num,playlist_name);
 	}
 	
 }

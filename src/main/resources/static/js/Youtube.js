@@ -164,4 +164,58 @@ function PlayListAdd(){
 		});
 }
 
+/* 재생목록 삭제 */
+
+function playlistDelete(id){
+	
+	
+	var playlistDelete = {
+		playlist_num: $("#playlist"+ id).val() 
+	}
+	
+	console.log(playlistDelete);
+	
+	$.ajax({
+			url: "/playlist-delete",
+			type:"post",
+			data: playlistDelete,
+			success:function(){
+				alert("삭제 성공")
+				$("#playlistReload").load(location.href + " #playlistReload");
+			},
+			error:function(){
+				alert("삭제 실패")
+			}
+		});
+}
+
+/* 모달로 값 넘기기*/
+
+function PlaylistUpdateForm(id){
+ 	$("#playlistNum").val(id)
+
+	console.log(id);
+}
+
+/* 재생 목록 수정 ajax*/
+
+function PlaylistUpdate(){
+	var playlistUpdate = {
+		playlist_num: $("#playlistNum").val(),
+		playlist_name: $("#playlistName").val()
+	}
+	
+	$.ajax({
+		url: "/playlist-update",
+		type:"post",
+		data: playlistUpdate,
+		success:function(){
+			alert("변경 성공")
+			$("#playlistReload").load(location.href + " #playlistReload");
+		},
+		error:function(){
+			alert("변경 실패")
+		}
+	});
+}
 

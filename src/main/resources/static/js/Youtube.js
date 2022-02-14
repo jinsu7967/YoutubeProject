@@ -248,7 +248,7 @@ function Myplaylist(id){
 			
 			if(data.length >=1){
 				data.forEach(function(data){
-				str='<div class="container-fluid">'
+				str='<div class="container-fluid mb-0">'
 				str+='<table class="table">'
 				str+='<thead class="thead-light">'
 				str+='<tr>'

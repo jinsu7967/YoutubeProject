@@ -19,4 +19,6 @@ public interface PlaylistService {
 	public void PlaylistDelete(@Param("playlist_num") String playlist_num) throws Exception;
 	
 	public void PlaylistUpdate(@Param("playlist_num") String playlist_num,@Param("playlist_name") String playlist_name) throws Exception;
+	
+	public ArrayList<ContentDto> Myplaylist(@Param("playlist_name") String playlist_name,@Param("email") String email) throws Exception;
 }

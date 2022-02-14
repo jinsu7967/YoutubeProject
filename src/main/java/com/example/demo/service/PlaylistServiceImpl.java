@@ -51,4 +51,11 @@ public class PlaylistServiceImpl implements PlaylistService {
 		mapper.PlaylistUpdate(playlist_num,playlist_name);
 	}
 	
+	@Override
+	public ArrayList<ContentDto> Myplaylist(String playlist_name, String email) throws Exception{
+		PlaylistMapper mapper = sqlSession.getMapper(PlaylistMapper.class);
+		return mapper.Myplaylist(playlist_name,email);
+	}
+
+	
 }

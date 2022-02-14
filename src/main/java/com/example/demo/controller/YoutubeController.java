@@ -60,7 +60,7 @@ public class YoutubeController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/search-test")
+	@RequestMapping("/search")
 	public ArrayList<ContentDto> SearchTest(@RequestBody String keyword,Model model) throws Exception{
 		
 		System.out.println(keyword);
@@ -71,21 +71,19 @@ public class YoutubeController {
 		return searchContentList;
 	}
 	
-	
-	@RequestMapping("/search")
-	public String Search(@RequestParam("keyword") String keyword,Model model) throws Exception{
+	@ResponseBody
+	@RequestMapping("/myplaylist")
+	public ArrayList<ContentDto> Myplaylist(@RequestBody PlaylistDto playlistDto,Model model) throws Exception{
 		
-		System.out.println("키워드는"+keyword);
-		ArrayList<ContentDto> searchContentList = cs.SearchContent(keyword);
-		if(searchContentList.isEmpty()) {
-			System.out.println("결과없음");
-		}
-		model.addAttribute("allContentList",searchContentList);
-		System.out.println(searchContentList);
+		String playlist_name=playlistDto.getPlaylist_name();
+		String email=playlistDto.getEmail();
 		
-		return "index";
+		ArrayList<ContentDto> playlistData =ps.Myplaylist(playlist_name, email);
 		
+		
+		return playlistData;
 	}
+	
 	
 	@RequestMapping("/join")
 	public String Join(Model model) throws Exception{
@@ -121,10 +119,8 @@ public class YoutubeController {
 		System.out.println("pageStart : "+pageStart);
 		System.out.println("perPageNum : "+perPageNum);
 		
-		
 		ArrayList<UploadDto> contentList = us.ContentList(user_email, pageStart, perPageNum);
 		ArrayList<PlaylistDto> playlist = ps.MyPlaylistName(user_email);
-		
 		
 		System.out.println(contentList);
 		System.out.println(paging);
@@ -233,11 +229,11 @@ public class YoutubeController {
 	}
 	
 	@RequestMapping("/playlist-delete")
-	public void playlistDelete(@RequestParam("playlist_num") String playlist_num) throws Exception{
+	public String playlistDelete(@RequestParam("playlist_num") String playlist_num) throws Exception{
 		
 		ps.PlaylistDelete(playlist_num);
 		
-		
+		return "redirect:/mypage";
 	}
 	
 	@RequestMapping("/playlist-update")
@@ -247,6 +243,9 @@ public class YoutubeController {
 		
 		return "redirect:/mypage";
 	}
+	
+	
+	
 	
 	
 	

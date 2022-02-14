@@ -88,13 +88,13 @@ function searchContent(){
 	console.log("keyword는"+SearchData.keyword);
 	
 	$.ajax({
-        url: "/search-test",
+        url: "/search",
         type: "post",
         data: SearchData.keyword,
 		contentType: "application/json",
 		dataType: "json",
         success: function(content){
-
+			console.log(content)
 			$('#contentList').empty();
 			
 			if(content.length >=1){
@@ -137,7 +137,7 @@ function searchContent(){
     })
 }
 
-/* 재생 목록에 추가*/
+/* 재생 목록에 추가 */
 
 function PlayListAdd(){
 	
@@ -185,11 +185,12 @@ function playlistDelete(id){
 			},
 			error:function(){
 				alert("삭제 실패")
+				
 			}
 		});
 }
 
-/* 모달로 값 넘기기*/
+/* 모달로 값 넘기기 */
 
 function PlaylistUpdateForm(id){
  	$("#playlistNum").val(id)
@@ -197,7 +198,7 @@ function PlaylistUpdateForm(id){
 	console.log(id);
 }
 
-/* 재생 목록 수정 ajax*/
+/* 재생 목록 수정 ajax */
 
 function PlaylistUpdate(){
 	var playlistUpdate = {
@@ -218,4 +219,64 @@ function PlaylistUpdate(){
 		}
 	});
 }
+
+/* 재생목록 조회 */
+
+function Myplaylist(id){
+	var playlistData = {
+		playlist_name: $("#playlist_name"+ id).val(),
+		email: $("#user_email"+ id).val()
+	}
+	
+	console.log(playlistData);
+	
+	$.ajax({
+		url: "/myplaylist",
+		type: "post",
+		data: JSON.stringify(playlistData),
+		contentType: "application/json",
+		dataType: "json",
+		success:function(data){
+			console.log(data)
+			
+			
+			if(data.length==0){
+				alert("재생목록을 추가해주세요");
+			}
+			
+			$('#playlistShow').empty();
+			
+			if(data.length >=1){
+				data.forEach(function(data){
+				str='<div class="container-fluid">'
+				str+='<table class="table">'
+				str+='<thead class="thead-light">'
+				str+='<tr>'
+				str+='<th scope="col" class="col-4">컨텐츠 제목</th>'
+				str+='<th scope="col" class="col-4">작성자</th>'
+				str+='<th scope="col" class="col-4">조회수</th>'
+				str+='</tr>'
+				str+='</thead>'
+				str+='<tbody>'
+				str+='<tr>'
+				str+='<td><a class="text-primary" href="/mypage/content-detail?contentNum='+data.content_num+'">'+data.content_name+'</a></td>'
+				str+='<td>'+data.content_writer+'</td>'
+				str+='<td>'+data.content_count+"회"+'</td>'
+				str+='</tr>'
+				str+='</tbody>'
+				str+='</div>'
+				$('#playlistShow').append(str);
+				})
+				
+			}
+			
+		},
+		error:function(){
+			alert("변경 실패")
+		}
+	});
+}
+
+
+
 

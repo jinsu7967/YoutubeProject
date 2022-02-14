@@ -4,6 +4,7 @@ public class PlaylistDto {
 	private String playlist_name;
 	private String email;
 	private int playlist_num;
+	private int content_num;
 	
 	public PlaylistDto() {}
 
@@ -31,16 +32,27 @@ public class PlaylistDto {
 		this.playlist_num = playlist_num;
 	}
 
-	public PlaylistDto(String playlist_name, String email, int playlist_num) {
+	public int getContent_num() {
+		return content_num;
+	}
+
+	public void setContent_num(int content_num) {
+		this.content_num = content_num;
+	}
+
+	public PlaylistDto(String playlist_name, String email, int playlist_num, int content_num) {
 		super();
 		this.playlist_name = playlist_name;
 		this.email = email;
 		this.playlist_num = playlist_num;
+		this.content_num = content_num;
 	}
 
 	@Override
 	public String toString() {
-		return "PlaylistDto [playlist_name=" + playlist_name + ", email=" + email + ", playlist_num=" + playlist_num + "]";
+		return "PlaylistDto [playlist_name=" + playlist_name + ", email=" + email + ", playlist_num=" + playlist_num + ", content_num=" + content_num + "]";
 	}
+
+	
 	
 }

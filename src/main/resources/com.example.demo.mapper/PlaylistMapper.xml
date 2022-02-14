@@ -30,4 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where playlist_num = #{playlist_num}
 	</update>
 	
+	<select id="Myplaylist" resultType="ContentDto">
+		select content_name,content_writer,content_count,content_num
+		from content
+		where content_num in (select content_num from playlistdata where playlist_name = #{playlist_name} and email = #{email})
+	</select>
+	
 </mapper>

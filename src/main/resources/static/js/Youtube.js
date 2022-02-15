@@ -240,7 +240,7 @@ function Myplaylist(id){
 			console.log(data)
 			
 			
-			if(data.length==0){
+			if(data.length<=0){
 				alert("재생목록을 추가해주세요");
 			}
 			
@@ -252,9 +252,10 @@ function Myplaylist(id){
 				str+='<table class="table">'
 				str+='<thead class="thead-light">'
 				str+='<tr>'
-				str+='<th scope="col" class="col-4">컨텐츠 제목</th>'
-				str+='<th scope="col" class="col-4">작성자</th>'
-				str+='<th scope="col" class="col-4">조회수</th>'
+				str+='<th scope="col" class="col-3">컨텐츠 제목</th>'
+				str+='<th scope="col" class="col-3">작성자</th>'
+				str+='<th scope="col" class="col-3">조회수</th>'
+				str+='<th scope="col" class="col-3">설정</th>'
 				str+='</tr>'
 				str+='</thead>'
 				str+='<tbody>'
@@ -262,17 +263,40 @@ function Myplaylist(id){
 				str+='<td><a class="text-primary" href="/mypage/content-detail?contentNum='+data.content_num+'">'+data.content_name+'</a></td>'
 				str+='<td>'+data.content_writer+'</td>'
 				str+='<td>'+data.content_count+"회"+'</td>'
+				str+='<input type="hidden" value="'+data.content_num+'" id="myPlaylistContent'+data.content_num+'">'
+				str+='<td><button type="button" class="border-0 bg-transparent" id="'+data.content_num+'" onclick="MyplaylistConDelete(this.id)"><i class="bi bi-x-circle"></i></button></td>'
 				str+='</tr>'
 				str+='</tbody>'
 				str+='</div>'
 				$('#playlistShow').append(str);
 				})
-				
 			}
 			
 		},
 		error:function(){
 			alert("변경 실패")
+		}
+	});
+}
+
+/*나의 재생목록 컨텐츠 제거*/
+
+function MyplaylistConDelete(id){
+	var myplaylistContentDel= {
+		content_num: $("#myPlaylistContent"+ id).val()
+	}
+	console.log(myplaylistContentDel)
+	
+	$.ajax({
+		url: "/myplaylistcontent-delete",
+		type: "post",
+		data: myplaylistContentDel,
+		success:function(){
+			alert("삭제 완료")
+			$(".close").click;
+		},
+		error:function(){
+			alert("삭제 실패")
 		}
 	});
 }

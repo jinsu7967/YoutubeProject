@@ -25,5 +25,7 @@ public interface PlaylistMapper {
 	
 	public ArrayList<ContentDto> Myplaylist(@Param("playlist_name") String playlist_name,@Param("email") String email) throws Exception;
 	
+	public void MyplaylistDelete(@Param("content_num") String content_num) throws Exception;
+	
 	
 }

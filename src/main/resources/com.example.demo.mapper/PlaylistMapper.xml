@@ -36,4 +36,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where content_num in (select content_num from playlistdata where playlist_name = #{playlist_name} and email = #{email})
 	</select>
 	
+	<delete id="MyplaylistDelete">
+		delete from playlistdata
+		where content_num = #{content_num}
+	</delete>
+	
 </mapper>

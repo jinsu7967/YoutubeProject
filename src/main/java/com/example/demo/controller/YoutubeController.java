@@ -244,8 +244,13 @@ public class YoutubeController {
 		return "redirect:/mypage";
 	}
 	
-	
-	
+	@RequestMapping("/myplaylistcontent-delete")
+	public String MyplaylistContetnDelete(@RequestParam("content_num") String content_num) throws Exception {
+		System.out.println(content_num);
+		ps.MyplaylistDelete(content_num);
+		
+		return "redirect:/mypage";
+	}
 	
 	
 	

@@ -56,6 +56,13 @@ public class PlaylistServiceImpl implements PlaylistService {
 		PlaylistMapper mapper = sqlSession.getMapper(PlaylistMapper.class);
 		return mapper.Myplaylist(playlist_name,email);
 	}
+	
+	@Override
+	public void MyplaylistDelete(String content_num) throws Exception {
+	PlaylistMapper mapper = sqlSession.getMapper(PlaylistMapper.class);
+	mapper.MyplaylistDelete(content_num);
+	}
+	
 
 	
 }

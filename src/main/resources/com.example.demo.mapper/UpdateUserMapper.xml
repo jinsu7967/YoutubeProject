@@ -3,18 +3,22 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.UpdateUserMapper">
+
+	<!-- 본인 확인 -->
 	<select id="UserCheck" resultType="UpdateUserDto">
 		select email,pw,name 
 		from user 
 		where email=#{user_email} and pw=#{user_pw} and name=#{user_name}
 	</select>
 	
+	<!-- 비밀번호 확인 -->
 	<select id="PwCheck" resultType="updateUserDto">
 		select pw
 		from user
 		where email=#{user_email}
 	</select>
 	
+	<!-- 개인정보 변경 -->
 	<update id="UserUpdate">
 		update user set pw=#{user_pw}, name=#{user_name} where email=#{user_email}
 	</update>

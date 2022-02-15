@@ -48,7 +48,7 @@ public class YoutubeController {
 	
 	
 	
-
+	//접속시 페이지
 	@RequestMapping("/")
 	public String Main(Model model) throws Exception{
 		
@@ -59,6 +59,7 @@ public class YoutubeController {
 		return "index";
 	}
 	
+	//유튜브 메인페이지의 검색 기능
 	@ResponseBody
 	@RequestMapping("/search")
 	public ArrayList<ContentDto> SearchTest(@RequestBody String keyword,Model model) throws Exception{
@@ -71,20 +72,7 @@ public class YoutubeController {
 		return searchContentList;
 	}
 	
-	@ResponseBody
-	@RequestMapping("/myplaylist")
-	public ArrayList<ContentDto> Myplaylist(@RequestBody PlaylistDto playlistDto,Model model) throws Exception{
-		
-		String playlist_name=playlistDto.getPlaylist_name();
-		String email=playlistDto.getEmail();
-		
-		ArrayList<ContentDto> playlistData =ps.Myplaylist(playlist_name, email);
-		
-		
-		return playlistData;
-	}
-	
-	
+	//회원가입 Form 페이지
 	@RequestMapping("/join")
 	public String Join(Model model) throws Exception{
 		
@@ -92,6 +80,7 @@ public class YoutubeController {
 		return "join";
 	}
 	
+	//로그인 Form 페이지
 	@RequestMapping("/login")
 	public String Login(Model model) throws Exception{
 		
@@ -99,6 +88,7 @@ public class YoutubeController {
 		return "login";
 	}
 	
+	//마이페이지
 	@RequestMapping("/mypage")
 	public String Mypage(Model model,HttpSession session,String user_email,Criteria cri,Principal principal) throws Exception{
 		
@@ -135,6 +125,7 @@ public class YoutubeController {
 		return "mypage";
 	}
 	
+	//본인확인 Form 페이지
 	@RequestMapping("/update-user-check")
 	public String UpdateUserCheck(Model model,HttpSession session) throws Exception{
 		
@@ -146,22 +137,21 @@ public class YoutubeController {
 		return "update-user-check";
 	}
 	
+	//개인정보변경 Form 페이지
 	@RequestMapping("/user-update")
 	public String UserUpdate(Model model) throws Exception{
-		
 		
 		return "user-update";
 	}
 	
-	
-	
+	//비밀번호 찾기 Form 페이지
 	@RequestMapping("/find-pw")
 	public String FindPwForm(Model model) throws Exception{
-		
 		
 		return "find-pw";
 	}
 	
+	//개인정보변경 기능
 	@RequestMapping("/find")
 	public String FindPw(@RequestParam("user_email") String user_email,@RequestParam("user_name") String user_name,@RequestParam("user_birth") String user_birth,Model model,HttpServletResponse response) throws Exception{
 		
@@ -189,7 +179,7 @@ public class YoutubeController {
 			String pw_info=pw.get(0).getPw();
 			
 			System.out.println(pw_info);
-		
+			model.addAttribute("user_email",user_email);
 			model.addAttribute("user_pw",pw_info);
 			
 			return "find-pw-user";
@@ -197,7 +187,7 @@ public class YoutubeController {
 		
 		
 	}
-
+	//재생목록 수정
 	@RequestMapping("/mypage-update")
 	public String MypageUpdate(@RequestParam("content_num") String content_num,@RequestParam("content_name") String content_name,Model model) throws Exception{
 		System.out.println(content_num);
@@ -207,7 +197,7 @@ public class YoutubeController {
 		
 		return "mypage-update";
 	}
-	
+	//재생목록에 컨텐츠 추가
 	@RequestMapping("/playlist-add")
 	public String PlaylistAdd(@RequestParam("content_num") String content_num,@RequestParam("playlist_name") String playlist_name,@RequestParam("email") String email,Principal principal) throws Exception{
 		
@@ -219,6 +209,7 @@ public class YoutubeController {
 		
 	}
 	
+	//재생목록 생성
 	@RequestMapping("playlist-create")
 	public String playlistCreate(@RequestParam("playlistName") String playlistName,Principal principal) throws Exception {
 		String email=principal.getName();
@@ -228,6 +219,7 @@ public class YoutubeController {
 		return "redirect:/mypage";
 	}
 	
+	//재생목록 삭제
 	@RequestMapping("/playlist-delete")
 	public String playlistDelete(@RequestParam("playlist_num") String playlist_num) throws Exception{
 		
@@ -236,6 +228,7 @@ public class YoutubeController {
 		return "redirect:/mypage";
 	}
 	
+	//재생목록 수정
 	@RequestMapping("/playlist-update")
 	public String playlistUpdate(@RequestParam("playlist_num")String playlist_num,@RequestParam("playlist_name") String playlist_name) throws Exception {
 		
@@ -244,6 +237,7 @@ public class YoutubeController {
 		return "redirect:/mypage";
 	}
 	
+	//재생목록에 추가된 컨텐츠 목록 삭제
 	@RequestMapping("/myplaylistcontent-delete")
 	public String MyplaylistContetnDelete(@RequestParam("content_num") String content_num) throws Exception {
 		System.out.println(content_num);
@@ -252,7 +246,19 @@ public class YoutubeController {
 		return "redirect:/mypage";
 	}
 	
-	
+	//재생목록에 추가되어있는 컨텐츠 목록 정보
+	@ResponseBody
+	@RequestMapping("/myplaylist")
+	public ArrayList<ContentDto> Myplaylist(@RequestBody PlaylistDto playlistDto,Model model) throws Exception{
+		
+		String playlist_name=playlistDto.getPlaylist_name();
+		String email=playlistDto.getEmail();
+		
+		ArrayList<ContentDto> playlistData =ps.Myplaylist(playlist_name, email);
+		
+		
+		return playlistData;
+	}
 	
 	
 }

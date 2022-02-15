@@ -28,7 +28,7 @@ public class UpdateUserController {
 	@Autowired
 	private UpdateUserService uus;
 	
-	
+	//개인정보 변경 전 본인 확인
 	@RequestMapping("/user-check")
 	public String UserCheck(@RequestParam("user_name") String user_name,Model model,@RequestParam("user_email") String user_email
 			,@RequestParam("user_pw") String user_pw,HttpServletResponse response,Principal principal) throws Exception{
@@ -56,6 +56,7 @@ public class UpdateUserController {
 		return "user-update";
 	}
 	
+	//개인정보 변경
 	@RequestMapping("/user-update")
 	public void UpdateUser(@RequestParam("user_email") String user_email,@RequestParam("user_pw") String user_pw,@RequestParam("user_name") String user_name,Model model,HttpServletResponse response) throws Exception{
 		response.setContentType("text/html; charset=UTF-8");

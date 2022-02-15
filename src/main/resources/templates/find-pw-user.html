@@ -20,13 +20,13 @@
         <div class="wrapper-box">
             <form action="/find" method="post">
                 <a href="/"><img class="Google-logo" src="../static/images/Google_logo.png"></a>
-                <h3>비밀번호 찾기 결과</h3>
-                <p style="font-size: 18px;" th:text="${#authentication.principal.Username}">님의 비밀번호 찾기 결과입니다</p><br>
+                <h3 class="pt-3">비밀번호 찾기 결과</h3>
+                <p style="font-size: 18px;" th:text="|${user_email} 님의 비밀번호 찾기 결과입니다.|"></p>
                 <div class="find-box">
                     비밀번호 : <input type="text" th:value="${user_pw}">
                 </div>
-                <div>
-                	<a href="login" style="font-size: 20px;">로그인</a>
+                <div class="d-flex justify-content-end pt-2">
+                	<a href="login" class="text-primary" style="font-size: 20px;">로그인</a>
                 </div>
             </form>
         </div>

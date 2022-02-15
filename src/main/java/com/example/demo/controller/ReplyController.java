@@ -23,6 +23,7 @@ public class ReplyController {
 	@Autowired
 	private ReplyService rs;
 	
+	//댓글 작성
 	@RequestMapping("/write")
 	public String Write(@RequestParam("contentNum") String content_num,@RequestParam("replyWriter") String replyWriter,
 		@RequestParam("replyContent") String replyContent,@RequestParam("replyDate") String replyDate,
@@ -36,6 +37,7 @@ public class ReplyController {
 		
 	}
 	
+	//댓글 수정
 	@RequestMapping("/update")
 	public String Update(@RequestParam("content_num") String content_num,@RequestParam("rno") String rno,@RequestParam("content") String content) throws Exception{
 		System.out.println("성공");
@@ -44,6 +46,7 @@ public class ReplyController {
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}
 	
+	//댓글 삭제
 	@RequestMapping("/delete")
 	public String Delete(@RequestParam("rno") String rno,
 			@RequestParam("content_num") String content_num,Model model ) throws Exception{
@@ -54,6 +57,7 @@ public class ReplyController {
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}
 	
+	//좋아요
 	@RequestMapping("reply-up")
 	public String ReplyUp(@RequestParam("contentNum") String content_num,@RequestParam("rno") String rno,Model model) throws Exception{
 		
@@ -65,7 +69,7 @@ public class ReplyController {
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}
 
-	
+	//싫어요
 	@RequestMapping("reply-down")
 	public String ReplyDown(@RequestParam("contentNum") String content_num,@RequestParam("rno") String rno,Model model) throws Exception{
 		

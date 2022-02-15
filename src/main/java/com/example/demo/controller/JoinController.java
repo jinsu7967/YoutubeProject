@@ -19,13 +19,8 @@ public class JoinController {
 	@Autowired
 	private JoinService js;
 	
-//	@GetMapping
-//	public String loginForm(@ModelAttribute("joinForm")JoinForm joinForm) {
-//		return "/join/joinForm";
-//	}
-//	@PostMapping
-	
-	@RequestMapping("/user-join")
+	//회원가입
+	@RequestMapping("/user-join") 
 	@ResponseBody
 	public String UserJoin(@RequestParam("user_name") String user_name,@RequestParam("user_birth") String user_birth
 			,@RequestParam("user_email") String user_email,@RequestParam("user_pw") String user_pw,@RequestParam("user_pw_check") String user_pw_check) {

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.service.LoginService;
 
-
+//Security 사용으로 사용하지는 않음
 @Controller
 @RequestMapping("/login/*")
 public class LoginController {
@@ -34,23 +34,6 @@ public class LoginController {
 		model.addAttribute("user",principal.getName());
 		
 		System.out.println(principal.getName());
-		
-//		ArrayList<LoginDto> user=ls.LoginCheck(user_email, user_pw);
-//		System.out.println("로그인 정보는 "+user);
-//		String resultMsg ="";
-//		
-//		if(user.isEmpty()) {
-//			System.out.println("로그인 실패");
-//			resultMsg ="<script> alert('로그인 실패 하였습니다 다시 로그인 해주세요.'); location.href='/login' </script>";
-//			return resultMsg;
-//		}else {
-//			session.setAttribute("user_email", user_email);
-//			System.out.println("로그인 성공");
-//			resultMsg ="<script> alert('로그인 성공'); location.href='/index' </script>";
-//			return resultMsg;
-//		}
-		
-		
 		
 	}
 	

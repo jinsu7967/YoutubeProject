@@ -20,27 +20,26 @@
         <div class="wrapper-box">
             <form action="/find" method="post">
                 <a href="/"><img class="Google-logo" src="../static/images/Google_logo.png"></a>
-                <h3>비밀번호 찾기</h3>
-                <p style="font-size: 18px;">회원가입시 사용한 정보를 입력해주세요</p><br>
+                <h3 class="pt-2">비밀번호 찾기</h3>
+                <p style="font-size: 18px;">회원가입시 사용한 정보를 입력해주세요.</p>
                 <div class="find-box">
                     <div>
-                        <input type="text" class="find-pw-box" placeholder="이메일" name="user_email"><br>
+                        <input type="text" class="input-group" placeholder="이메일" name="user_email">
                     </div>
-                    <br>
                     <div>
-                        <input type="text" class="find-pw-box" placeholder="이름" name="user_name"><br>
+                        <input type="text" class="input-group mt-2" placeholder="이름" name="user_name">
                     </div>
-                    <br>
                     <div>
-                        <input type="text" class="find-pw-box" placeholder="생일 EX : 20210101 형식" name="user_birth"><br>
+                        <input type="text" class="input-group mt-2" placeholder="생일" name="user_birth">
+                        <p class="text-sm text-danger">생일의 형식은 20220101입니다.</p>
                     </div>
-                    <div class="container" style="margin-top: 100px;">
+                    <div class="container pt-3">
                         <div class="row">
                             <div class="col-6">
 
                             </div>
-                            <div class="col-6" style="padding-right: 0;">
-                                <button type="submit" class="login-btn">다음</button>
+                            <div class="col-6 d-flex justify-content-end" style="padding-right: 0;">
+                                <button type="submit" class="btn btn-primary">다음</button>
                             </div>
                         </div>
                     </div>

@@ -84,7 +84,9 @@ public class UploadController {
 	@RequestMapping("/update")
 	public String Update(@RequestParam("content_num") String content_num,@RequestParam("content_name") String content_name,@RequestParam("content_date") @DateTimeFormat(pattern ="yyyy-MM-dd") Date content_date) throws Exception {
 		
+		
 		us.ContentUpdate(content_num, content_name, content_date);
+		
 		System.out.println(content_num+"번의 제목을 "+content_name+"으로 변경");
 		
 		return "redirect:/mypage";

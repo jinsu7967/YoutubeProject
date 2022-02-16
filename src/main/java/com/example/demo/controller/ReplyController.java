@@ -26,13 +26,12 @@ public class ReplyController {
 	//댓글 작성
 	@RequestMapping("/write")
 	public String Write(@RequestParam("contentNum") String content_num,@RequestParam("replyWriter") String replyWriter,
-		@RequestParam("replyContent") String replyContent,@RequestParam("replyDate") String replyDate,
-		HttpServletRequest req,Model model) throws Exception{
+		@RequestParam("replyContent") String replyContent,@RequestParam("replyDate") String replyDate,Model model) throws Exception{
 		
 		if(!(replyContent.isEmpty())) {
 			rs.ReplyWrite(content_num, replyWriter, replyContent, replyDate);
 		}
-		
+
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 		
 	}
@@ -40,7 +39,7 @@ public class ReplyController {
 	//댓글 수정
 	@RequestMapping("/update")
 	public String Update(@RequestParam("content_num") String content_num,@RequestParam("rno") String rno,@RequestParam("content") String content) throws Exception{
-		System.out.println("성공");
+		
 		rs.ReplyUpdate(rno, content_num, content);
 		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
@@ -48,9 +47,7 @@ public class ReplyController {
 	
 	//댓글 삭제
 	@RequestMapping("/delete")
-	public String Delete(@RequestParam("rno") String rno,
-			@RequestParam("content_num") String content_num,Model model ) throws Exception{
-		
+	public String Delete(@RequestParam("rno") String rno,@RequestParam("content_num") String content_num,Model model ) throws Exception{
 		
 		rs.ReplyDelete(rno,content_num);
 		
@@ -64,7 +61,6 @@ public class ReplyController {
 		System.out.println(rno);
 		System.out.println(content_num);
 		int replyUp = rs.ReplyUp(rno,content_num);
-		System.out.println("replyup :"+replyUp);
 		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}

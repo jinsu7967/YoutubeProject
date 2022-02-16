@@ -128,7 +128,9 @@
 										</div>								
 									</div>
 									<div class="d-flex justify-content-end">
-										<a class="mr-2 text-primary" th:href="@{/mypage-update(content_num=${content.content_num},content_name=${content.content_name})}">수정</a>
+										<!-- <a class="mr-2 text-primary" th:href="@{/mypage-update(content_num=${content.content_num},content_name=${content.content_name})}">수정</a> -->
+										<button type="button" class="border-0 text-primary bg-transparent" th:id="${content.content_num}" onclick="ContentUpdateForm(this.id)"
+										data-toggle="modal" data-target="#contentUpdateModal">수정</button>
 										<a class="text-primary" th:href="@{/mypage/delete(content_num=${content.content_num})}">삭제</a>
 									</div>
 								</div>
@@ -173,7 +175,7 @@
 		</div>
 	</section>
 
-	<!-- uploadModal -->
+	<!-- upload Modal -->
 	<div id="uplaodModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
 			<!-- Modal content -->
@@ -206,6 +208,33 @@
 							<button type="submit" class="btn btn-primary d-flex align-items-center">컨텐츠 등록</button>
 						</span>
 					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- ContentUpdate Modal -->
+	
+	<div th:id="contentUpdateModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+		<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title font-weight-bold" id="myModalLabel">컨텐츠 수정</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span id="close" aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="text" class="input-group" id="contentUpdateName" placeholder="변경할 제목을 입력하세요.">
+					<input type="hidden" value="" id="contentUpdateNum">
+					<div class="d-flex justify-content-end align-items-center pt-3">
+						<span class="mr-2">수정한 날짜</span>
+						<input type="date" value="" id="now_update_date" min=now_update_date readonly>
+					</div>
+					<div class="d-flex justify-content-end pt-2">
+						<button type="button" class="btn btn-primary" onclick="ContentUpdate();">수정</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -309,6 +338,7 @@
 				});
 		//현재시간 불러오기
 		document.getElementById('now_date').valueAsDate = new Date();
+		document.getElementById('now_update_date').valueAsDate = new Date();
 	</script>
 </body>
 </html>

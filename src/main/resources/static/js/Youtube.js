@@ -198,6 +198,13 @@ function PlaylistUpdateForm(id){
 	console.log(id);
 }
 
+/* 정보 수정 모달로 값 넘기기 */
+function ContentUpdateForm(id){
+	$("#contentUpdateNum").val(id)
+	
+	console.log(id);
+}
+
 /* 재생 목록 수정 ajax */
 
 function PlaylistUpdate(){
@@ -304,6 +311,31 @@ function MyplaylistConDelete(id){
 	});
 }
 
+/* 컨텐츠 수정 */
 
+function ContentUpdate(){
+
+	var contentUpdate={
+		content_num: $("#contentUpdateNum").val(),
+		content_name: $("#contentUpdateName").val(),
+		content_date: $("#now_update_date").val()
+	}
+	
+	console.log(contentUpdate);
+	
+	$.ajax({
+	 	url: "/mypage/update",
+		type: "post",
+		data: contentUpdate,
+		success:function(){
+			alert("수정 성공")
+		},
+		error:function(){
+			alert("수정 실패")
+		}
+	})
+	
+	
+}
 
 

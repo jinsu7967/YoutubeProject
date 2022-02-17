@@ -101,7 +101,7 @@ function searchContent(){
 				content.forEach(function(content){
 					str= '<div class="player col pr-3">';
 					str+= '<div class="thumb-wrap">';
-					str+= '<a href="/mypage/content-detail/'+content.content_num+'">';
+					str+= '<a href="/mypage/content-detail?contentNum='+content.content_num+'">';
 					str+= '<img class="play-content" src="../static/upload/'+content.file_name+'">';
 					str+= '</a>';
 					str+= '</div>';

@@ -60,7 +60,7 @@ public class ReplyController {
 	public String ReplyUp(@RequestParam("contentNum") String content_num,@RequestParam("rno") String rno,Model model) throws Exception{
 		
 		int replyUp = rs.ReplyUp(rno,content_num);
-		System.out.println(replyUp);
+		System.out.println("성공여부 "+replyUp);
 		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}

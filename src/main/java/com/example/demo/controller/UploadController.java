@@ -66,7 +66,7 @@ public class UploadController {
 		int result = -1;
 		user_email = principal.getName(); //로그인된 유저 아이디
 		result = us.UploadContent(content_name, content_date, user_email,file_name); //컨텐츠 업로드
-		System.out.println("여부는 "+result);
+		System.out.println(result);
 		
 		return "redirect:/mypage";
 	}
@@ -77,7 +77,7 @@ public class UploadController {
 		
 		rs.ReplyDeleteAll(content_num); //모든 리플 삭제
 		us.ContentDelete(content_num); //컨텐츠 삭제
-		System.out.println(content_num+"번 삭제");
+		System.out.println(content_num+"의 컨텐츠 삭제");
 		
 		return "redirect:/mypage";
 	}
@@ -107,11 +107,6 @@ public class UploadController {
 		ArrayList<ContentDto> thumList = cs.ContentList();
 		ArrayList<PlaylistDto> myPlaylist = ps.MyPlaylistName(user_email);
 		
-		System.out.println(myPlaylist);
-		System.out.println(user_email);
-		System.out.println(contentDetail);
-		System.out.println(thumList);
-		
 		//컨텐츠 상세조회 필요 데이터
 		model.addAttribute("contentDetail",contentDetail);
 		model.addAttribute("user_email",user_email);
@@ -126,16 +121,15 @@ public class UploadController {
 		ArrayList<ReplyDto> reply = rs.ReplyList(content_num);
 		model.addAttribute("reply",reply);
 		
-		System.out.println(reply);
-		
 		return "content-detail";
 	}
 	
 	//댓글 수정
 	@RequestMapping("/reply/update")
 	public String Update(@RequestParam("content_num") String content_num,@RequestParam("rno") String rno,@RequestParam("content") String content) throws Exception{
-		System.out.println("성공");
+		
 		rs.ReplyUpdate(rno, content_num, content);
+		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}
 	
@@ -143,7 +137,6 @@ public class UploadController {
 	@RequestMapping("/reply/delete")
 	public String Delete(@RequestParam("rno") String rno,
 			@RequestParam("contentNum") String content_num,Model model ) throws Exception{
-		
 		
 		rs.ReplyDelete(rno,content_num);
 		

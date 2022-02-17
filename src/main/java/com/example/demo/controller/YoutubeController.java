@@ -54,7 +54,6 @@ public class YoutubeController {
 		
 		ArrayList<ContentDto> allContentList = cs.ContentList();
 		model.addAttribute("allContentList",allContentList);
-		System.out.println(allContentList);
 		
 		return "index";
 	}
@@ -64,63 +63,51 @@ public class YoutubeController {
 	@RequestMapping("/search")
 	public ArrayList<ContentDto> SearchTest(@RequestBody String keyword,Model model) throws Exception{
 		
-		System.out.println(keyword);
-		
 		ArrayList<ContentDto> searchContentList = cs.SearchContent(keyword);
-		System.out.println(searchContentList);
 		
 		return searchContentList;
 	}
 	
-	//회원가입 Form 페이지
+	//회원가입 Form 페이지 
 	@RequestMapping("/join")
 	public String Join(Model model) throws Exception{
-		
 		
 		return "join";
 	}
 	
-	//로그인 Form 페이지
+	//로그인 Form 페이지 
 	@RequestMapping("/login")
 	public String Login(Model model) throws Exception{
-		
 		
 		return "login";
 	}
 	
-	//마이페이지
+	//마이페이지 
 	@RequestMapping("/mypage")
 	public String Mypage(Model model,HttpSession session,String user_email,Criteria cri,Principal principal) throws Exception{
 		
 		user_email = principal.getName();
 		
 		int boardListCnt = us.boardListCnt(user_email);
-		System.out.println("boardListCnt : "+boardListCnt);
-		
 		
 		Paging paging = new Paging();
-		System.out.println(cri);
+		
 		paging.setCri(cri);
 		paging.setTotalCount(boardListCnt);
 		
 		int pageStart = cri.getPageStart();
 		int perPageNum = cri.getPerpageNum();
 		
-		System.out.println("pageStart : "+pageStart);
-		System.out.println("perPageNum : "+perPageNum);
-		
 		ArrayList<UploadDto> contentList = us.ContentList(user_email, pageStart, perPageNum);
 		ArrayList<PlaylistDto> playlist = ps.MyPlaylistName(user_email);
 		
-		System.out.println(contentList);
-		System.out.println(paging);
-		
-		
+		//마이페이지 사용 될 데이터
 		model.addAttribute("contentList",contentList);
 		model.addAttribute("paging",paging);
 		model.addAttribute("user",user_email);
-		model.addAttribute("playlist",playlist);
 		
+		//내가 생성한 재생목록
+		model.addAttribute("playlist",playlist);
 		
 		return "mypage";
 	}
@@ -129,19 +116,7 @@ public class YoutubeController {
 	@RequestMapping("/update-user-check")
 	public String UpdateUserCheck(Model model,HttpSession session) throws Exception{
 		
-		String user_email=null;
-		user_email=(String) session.getAttribute("user_email");
-		System.out.println(user_email);
-		model.addAttribute("user_email",user_email);
-		
 		return "update-user-check";
-	}
-	
-	//개인정보변경 Form 페이지
-	@RequestMapping("/user-update")
-	public String UserUpdate(Model model) throws Exception{
-		
-		return "user-update";
 	}
 	
 	//비밀번호 찾기 Form 페이지
@@ -155,9 +130,7 @@ public class YoutubeController {
 	@RequestMapping("/find")
 	public String FindPw(@RequestParam("user_email") String user_email,@RequestParam("user_name") String user_name,@RequestParam("user_birth") String user_birth,Model model,HttpServletResponse response) throws Exception{
 		
-		System.out.println(user_email);
-		System.out.println(user_name);
-		System.out.println(user_birth);
+		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		ArrayList<LoginDto> pw =ls.PwFind(user_email,user_name,user_birth);
@@ -178,7 +151,6 @@ public class YoutubeController {
 		
 			String pw_info=pw.get(0).getPw();
 			
-			System.out.println(pw_info);
 			model.addAttribute("user_email",user_email);
 			model.addAttribute("user_pw",pw_info);
 			
@@ -190,7 +162,7 @@ public class YoutubeController {
 	//재생목록 수정
 	@RequestMapping("/mypage-update")
 	public String MypageUpdate(@RequestParam("content_num") String content_num,@RequestParam("content_name") String content_name,Model model) throws Exception{
-		System.out.println(content_num);
+		
 		model.addAttribute("content_num",content_num);
 		model.addAttribute("content_name",content_name);
 		
@@ -201,8 +173,6 @@ public class YoutubeController {
 	@RequestMapping("/playlist-add")
 	public String PlaylistAdd(@RequestParam("content_num") String content_num,@RequestParam("playlist_name") String playlist_name,@RequestParam("email") String email,Principal principal) throws Exception{
 		
-		
-		System.out.println(playlist_name);
 		ps.PlaylistAdd(playlist_name, email, content_num);
 		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
@@ -212,9 +182,9 @@ public class YoutubeController {
 	//재생목록 생성
 	@RequestMapping("playlist-create")
 	public String playlistCreate(@RequestParam("playlistName") String playlistName,Principal principal) throws Exception {
+		
 		String email=principal.getName();
 		ps.PlaylistCreate(email, playlistName);
-		
 		
 		return "redirect:/mypage";
 	}
@@ -240,7 +210,7 @@ public class YoutubeController {
 	//재생목록에 추가된 컨텐츠 목록 삭제
 	@RequestMapping("/myplaylistcontent-delete")
 	public String MyplaylistContetnDelete(@RequestParam("content_num") String content_num) throws Exception {
-		System.out.println(content_num);
+		
 		ps.MyplaylistDelete(content_num);
 		
 		return "redirect:/mypage";

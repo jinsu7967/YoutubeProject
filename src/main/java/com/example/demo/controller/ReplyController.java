@@ -28,6 +28,7 @@ public class ReplyController {
 	public String Write(@RequestParam("contentNum") String content_num,@RequestParam("replyWriter") String replyWriter,
 		@RequestParam("replyContent") String replyContent,@RequestParam("replyDate") String replyDate,Model model) throws Exception{
 		
+		//댓글 내용이 비어있다면 실행되지 않는 로직
 		if(!(replyContent.isEmpty())) {
 			rs.ReplyWrite(content_num, replyWriter, replyContent, replyDate);
 		}
@@ -58,9 +59,8 @@ public class ReplyController {
 	@RequestMapping("reply-up")
 	public String ReplyUp(@RequestParam("contentNum") String content_num,@RequestParam("rno") String rno,Model model) throws Exception{
 		
-		System.out.println(rno);
-		System.out.println(content_num);
 		int replyUp = rs.ReplyUp(rno,content_num);
+		System.out.println(replyUp);
 		
 		return "redirect:/mypage/content-detail?contentNum="+content_num;
 	}

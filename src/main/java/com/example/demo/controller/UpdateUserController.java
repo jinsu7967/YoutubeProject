@@ -40,14 +40,11 @@ public class UpdateUserController {
 		
 		ArrayList<UpdateUserDto> user_pw_check = uus.PwCheck(user_email);
 		
-		if(encoder.matches(user_pw,user_pw_check.get(0).getPw())) {
+		if(encoder.matches(user_pw,user_pw_check.get(0).getPw())) { //암호화된 비밀번호와 입력한 비밀번호 확인
 			user_pw = user_pw_check.get(0).getPw();
 			ArrayList<UpdateUserDto> userInfo = uus.UserCheck(user_name,user_email,user_pw);
 			model.addAttribute("userInfo", userInfo);
-			System.out.println(user_name);
-			System.out.println(user_email);
-			System.out.println(user_pw);
-			System.out.println(userInfo);
+
 			out.println("<script>alert('본인인증 성공.'); </script>");
 		}else {
 			out.println("<script>alert('본인인증 실패했습니다.'); location.href=history.back(); </script>");
@@ -62,11 +59,11 @@ public class UpdateUserController {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		
+		//입력된 형식 확인 로직
 		if(user_pw.length()<8 || user_pw.matches("[0-9|a-z|A-Z\\\\s]*") || !(user_name.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*"))) {
 			out.println("<script>alert('정보변경 실패 입력내용을 확인해주세요.'); location.href=history.back(); </script>");
 		}else {
-			int userUpdate = uus.UserUpdate(user_email,user_pw,user_name);
+			int userUpdate = uus.UserUpdate(user_email,user_pw,user_name); //개인정보 변경
 			if(userUpdate == 1 ) {
 				System.out.println("정보변경 성공");
 			}else {

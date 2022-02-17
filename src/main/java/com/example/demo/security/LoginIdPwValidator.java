@@ -26,7 +26,7 @@ public class LoginIdPwValidator implements UserDetailsService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//엔코더 빈 등록
+	//엔코더 Bean 등록
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

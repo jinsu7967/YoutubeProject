@@ -57,13 +57,15 @@ public class UploadController {
 			@RequestParam("content_date") @DateTimeFormat(pattern ="yyyy-MM-dd") Date content_date,
 			String user_email,Model model,Principal principal,@RequestParam("file-name") MultipartFile mFile,String file_name) throws Exception {
 		
-		UUID uuid = UUID.randomUUID();
+		UUID uuid = UUID.randomUUID(); //랜덤아이디 생성
+		
+		//내부경로로 업로드 지정 및 UUID + 파일이름 추가
 		mFile.transferTo(new File("C:\\Users\\gridone\\eclipse-workspace\\YoutubeProject\\src\\main\\resources\\static\\upload\\"+uuid+"_"+mFile.getOriginalFilename()));
 		file_name=uuid+"_"+mFile.getOriginalFilename();
 		
 		int result = -1;
-		user_email = principal.getName();
-		result = us.UploadContent(content_name, content_date, user_email,file_name);
+		user_email = principal.getName(); //로그인된 유저 아이디
+		result = us.UploadContent(content_name, content_date, user_email,file_name); //컨텐츠 업로드
 		System.out.println("여부는 "+result);
 		
 		return "redirect:/mypage";
@@ -73,8 +75,8 @@ public class UploadController {
 	@RequestMapping("/delete")
 	public String Delete(@RequestParam("content_num") String content_num) throws Exception {
 		
-		rs.ReplyDeleteAll(content_num);
-		us.ContentDelete(content_num);
+		rs.ReplyDeleteAll(content_num); //모든 리플 삭제
+		us.ContentDelete(content_num); //컨텐츠 삭제
 		System.out.println(content_num+"번 삭제");
 		
 		return "redirect:/mypage";
@@ -96,8 +98,9 @@ public class UploadController {
 	@RequestMapping("/content-detail")
 	public String ContentDetail(@RequestParam("contentNum") String content_num,Model model,HttpSession session,Principal principal) throws Exception{
 		
-		int replyCount = rs.ReplyCount(content_num);
-		us.CountUpdate(content_num);
+		int replyCount = rs.ReplyCount(content_num); //댓글 갯수 확인
+		us.CountUpdate(content_num); //조회수 증가 로직
+		
 		String user_email= principal.getName();
 		
 		ArrayList<UploadDto> contentDetail = us.ContentDetail(content_num);

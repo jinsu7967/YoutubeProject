@@ -37,30 +37,33 @@ public class LoginIdPwValidator implements UserDetailsService {
 	public UserDetails loadUserByUsername(String insertedId) throws UsernameNotFoundException{
 		
 		LoginMapper mapper = sqlSession.getMapper(LoginMapper.class);
-		
+		String pw2= "";
 		ArrayList<LoginDto> user = null;
 		try {
 			
 			ArrayList<LoginDto> userInfo = mapper.userInfo(insertedId);
 			String userPw = userInfo.get(0).getPw();
 			user = mapper.LoginCheck(insertedId,userPw);
+			System.out.println("user pwd: "+user.get(0).getPw() + "user info pwd: " + userInfo.get(0).getPw());
+			
+			pw2 = userInfo.get(0).getPw();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		if (user==null) {
-			return null;
-		}
+//		if (user==null) {
+//			return null;
+//		}
 		
-		String pw = user.get(0).getPw();
-		System.out.println("id="+insertedId);
-		System.out.println("pw="+pw);
+		
+//		System.out.println("id="+insertedId);
+//		System.out.println("pw="+pw);
 		
 		
 		return User.builder()
 				.username(insertedId)
-				.password(pw)
+				.password(pw2)
 				.roles("user")
 				.build();
 	}

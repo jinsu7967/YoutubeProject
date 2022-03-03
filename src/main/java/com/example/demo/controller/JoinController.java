@@ -28,7 +28,7 @@ public class JoinController {
 		String resultMsg = null;
 		
 		try {
-			int idCheck=js.IdCheck(user_email); //등록된 아이디인지 체크
+			int idCheck = js.IdCheck(user_email); //등록된 아이디인지 체크
 			int joinCheck=-1;
 			
 			if(idCheck==1) { 

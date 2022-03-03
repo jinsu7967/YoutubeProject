@@ -52,9 +52,9 @@ public class PlaylistServiceImpl implements PlaylistService {
 	}
 	
 	@Override
-	public ArrayList<ContentDto> Myplaylist(String playlist_name, String email) throws Exception{
+	public ArrayList<ContentDto> Myplaylist(int playlist_num) throws Exception{
 		PlaylistMapper mapper = sqlSession.getMapper(PlaylistMapper.class);
-		return mapper.Myplaylist(playlist_name,email);
+		return mapper.Myplaylist(playlist_num);
 	}
 	
 	@Override

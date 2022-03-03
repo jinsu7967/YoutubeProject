@@ -312,8 +312,8 @@
 	
 	<!-- Modal JQuery -->	
 	<script>
-		$(document).ready(
-				function() {
+		$(document).ready(function() {
+			
 					$('.your-class').slick({
 						slide: 'div',
 						infinite: true,
@@ -327,15 +327,14 @@
 						$("input#file-select").click();
 					});
 
-					$("input#file-select").on(
-							'change',
-							function() {
-								var fileName = $(this).val().split('/').pop()
-										.split('\\').pop();
-								$("#upload-name").val(fileName);
-							});
+					$("input#file-select").on('change',function() {
+						var fileName = $(this).val().split('/').pop()
+								.split('\\').pop();
+						$("#upload-name").val(fileName);
+					});
 
-				});
+		});
+		
 		//현재시간 불러오기
 		document.getElementById('now_date').valueAsDate = new Date();
 		document.getElementById('now_update_date').valueAsDate = new Date();

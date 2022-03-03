@@ -221,11 +221,9 @@ public class YoutubeController {
 	@RequestMapping("/myplaylist")
 	public ArrayList<ContentDto> Myplaylist(@RequestBody PlaylistDto playlistDto,Model model) throws Exception{
 		
-		String playlist_name=playlistDto.getPlaylist_name();
-		String email=playlistDto.getEmail();
+		int playlist_num = playlistDto.getPlaylist_num();
 		
-		ArrayList<ContentDto> playlistData =ps.Myplaylist(playlist_name, email);
-		
+		ArrayList<ContentDto> playlistData =ps.Myplaylist(playlist_num);
 		
 		return playlistData;
 	}

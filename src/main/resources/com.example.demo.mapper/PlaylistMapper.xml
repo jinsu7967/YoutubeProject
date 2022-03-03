@@ -38,9 +38,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 나의 재생목록의 컨텐츠들 -->
 	<select id="Myplaylist" resultType="ContentDto">
-		select content_name,content_writer,content_count,content_num
-		from content
-		where content_num in (select content_num from playlistdata where playlist_name = #{playlist_name} and email = #{email})
+		select c.content_name,c.content_writer,c.content_count,c.content_num
+		from content c,playlistdata p
+		where c.content_num = p.content_num and p.playlist_num = #{playlist_num}
 	</select>
 	
 	<!-- 나의 재생목록에서 컨텐츠 삭제 -->

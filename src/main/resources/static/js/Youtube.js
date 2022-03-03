@@ -199,6 +199,7 @@ function PlaylistUpdateForm(id){
 }
 
 /* 정보 수정 모달로 값 넘기기 */
+
 function ContentUpdateForm(id){
 	$("#contentUpdateNum").val(id)
 	
@@ -231,8 +232,7 @@ function PlaylistUpdate(){
 
 function Myplaylist(id){
 	var playlistData = {
-		playlist_name: $("#playlist_name"+ id).val(),
-		email: $("#user_email"+ id).val()
+		playlist_num: id
 	}
 	
 	console.log(playlistData);
@@ -252,7 +252,6 @@ function Myplaylist(id){
 				alert("재생목록이 없습니다.")
 				
 			}
-			
 			
 			if(data.length >=1){
 				
@@ -289,7 +288,7 @@ function Myplaylist(id){
 	});
 }
 
-/*나의 재생목록 컨텐츠 제거*/
+/* 나의 재생목록 컨텐츠 제거 */
 
 function MyplaylistConDelete(id){
 	var myplaylistContentDel= {

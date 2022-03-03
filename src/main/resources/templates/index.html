@@ -27,7 +27,7 @@
 				<div class="col d-flex justify-content-center align-items-center">
 					<form>
 						<div class="input-group">
-							<input hidden="hidden">
+							<input hidden="hidden"> <!-- enter submit 막기 용도 -->
 							<input id="search-input" class="form-control" type="text" placeholder="검색" name="keyword" onkeypress="if(event.keyCode==13)searchContent();" onsubmit="return false">
 							<div class="input-group-append">
 								<button class="btn btn-secondary" type="button" onclick="searchContent();" >
@@ -45,10 +45,11 @@
 						<div class="dropdown">
 							<button class="btn btn-lg btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
 								<div>
-										<i class="bi bi-person-circle text-muted"></i>
+									<i class="bi bi-person-circle text-muted"></i>
 								</div>
 							</button>
 							<div class="dropdown-menu dropdown-menu-right text-center">
+								<input type="hidden" th:value="${#authentication.principal.Username}" name="user_email">
 								<p class="dropdown-item mb-0" th:text="|${#authentication.principal.Username}님 환영합니다|"></p>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="mypage">마이페이지</a> 

@@ -96,27 +96,25 @@ public class UploadController {
 	
 	//컨텐츠 상세 조회
 	@RequestMapping("/content-detail")
-	public String ContentDetail(@RequestParam("contentNum") String content_num,Model model,HttpSession session,Principal principal) throws Exception{
+	public String ContentDetail(@RequestParam("contentNum") String content_num,String user_email,Model model,HttpSession session,Principal principal) throws Exception{
 		
 		int replyCount = rs.ReplyCount(content_num); //댓글 갯수 확인
 		us.CountUpdate(content_num); //조회수 증가 로직
 		
-		String user_email= principal.getName();
+		user_email = principal.getName(); //로그인 객체 정보 변수화
 		
-		ArrayList<UploadDto> contentDetail = us.ContentDetail(content_num);
-		ArrayList<ContentDto> thumList = cs.ContentList();
-		ArrayList<PlaylistDto> myPlaylist = ps.MyPlaylistName(user_email);
-		
+		ArrayList<UploadDto> contentDetail = us.ContentDetail(content_num); //해당 파라미터로 받은 컨텐츠 정보 담기
+
 		//컨텐츠 상세조회 필요 데이터
 		model.addAttribute("contentDetail",contentDetail);
-		model.addAttribute("user_email",user_email);
 		model.addAttribute("contentNum",content_num);
 		model.addAttribute("replyCount",replyCount);
 		//섬네일 리스트
+		ArrayList<ContentDto> thumList = cs.ContentList();
 		model.addAttribute("thumList",thumList);
 		//나의 플레이리스트 목록 정보
+		ArrayList<PlaylistDto> myPlaylist = ps.MyPlaylistName(user_email);
 		model.addAttribute("myPlaylist",myPlaylist);
-		
 		//댓글 조회
 		ArrayList<ReplyDto> reply = rs.ReplyList(content_num);
 		model.addAttribute("reply",reply);
